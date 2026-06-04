@@ -1,0 +1,3498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>千房ホールディングス｜2026年5月度 統合レポートポータル</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/* ===== PORTAL SHELL ===== */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --chibo:#8B1A1A;--chibo-mid:#B94040;--chibo-light:#F5E6E6;
+  --bg:#faf8f5;--border:#e8e3dc;--text:#1a1917;--sub:#5f5e5a;
+}
+html,body{background:#faf8f5;color:#1a1917;font-family:'Noto Sans JP',sans-serif;}
+
+/* PORTAL HEADER */
+.portal-header{
+  background:var(--chibo);color:#fff;
+  padding:14px 32px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:1000;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+  height:56px;
+}
+.portal-eyebrow{font-size:10px;letter-spacing:0.14em;opacity:0.65;margin-bottom:2px;}
+.portal-title{font-size:16px;font-weight:700;letter-spacing:0.04em;}
+.portal-meta{font-size:11px;opacity:0.7;text-align:right;line-height:1.6;}
+
+/* TAB BAR */
+.tab-bar{
+  background:#fff;border-bottom:2px solid #e8e3dc;
+  display:flex;overflow-x:auto;scrollbar-width:none;
+  position:sticky;top:56px;z-index:999;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  height:50px;
+}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-btn{
+  padding:0 24px;height:50px;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  cursor:pointer;border:none;background:transparent;
+  border-bottom:3px solid transparent;
+  color:#5f5e5a;white-space:nowrap;
+  font-family:'Noto Sans JP',sans-serif;
+  transition:color .15s,border-color .15s,background .15s;
+  flex-shrink:0;margin-bottom:-2px;
+}
+.tab-btn:hover{background:#F5E6E6;color:#8B1A1A;}
+.tab-btn.active{border-bottom-color:#8B1A1A;color:#8B1A1A;background:#fdf5f5;}
+.tab-label{font-size:12px;font-weight:700;letter-spacing:0.02em;}
+.tab-sub{font-size:10px;opacity:0.65;margin-top:1px;}
+
+/* PANELS */
+.panel{display:none;min-height:100vh;}
+.panel.active{display:block;}
+
+/* Fix sticky elements inside panels — portal header(56) + tabbar(50) = 106px */
+.panel .nav,
+.panel .sticky-nav,
+.panel .nav-inner,
+.panel .header {
+  position:sticky !important;
+  top:106px !important;
+}
+/* tab3 has double sticky (header + nav) */
+#tab3 .header{top:106px !important;}
+#tab3 .nav{top:154px !important;}  /* 106 + ~48px header */
+</style>
+<style>
+:root{
+  --chibo:#8B1A1A;--green:#2d6a3f;--green-l:#eaf3ee;
+  --red:#a32d2d;--red-l:#fdf0f0;--amber:#854f0b;--amber-l:#fef7ed;
+  --blue:#185fa5;--gray:#5f5e5a;--gray-l:#f8f7f5;
+  --border:#e8e5e0;--text:#1a1917;--sub:#5f5e5a;--hint:#9b9894;--bg:#faf9f7;
+}#tab1 {box-sizing:border-box;margin:0;padding:0;}body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.7;}#tab1 .page{max-width:1100px;margin:0 auto;padding:28px 24px 80px;}
+
+/* nav */
+.nav{position:sticky;top:0;background:rgba(250,249,247,.96);backdrop-filter:blur(6px);border-bottom:.5px solid var(--border);z-index:100;}#tab1 .nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;}#tab1 .nav a{font-size:12px;padding:10px 14px;color:var(--sub);white-space:nowrap;border-bottom:2px solid transparent;text-decoration:none;display:block;}#tab1 .nav a:hover, #tab1 .nav a.on{color:var(--chibo);border-bottom-color:var(--chibo);font-weight:700;}
+
+/* cover */
+.cover{border-bottom:2px solid var(--chibo);padding-bottom:18px;margin-bottom:28px;}#tab1 .eye{font-size:11px;letter-spacing:.12em;color:var(--chibo);font-weight:500;margin-bottom:6px;}#tab1 h1{font-family:'Noto Serif JP',serif;font-size:24px;font-weight:600;line-height:1.4;margin-bottom:5px;}#tab1 .meta{font-size:12px;color:var(--sub);}#tab1 .note-box{margin-top:10px;background:var(--amber-l);border-left:3px solid #EF9F27;padding:8px 14px;border-radius:0 6px 6px 0;font-size:12px;color:var(--amber);}#tab1 .note-box strong{font-weight:700;}
+
+/* kpi */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:32px;}#tab1 .kpi{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:12px 14px;}#tab1 .kpi.al{border-left:3px solid var(--red);}#tab1 .kpi.gd{border-left:3px solid var(--green);}#tab1 .kpi label{display:block;font-size:10px;color:var(--hint);margin-bottom:5px;}#tab1 .kpi .v{font-size:21px;font-weight:700;line-height:1;}#tab1 .v.r{color:var(--red);}#tab1 .v.g{color:var(--green);}#tab1 .v.n{color:var(--text);}#tab1 .kpi .s{font-size:11px;margin-top:3px;color:var(--sub);}
+
+/* section */
+.sec{margin-bottom:44px;}#tab1 .sh{display:flex;align-items:center;gap:10px;margin-bottom:14px;border-bottom:.5px solid var(--border);padding-bottom:8px;}#tab1 .sn{width:23px;height:23px;border-radius:50%;background:var(--chibo);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}#tab1 .st{font-size:15px;font-weight:700;}#tab1 .sm{font-size:11px;color:var(--hint);margin-left:auto;}
+
+/* cards */
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}#tab1 .ic{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:13px 15px;}#tab1 .ic.r{border-left:3px solid var(--red);}#tab1 .ic.g{border-left:3px solid var(--green);}#tab1 .ic.a{border-left:3px solid #EF9F27;}#tab1 .ic.b{border-left:3px solid var(--blue);}#tab1 .ic .tg{font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:5px;}#tab1 .ic.r .tg{color:var(--red);}#tab1 .ic.g .tg{color:var(--green);}#tab1 .ic.a .tg{color:var(--amber);}#tab1 .ic.b .tg{color:var(--blue);}#tab1 .ic h4{font-size:13px;font-weight:700;line-height:1.45;margin-bottom:4px;}#tab1 .ic p{font-size:11px;color:var(--sub);line-height:1.7;}
+
+/* chart wrappers — key fix: overflow:hidden + explicit height on wrapper */
+.cc{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;}#tab1 .cc h3{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px;}#tab1 .cw{width:100%;overflow:hidden;}  /* wrapper — canvas fills this */
+.cw canvas{display:block;}        /* block removes inline gap */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+
+/* legend */
+.leg{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--sub);margin-bottom:6px;}#tab1 .leg span{display:flex;align-items:center;gap:4px;}#tab1 .ld{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
+/* matrix */
+.mx-y{font-size:10px;color:var(--hint);text-align:center;margin-bottom:4px;}#tab1 .mx-x{display:flex;justify-content:space-between;font-size:10px;color:var(--hint);margin-top:4px;}#tab1 .mxg{display:grid;grid-template-columns:1fr 1fr;gap:8px;}#tab1 .q{background:var(--gray-l);border-radius:8px;padding:11px;min-height:120px;}#tab1 .qt{font-size:10px;font-weight:700;margin-bottom:7px;}#tab1 .qt.r{color:var(--red);}#tab1 .qt.g{color:var(--green);}#tab1 .qt.a{color:var(--amber);}#tab1 .qt.b{color:var(--blue);}#tab1 .ts{display:inline-block;font-size:10px;padding:2px 7px;background:#fff;border-radius:4px;margin:2px 2px 2px 0;border:.5px solid var(--border);}
+
+/* struct */
+.sr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}#tab1 .sc{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:12px 14px;}#tab1 .stag{font-size:10px;font-weight:700;letter-spacing:.05em;margin-bottom:5px;}#tab1 .stag.r{color:var(--red);}#tab1 .stag.g{color:var(--green);}#tab1 .stag.b{color:var(--blue);}#tab1 .bn{font-size:19px;font-weight:700;margin-bottom:3px;}#tab1 .bn.r{color:var(--red);}#tab1 .bn.g{color:var(--green);}#tab1 .bn.b{color:var(--blue);}
+
+/* action */
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}#tab1 .ac{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:13px 15px;}#tab1 .ac.hl{border:1.5px solid #EF9F27;background:var(--amber-l);}#tab1 .pr{font-size:10px;font-weight:700;letter-spacing:.06em;margin-bottom:5px;}#tab1 .pr.hi{color:var(--red);}#tab1 .pr.mi{color:var(--amber);}#tab1 .pr.lo{color:var(--blue);}#tab1 .ac h4{font-size:13px;font-weight:700;line-height:1.45;margin-bottom:4px;}#tab1 .ac p{font-size:11px;color:var(--sub);line-height:1.7;}#tab1 .nb{display:inline-block;background:var(--amber);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;margin-left:5px;vertical-align:middle;}
+
+/* table */
+.tw{overflow-x:auto;}#tab1 table{width:100%;border-collapse:collapse;font-size:11px;}#tab1 th{background:var(--gray-l);padding:7px 9px;text-align:left;font-weight:700;color:var(--sub);font-size:10px;white-space:nowrap;border-bottom:1px solid var(--border);}#tab1 th.r{text-align:right;}#tab1 td{padding:7px 9px;border-bottom:.5px solid var(--border);white-space:nowrap;}#tab1 td.r{text-align:right;font-variant-numeric:tabular-nums;}#tab1 tr:hover td{background:var(--gray-l);}#tab1 .pi{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;}#tab1 .pg{background:var(--green-l);color:var(--green);}#tab1 .pr2{background:var(--red-l);color:var(--red);}#tab1 .pn{background:var(--gray-l);color:var(--gray);}#tab1 .div{border:none;border-top:.5px solid var(--border);margin:44px 0;}#tab1 .ft{border-top:.5px solid var(--border);margin-top:36px;padding-top:14px;font-size:10px;color:var(--hint);display:flex;justify-content:space-between;}
+
+
+</style>
+<style>
+:root{
+  --maroon: #8B1A1A;
+  --maroon-light: #b83030;
+  --maroon-pale: #f8eeee;
+  --maroon-mid: #d4a0a0;
+  --gold: #c9963a;
+  --gold-pale: #fdf6e3;
+  --ink: #1a1a1a;
+  --ink-mid: #444;
+  --ink-light: #777;
+  --border: #e8e0d8;
+  --bg: #faf8f5;
+  --white: #ffffff;
+  --green: #1D7A55;
+  --green-pale: #e8f5ef;
+  --blue: #1a4fa0;
+  --blue-pale: #eaf0fb;
+  --amber: #a06010;
+  --amber-pale: #fdf2e0;
+  --gray-pale: #f2f0ec;
+}#tab2 { margin: 0; padding: 0; box-sizing: border-box; }body{
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* COVER */
+.cover {
+  background: var(--maroon);
+  color: white;
+  padding: 64px 60px 56px;
+  position: relative;
+  overflow: hidden;
+}#tab2 .cover::before{
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 360px; height: 360px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 50%;
+}#tab2 .cover::after{
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 240px; height: 240px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 50%;
+}#tab2 .cover-eyebrow{
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 14px;
+  font-weight: 400;
+}#tab2 .cover-title{
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}#tab2 .cover-subtitle{
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+  font-weight: 300;
+}#tab2 .cover-meta{
+  display: flex;
+  gap: 40px;
+}#tab2 .cover-meta-item{ }#tab2 .cover-meta-label{
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}#tab2 .cover-meta-val{
+  font-size: 13px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+
+/* NAV */
+.nav {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 60px;
+  display: flex;
+  gap: 0;
+}#tab2 .nav a{
+  display: block;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: var(--ink-light);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}#tab2 .nav a:hover{ color: var(--maroon); border-bottom-color: var(--maroon); }
+
+/* LAYOUT */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 60px; }#tab2 .section{
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--border);
+}#tab2 .section:last-child{ border-bottom: none; }#tab2 .section-header{ margin-bottom: 32px; }#tab2 .section-num{
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--maroon);
+  font-weight: 500;
+  margin-bottom: 6px;
+}#tab2 .section-title{
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+}#tab2 .section-desc{
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-light);
+  font-weight: 300;
+  max-width: 600px;
+}
+
+/* KPI CARDS */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}#tab2 .kpi-card{
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 22px;
+  position: relative;
+  overflow: hidden;
+}#tab2 .kpi-card::before{
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--maroon);
+}#tab2 .kpi-label{
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}#tab2 .kpi-val{
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  color: var(--maroon);
+  line-height: 1;
+  margin-bottom: 4px;
+}#tab2 .kpi-unit{ font-size: 14px; color: var(--ink-mid); margin-left: 2px; }#tab2 .kpi-sub{ font-size: 11px; color: var(--ink-light); margin-top: 4px; }
+
+/* STORE SUMMARY CARDS */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}#tab2 .store-card{
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}#tab2 .store-card.top-ratio{ border-color: var(--maroon); border-width: 1.5px; }#tab2 .store-name{
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  min-height: 34px;
+}#tab2 .store-stat{ margin-bottom: 6px; }#tab2 .store-stat-label{ font-size: 10px; color: var(--ink-light); }#tab2 .store-stat-val{ font-size: 16px; font-weight: 700; color: var(--ink); }#tab2 .store-stat-val.highlight{ color: var(--maroon); }#tab2 .store-badge{
+  display: inline-block;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}#tab2 .badge-top{ background: var(--maroon); color: white; }#tab2 .badge-note{ background: var(--amber-pale); color: var(--amber); }
+
+/* CHART AREAS */
+.chart-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}#tab2 .chart-box{
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 22px 18px;
+}#tab2 .chart-box-title{
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-mid);
+  margin-bottom: 16px;
+  letter-spacing: 0.04em;
+}#tab2 .chart-full{
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 22px 18px;
+  margin-bottom: 24px;
+}#tab2 .chart-legend{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}#tab2 .legend-item{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--ink-mid);
+}#tab2 .legend-dot{
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* TABLES */
+.table-wrap { overflow-x: auto; }#tab2 table.data{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}#tab2 table.data th{
+  background: var(--gray-pale);
+  padding: 9px 12px;
+  text-align: center;
+  color: var(--ink-mid);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}#tab2 table.data th.left{ text-align: left; }#tab2 table.data td{
+  padding: 8px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  white-space: nowrap;
+}#tab2 table.data td.left{ text-align: left; color: var(--ink-mid); font-weight: 500; }#tab2 table.data tr.total td{ background: var(--gray-pale); font-weight: 700; }#tab2 table.data tbody tr:hover{ background: var(--bg); }
+
+/* RANK BADGES */
+.rank { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; }#tab2 .rank-A{ background: var(--green-pale); color: var(--green); }#tab2 .rank-B{ background: var(--blue-pale); color: var(--blue); }#tab2 .rank-C{ background: var(--gray-pale); color: var(--ink-light); }#tab2 .rank-none{ color: var(--border); }
+
+/* HEATMAP */
+.heat-high { background: #7B1A1A22; color: #7B1A1A; font-weight: 700; }#tab2 .heat-mid{ background: #8B1A1A14; color: #8B3030; font-weight: 500; }#tab2 .heat-low{ background: #8B1A1A08; color: var(--ink-mid); }#tab2 .heat-zero{ color: var(--border); }
+
+/* TIME ZONE BADGE */
+.zone-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-right: 6px;
+}#tab2 .zone-lunch{ background: var(--gold-pale); color: var(--gold); border: 1px solid #e8d090; }#tab2 .zone-pm{ background: var(--blue-pale); color: var(--blue); border: 1px solid #b0c8f0; }#tab2 .zone-dinner{ background: var(--maroon-pale); color: var(--maroon); border: 1px solid var(--maroon-mid); }
+
+/* INSIGHT CARDS */
+.insight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 24px;
+}#tab2 .insight-card{
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--maroon);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 18px;
+}#tab2 .insight-card.green{ border-left-color: var(--green); }#tab2 .insight-card.amber{ border-left-color: var(--gold); }#tab2 .insight-card.blue{ border-left-color: var(--blue); }#tab2 .insight-title{ font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }#tab2 .insight-body{ font-size: 12px; color: var(--ink-mid); line-height: 1.65; font-weight: 300; }
+
+/* FOOTER */
+.footer {
+  background: var(--maroon);
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  padding: 24px 60px;
+  text-align: center;
+}
+
+/* TAB CONTROL */
+.tab-bar { display: flex; gap: 4px; margin-bottom: 16px; }#tab2 .tab-btn{
+  padding: 6px 14px;
+  font-size: 11px;
+  font-family: 'Noto Sans JP', sans-serif;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  background: white;
+  color: var(--ink-light);
+  font-weight: 500;
+  transition: all 0.15s;
+}#tab2 .tab-btn.active{ background: var(--maroon); color: white; border-color: var(--maroon); }
+
+@media print {
+  .nav { display: none; }
+}
+
+
+</style>
+<style>
+#tab3 {box-sizing:border-box;margin:0;padding:0}:root{
+  --enzo:#8B1A1A;--enzo-light:#F5E6E6;--enzo-mid:#B94040;
+  --ippin:#C97A2F;--blue:#4A6FA5;
+  --bg:#FAF8F5;--card:#FFFFFF;--border:#E8E3DC;
+  --text:#1A1410;--text2:#6B5E52;--text3:#A0907E;
+  --rank-a-bg:#C6EFCE;--rank-a-txt:#2D6A35;
+  --rank-b-bg:#FFF3B0;--rank-b-txt:#7A6000;
+  --rank-c-bg:#FFD0D0;--rank-c-txt:#9C2020;
+  --radius:10px;--shadow:0 1px 4px rgba(0,0,0,0.07);
+}html, body{font-family:'Hiragino Kaku Gothic ProN','Meiryo UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;}
+
+/* HEADER */
+.header{background:var(--enzo);color:#fff;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:100;}#tab3 .header-brand{font-size:11px;opacity:0.7;letter-spacing:0.08em;}#tab3 .header-title{font-size:18px;font-weight:700;letter-spacing:0.04em;margin-top:2px;}#tab3 .header-period{font-size:12px;opacity:0.8;margin-top:3px;}#tab3 .header-right{text-align:right;font-size:11px;opacity:0.75;line-height:1.7;}
+
+/* NAV ANCHORS */
+.nav{background:var(--enzo-mid);display:flex;gap:0;overflow-x:auto;position:sticky;top:88px;z-index:99;}#tab3 .nav a{color:rgba(255,255,255,0.8);font-size:12px;font-weight:600;padding:10px 22px;white-space:nowrap;text-decoration:none;letter-spacing:0.04em;transition:background .15s,color .15s;}#tab3 .nav a:hover{background:rgba(255,255,255,0.12);color:#fff;}
+
+/* LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:28px 24px 60px;}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:0;}#tab3 .kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);}#tab3 .kpi.accent{border-left:3px solid var(--enzo);}#tab3 .kpi-label{font-size:11px;color:var(--text3);margin-bottom:5px;letter-spacing:0.05em;}#tab3 .kpi-val{font-size:22px;font-weight:700;color:var(--text);line-height:1.15;}#tab3 .kpi-unit{font-size:13px;font-weight:400;margin-left:2px;}#tab3 .kpi-sub{font-size:11px;color:var(--text2);margin-top:3px;}
+
+/* SECTION */
+.section{margin-top:36px;}#tab3 .sec-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px;}#tab3 .sec-hd-bar{width:4px;height:20px;background:var(--enzo);border-radius:2px;flex-shrink:0;}#tab3 .sec-hd-title{font-size:15px;font-weight:700;color:var(--text);letter-spacing:0.03em;}#tab3 .sec-hd-sub{font-size:12px;color:var(--text3);margin-left:4px;}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}#tab3 .card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;}#tab3 .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);}#tab3 .leg-dot{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:720px){.two-col,.kpi-grid{grid-template-columns:repeat(2,1fr);}.nav a{padding:9px 14px;}}
+
+/* CAT */
+.cat-row{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:center;}#tab3 .cat-bar-item{margin-bottom:12px;}#tab3 .cat-lbl{font-size:12px;color:var(--text2);margin-bottom:4px;}#tab3 .cat-bg{background:#EDE7DF;border-radius:20px;height:9px;overflow:hidden;}#tab3 .cat-fill{height:9px;border-radius:20px;}#tab3 .insight-box{margin-top:12px;padding:12px 14px;background:var(--enzo-light);border-radius:8px;border-left:3px solid var(--enzo);font-size:12px;color:var(--text2);line-height:1.9;}
+
+/* STORE SELECTOR */
+.st-btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}#tab3 .st-btn{font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer;white-space:nowrap;transition:all .12s;font-family:inherit;}#tab3 .st-btn:hover{border-color:var(--enzo);color:var(--enzo);}#tab3 .st-btn.on{background:var(--enzo);color:#fff;border-color:var(--enzo);}#tab3 .store-meta{font-size:13px;color:var(--text2);margin-bottom:16px;padding:10px 14px;background:var(--enzo-light);border-radius:8px;border-left:3px solid var(--enzo);}#tab3 .store-meta strong{color:var(--enzo);font-weight:700;}
+
+/* RANK LIST */
+.rank-row{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);margin-bottom:5px;background:var(--card);}#tab3 .rn{font-size:11px;color:var(--text3);min-width:18px;font-weight:600;}#tab3 .rname{font-size:12px;font-weight:600;color:var(--text);flex:1;min-width:0;}#tab3 .rbar-w{flex:2;background:#EDE7DF;border-radius:20px;height:5px;overflow:hidden;}#tab3 .rbar{height:5px;border-radius:20px;}#tab3 .rqty{font-size:13px;font-weight:700;color:var(--text);min-width:38px;text-align:right;}#tab3 .rbadge{font-size:10px;padding:2px 7px;border-radius:10px;min-width:24px;text-align:center;font-weight:700;}#tab3 .rA{background:var(--rank-a-bg);color:var(--rank-a-txt);}#tab3 .rB{background:var(--rank-b-bg);color:var(--rank-b-txt);}#tab3 .rC{background:var(--rank-c-bg);color:var(--rank-c-txt);}#tab3 .rX{background:#F0EBE4;color:var(--text3);}#tab3 .rpct{font-size:11px;color:var(--text3);min-width:32px;text-align:right;}
+
+/* HEATMAP */
+.htbl-wrap{overflow-x:auto;margin-top:10px;}#tab3 .htable{width:100%;border-collapse:collapse;font-size:11px;}#tab3 .htable th{padding:4px 7px;font-weight:600;color:var(--text2);text-align:left;border-bottom:1px solid var(--border);background:var(--card);white-space:nowrap;}#tab3 .htable th.rot{writing-mode:vertical-rl;height:90px;vertical-align:bottom;text-align:left;font-size:10px;}#tab3 .htable td{padding:4px 6px;border-bottom:1px solid #F2EDE6;}#tab3 .htable tr:hover td{background:#FAF5EE;}#tab3 .htable td.sticky{white-space:nowrap;font-weight:600;font-size:11px;position:sticky;left:0;background:var(--card);border-right:1px solid var(--border);min-width:110px;z-index:1;}#tab3 .htable tr:hover td.sticky{background:#FAF5EE;}#tab3 .hcell{display:inline-block;border-radius:4px;padding:2px 6px;min-width:30px;text-align:center;font-size:11px;font-weight:600;}#tab3 .htot{text-align:right;font-weight:700;color:var(--text);}#tab3 .badge-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;}#tab3 .bl{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);}#tab3 .bl-sq{width:28px;height:16px;border-radius:3px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0 0;}
+
+/* FOOTER */
+.footer{text-align:center;padding:24px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:48px;}
+
+
+</style>
+<style>
+:root{
+    --crimson: #8B1A1A;
+    --crimson-sat: #C0392B;
+    --crimson-light: #E67E73;
+    --blue: #378ADD;
+    --amber: #EF9F27;
+    --gray: #888780;
+    --green: #639922;
+    --coral: #D85A30;
+    --budget: #2980B9;
+    --bg: #faf9f7;
+    --bg-card: #ffffff;
+    --bg-muted: #f4f2ee;
+    --text-primary: #1a1916;
+    --text-secondary: #5a5855;
+    --text-tertiary: #9a9895;
+    --border: #e0ddd8;
+    --border-light: #ece9e3;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }#tab4 { box-sizing: border-box; margin: 0; padding: 0; }body{
+    font-family: 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Meiryo UI', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--crimson);
+    color: #fff;
+    padding: 20px 32px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }#tab4 .site-header h1{ font-size: 18px; font-weight: 600; letter-spacing: .02em; }#tab4 .site-header .sub{ font-size: 11px; opacity: .75; margin-top: 3px; }#tab4 .site-header .meta{ font-size: 11px; opacity: .7; text-align: right; }
+
+  /* NAV */
+  .sticky-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }#tab4 .sticky-nav::-webkit-scrollbar{ display: none; }#tab4 .nav-item{
+    padding: 10px 16px; font-size: 12px; font-weight: 500;
+    color: var(--text-secondary); cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+    text-decoration: none; display: block;
+  }#tab4 .nav-item:hover{ color: var(--crimson); }#tab4 .nav-item.active{ color: var(--crimson); border-bottom-color: var(--crimson); }
+
+  /* LAYOUT */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }#tab4 .section{ padding: 2rem 0 0; }#tab4 .section-header{
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 1rem; padding-bottom: 8px;
+    border-bottom: 1.5px solid var(--border);
+  }#tab4 .section-num{
+    width: 22px; height: 22px; background: var(--crimson); color: #fff;
+    font-size: 11px; font-weight: 700; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }#tab4 .section-title{ font-size: 14px; font-weight: 600; color: var(--text-primary); }#tab4 .divider{ height: 1px; background: var(--border-light); margin: 2.5rem 0 0; }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 1rem; }#tab4 .kpi{ background: var(--bg-muted); border-radius: var(--radius); padding: 10px 12px; }#tab4 .kpi-label{ font-size: 11px; color: var(--text-tertiary); margin-bottom: 3px; }#tab4 .kpi-val{ font-size: 17px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }#tab4 .kpi-sub{ font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }#tab4 .badge{ display: inline-block; font-size: 10px; padding: 1px 8px; border-radius: 999px; margin-top: 4px; }#tab4 .badge-up{ background: #EAF3DE; color: #3B6D11; }#tab4 .badge-dn{ background: #FCEBEB; color: #A32D2D; }#tab4 .badge-neu{ background: #E6F1FB; color: #185FA5; }#tab4 .badge-warn{ background: #FAEEDA; color: #854F0B; }
+
+  /* CHARTS */
+  .chart-wrap { position: relative; width: 100%; }#tab4 .row2{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1rem; }
+  @media (max-width: 600px) { .row2 { grid-template-columns: 1fr; } }
+
+  /* LEGEND */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; font-size: 11px; color: var(--text-secondary); align-items: center; }#tab4 .ld{ width: 10px; height: 10px; border-radius: 2px; display: inline-block; vertical-align: middle; margin-right: 3px; }
+
+  /* INSIGHT */
+  .insight {
+    background: var(--bg-muted); border-left: 3px solid var(--crimson);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 10px 14px; font-size: 12px; color: var(--text-secondary);
+    line-height: 1.7; margin-top: 10px;
+  }
+
+  /* TABLE */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: var(--radius); }#tab4 table{ width: 100%; border-collapse: collapse; font-size: 12px; }#tab4 th{
+    background: var(--bg-muted); font-weight: 600; color: var(--text-secondary);
+    padding: 7px 9px; text-align: left; border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }#tab4 th.r, #tab4 td.r{ text-align: right; }#tab4 td{ padding: 6px 9px; border-bottom: 1px solid var(--border-light); color: var(--text-primary); vertical-align: middle; }#tab4 td.muted{ color: var(--text-tertiary); }#tab4 tr:last-child td{ border-bottom: none; }#tab4 tr.total-row td{ background: var(--bg-muted); font-weight: 600; border-top: 1px solid var(--border); }#tab4 tr:hover td{ background: #f8f6f2; }#tab4 .cat-badge{ display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }#tab4 .cat-d{ background: #FAECE7; color: #993C1D; }#tab4 .cat-l{ background: #E6F1FB; color: #185FA5; }#tab4 .cat-s{ background: #EAF3DE; color: #3B6D11; }#tab4 .cat-b{ background: #FAEEDA; color: #854F0B; }#tab4 .cat-f{ background: #F1EFE8; color: #5F5E5A; }#tab4 .bar-cell{ display: flex; align-items: center; gap: 6px; }#tab4 .mini-bar{ height: 8px; border-radius: 3px; min-width: 2px; display: inline-block; }#tab4 .chg-up{ color: #3B6D11; font-size: 11px; }#tab4 .chg-dn{ color: #A32D2D; font-size: 11px; }#tab4 .chg-neu{ color: var(--text-tertiary); font-size: 11px; }
+
+  /* FILTER */
+  .filter-row { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }#tab4 .fbtn{
+    font-size: 11px; padding: 4px 12px; border-radius: 999px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text-secondary); cursor: pointer; transition: all .15s;
+  }#tab4 .fbtn.active, #tab4 .fbtn:hover{ background: var(--crimson); color: #fff; border-color: var(--crimson); }
+
+  /* SUB-LABEL */
+  .sub-label {
+    font-size: 12px; font-weight: 600; color: var(--text-secondary);
+    margin: 1.2rem 0 0.6rem; padding-bottom: 4px;
+    border-bottom: 0.5px solid var(--border-light);
+  }
+
+  /* REVIEW */
+  .review-bars { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }#tab4 .rb-row{ display: flex; align-items: center; gap: 8px; font-size: 12px; }#tab4 .rb-fill{ height: 10px; border-radius: 4px; min-width: 2px; }#tab4 .star-avg{ font-size: 36px; font-weight: 700; text-align: center; color: var(--text-primary); }#tab4 .review-cards{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  @media (max-width: 500px) { .review-cards { grid-template-columns: 1fr; } }#tab4 .rv-card{ border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; }#tab4 .rv-head{ display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 12px; font-weight: 600; }#tab4 .rv-text{ font-size: 11px; color: var(--text-secondary); line-height: 1.5; }#tab4 .stars-gold{ color: #E29B00; }#tab4 .stars-red{ color: #E24B4A; }
+
+  /* FOOTER */
+  .footer { background: #2c2c2a; color: rgba(255,255,255,.5); font-size: 11px; padding: 18px 32px; text-align: center; }
+
+
+</style>
+</head>
+<body>
+<div class="portal-header">
+  <div>
+    <div class="portal-eyebrow">CHIBO HOLDINGS CO., LTD. ｜ 営業推進本部</div>
+    <div class="portal-title">2026年5月度 統合レポートポータル</div>
+  </div>
+  <div class="portal-meta">作成日：2026年6月4日<br>千房ホールディングス</div>
+</div>
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('tab1')" id="btn-tab1"><span class="tab-label">① 5月度 営業実績</span><span class="tab-sub">千房HD 全社レポート</span></button>
+  <button class="tab-btn" onclick="switchTab('tab2')" id="btn-tab2"><span class="tab-label">② ぷれじでんと</span><span class="tab-sub">新メニュー分析</span></button>
+  <button class="tab-btn" onclick="switchTab('tab3')" id="btn-tab3"><span class="tab-label">③ 新メニュー HD</span><span class="tab-sub">販売分析ダッシュボード</span></button>
+  <button class="tab-btn" onclick="switchTab('tab4')" id="btn-tab4"><span class="tab-label">④ 台中店</span><span class="tab-sub">月次レポート</span></button>
+</div>
+<div class="panel" id="tab1">
+
+
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#s0">表紙</a>
+    <a href="#s1">サマリー</a>
+    <a href="#s2">ポートフォリオ</a>
+    <a href="#s3">グラフ詳細</a>
+    <a href="#s4">店舗一覧</a>
+    <a href="#s5">アクション</a>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- COVER -->
+<div id="s0" class="cover" style="padding-top:6px;">
+  <div class="eye">千房ホールディングス株式会社 ／ 営業推進本部　53期 上期</div>
+  <h1>2026年5月度 営業実績分析レポート</h1>
+  <div class="meta">報告日：2026年6月 ／ 対象：直営全店（売上0除外・29店舗）／ 作成：営業推進本部 本部長</div>
+  <div class="note-box"><strong>注記：</strong>ヨドバシHD池袋ビル支店は商業施設のオープンが計画より遅延し、<strong>6月中旬以降にオープン予定</strong>。5月の予算未達（87.9%）は構造的問題ではなく<strong>オープン遅延による一時的要因</strong>。6月以降の急速な売上回復が期待される。</div>
+</div>
+
+<!-- KPI -->
+<div class="kpi-row">
+  <div class="kpi"><label>売上合計（実績）</label><div class="v n">2.92<span style="font-size:13px">億</span></div><div class="s">29店舗合計</div></div>
+  <div class="kpi al"><label>予算比</label><div class="v r">98.0<span style="font-size:13px">%</span></div><div class="s" style="color:var(--red)">▼ 予算未達 ▲5,927万</div></div>
+  <div class="kpi al"><label>前年比</label><div class="v r">97.7<span style="font-size:13px">%</span></div><div class="s" style="color:var(--red)">▼ 前年割れ ▲6,737万</div></div>
+  <div class="kpi gd"><label>予算達成店舗数</label><div class="v g">15<span style="font-size:13px">/29店</span></div><div class="s" style="color:var(--green)">達成率 52%</div></div>
+  <div class="kpi al"><label>客数前年比</label><div class="v r">96.1<span style="font-size:13px">%</span></div><div class="s" style="color:var(--red)">▼ ▲4,477人</div></div>
+</div>
+
+<hr class="div" id="s1">
+
+<!-- SECTION 1 SUMMARY -->
+<div class="sec">
+  <div class="sh"><div class="sn">1</div><div class="st">エグゼクティブサマリー ― 今月の「本質」</div></div>
+  <div class="ig">
+    <div class="ic r"><div class="tg">最重要課題</div><h4>客数が根本原因 ― 全社前年比96.1%</h4><p>売上不振の主因は「客単価」ではなく「客数」。道頓堀ビル店▲4,795人・曽根崎支店▲726人の2店で全社客数差異の約75%を占める。これらを除くと全社客数は前年比100%超。</p></div>
+    <div class="ic r"><div class="tg">構造的リスク</div><h4>道頓堀ビル店の不振が全社KPIを歪める</h4><p>1店で全社売上の約18%を占める旗艦店が予算比87.7%・前年比87.3%。客数▲4,795人は深刻。インバウンド動向・競合・価格政策の多角的な要因分析と緊急対策が不可欠。</p></div>
+    <div class="ic g"><div class="tg">明るい材料</div><h4>関東SC・近郊SCが高成長 ― 成功モデル台頭</h4><p>有明ガーデン（+18.5%）、シェラトン都ホテル（+15.8%）、堺東（+19.8%）、リノアス八尾（+16.3%）が高い予算超過。セレオ八王子（前年比+24.9%）も急成長中。</p></div>
+    <div class="ic a"><div class="tg">業態別格差</div><h4>ぷれじでんと業態が全体を下押し</h4><p>ぷれじでんと系7店の合計予算比は約93%。琥 虎ノ門（77.8%）・ぷれじでんと北店（84.8%）が特に深刻。シェラトン都ホテル大阪（115.8%）が示す通り「立地選択」が業績を大きく左右。</p></div>
+  </div>
+  <div class="row2">
+    <div class="cc"><h3>全社 売上 ― 実績 vs 予算 vs 前年（百万円）</h3><div class="cw" style="height:220px;"><canvas id="cTotal"></canvas></div></div>
+    <div class="cc"><h3>予算達成率 分布（店舗数）</h3><div class="cw" style="height:220px;"><canvas id="cDist"></canvas></div></div>
+  </div>
+  <div class="sr">
+    <div class="sc"><div class="stag g">ベーシック業態（SC・路面）</div><div class="bn g">予算比 102%超</div><p style="font-size:11px;color:var(--sub);margin-top:3px;">道頓堀ビル店を除くと業態全体は健全。関東SCが牽引。旗艦店依存リスクの解消が急務。</p></div>
+    <div class="sc"><div class="stag r">ぷれじでんと業態（高単価）</div><div class="bn r">予算比 約93%</div><p style="font-size:11px;color:var(--sub);margin-top:3px;">7店中5店が予算未達。高単価ゾーンのビジネス需要・インバウンドの回復鈍化が主因とみられる。</p></div>
+    <div class="sc"><div class="stag b">エリア別傾向</div><div class="bn b">関東 &gt; 近畿</div><p style="font-size:11px;color:var(--sub);margin-top:3px;">関東エリアが近畿をアウトパフォーム。有明・セレオ・ルミネ等の郊外SC型が安定的に好調。</p></div>
+  </div>
+</div>
+
+<hr class="div" id="s2">
+
+<!-- SECTION 2 PORTFOLIO -->
+<div class="sec">
+  <div class="sh"><div class="sn">2</div><div class="st">4象限マトリクス ― 店舗ポートフォリオの位置づけ</div><div class="sm">縦軸：予算比 ／ 横軸：前年比</div></div>
+  <div class="mx-y">↑ 予算比 100%超</div>
+  <div class="mxg">
+    <div class="q" style="border:1px solid #97C459;"><div class="qt g">★ 完全達成（予算◎・前年◎）</div>
+      <span class="ts">有明ガーデン</span><span class="ts">シェラトン都</span><span class="ts">高槻阪急</span><span class="ts">リノアス八尾</span><span class="ts">名古屋みなとアクルス</span><span class="ts">各務原インター</span><span class="ts">JO-TERRACE</span><span class="ts">ルミネ立川</span><span class="ts">セレオ八王子</span><span class="ts">舞イクスピアリ</span><span class="ts">恵比寿GP</span><span class="ts">あべのQsMall</span><span class="ts">京橋京阪</span><span class="ts">京都アバンティ</span>
+      <div style="font-size:10px;color:var(--green);margin-top:5px;">14店舗 ／ 全体の48%</div>
+    </div>
+    <div class="q" style="border:1px solid #EF9F27;"><div class="qt a">▲ 予算◎・前年割れ（反動注意）</div>
+      <span class="ts">堺東支店</span>
+      <div style="font-size:11px;color:var(--amber);margin-top:5px;">前年が高水準だった店舗。施策効果はあるが前年の反動を注視。</div>
+    </div>
+    <div class="q" style="border:1px solid #85B7EB;"><div class="qt b">△ 予算未達・前年超（成長型）</div>
+      <span class="ts" style="border:1.5px solid var(--amber);">ヨドバシ池袋 ★</span>
+      <div style="font-size:11px;color:var(--blue);margin-top:5px;"><strong style="color:var(--amber);">商業施設オープン遅延が原因。</strong><br>6月中旬以降オープンで急回復が期待される成長店。</div>
+    </div>
+    <div class="q" style="border:1px solid #F09595;"><div class="qt r">✕ 要介入（予算・前年ともに割れ）</div>
+      <span class="ts">道頓堀ビル店</span><span class="ts">曽根崎支店</span><span class="ts">ハービス梅田</span><span class="ts">有楽町ビックカメラ</span><span class="ts">そごう横浜</span><span class="ts">P南本店</span><span class="ts">P北店</span><span class="ts">日航ビル</span><span class="ts">大丸心斎橋</span><span class="ts">琥 虎ノ門</span><span class="ts">P Retreat</span><span class="ts">千日前本店</span><span class="ts">ららぽーと甲子園</span>
+      <div style="font-size:10px;color:var(--red);margin-top:5px;">13店舗 ／ 緊急度に応じた個別対策が必要</div>
+    </div>
+  </div>
+  <div class="mx-x"><span>← 前年比 100%未満</span><span>前年比 100%超 →</span></div>
+  <div class="cc" style="margin-top:14px;">
+    <h3>全店舗 予算比 vs 前年比 散布図（業態別色分け）</h3>
+    <div class="leg">
+      <span><span class="ld" style="background:#8B1A1A;"></span>ベーシック/フードコート</span>
+      <span><span class="ld" style="background:#185fa5;"></span>ぷれじでんと</span>
+      <span><span class="ld" style="background:#EF9F27;"></span>エレガンス</span>
+    </div>
+    <div class="cw" style="height:300px;"><canvas id="cScatter"></canvas></div>
+  </div>
+</div>
+
+<hr class="div" id="s3">
+
+<!-- SECTION 3 CHARTS -->
+<div class="sec">
+  <div class="sh"><div class="sn">3</div><div class="st">店舗別グラフ詳細（全29店舗）</div></div>
+
+  <div class="cc">
+    <h3>① 店舗別 売上実績 ／ 予算（万円）― 実績降順</h3>
+    <div class="leg"><span><span class="ld" style="background:#8B1A1A;"></span>売上実績</span><span><span class="ld" style="background:#B5D4F4;"></span>予算</span></div>
+    <div class="cw"><canvas id="cSales" style="width:100%;height:900px;"></canvas></div>
+  </div>
+
+  <div class="cc">
+    <h3>② 店舗別 予算比（%）― 達成：緑 ／ 未達：赤　ヨドバシ池袋：橙（オープン遅延）</h3>
+    <div class="cw"><canvas id="cYosan" style="width:100%;height:900px;"></canvas></div>
+  </div>
+
+  <div class="cc">
+    <h3>③ 店舗別 前年比（%）― 前年超：青 ／ 前年割れ：橙</h3>
+    <div class="cw"><canvas id="cZennen" style="width:100%;height:900px;"></canvas></div>
+  </div>
+
+  <div class="row2">
+    <div class="cc">
+      <h3>④ 客数前年比（%）</h3>
+      <div class="cw"><canvas id="cKyaku" style="width:100%;height:900px;"></canvas></div>
+    </div>
+    <div class="cc">
+      <h3>⑤ 客単価 実績 vs 前年（円）</h3>
+      <div class="cw"><canvas id="cTanka" style="width:100%;height:900px;"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div" id="s4">
+
+<!-- SECTION 4 TABLE -->
+<div class="sec">
+  <div class="sh"><div class="sn">4</div><div class="st">店舗別 実績一覧</div></div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
+    <label style="font-size:11px;color:var(--sub);">並び替え：</label>
+    <select id="tS" onchange="renderTbl()" style="font-size:11px;padding:4px 9px;border:.5px solid var(--border);border-radius:6px;background:#fff;">
+      <option value="s">売上実績</option><option value="y">予算比</option><option value="z">前年比</option><option value="k">客数</option>
+    </select>
+    <select id="tD" onchange="renderTbl()" style="font-size:11px;padding:4px 9px;border:.5px solid var(--border);border-radius:6px;background:#fff;">
+      <option value="d">降順</option><option value="a">昇順</option>
+    </select>
+  </div>
+  <div class="tw"><table><thead><tr>
+    <th>#</th><th>店舗名</th>
+    <th class="r">売上実績</th><th class="r">予算</th><th class="r">予算比</th>
+    <th class="r">前年実績</th><th class="r">前年比</th>
+    <th class="r">客数実績</th><th class="r">客数前年比</th>
+    <th class="r">客単価</th><th class="r">客単価前年</th>
+  </tr></thead><tbody id="tB"></tbody></table></div>
+</div>
+
+<hr class="div" id="s5">
+
+<!-- SECTION 5 ACTION -->
+<div class="sec">
+  <div class="sh"><div class="sn">5</div><div class="st">6月以降 アクションプラン提言</div></div>
+  <div class="ag">
+    <div class="ac"><div class="pr hi">優先度 高 ／ 即時対応</div><h4>道頓堀ビル店 緊急タスクフォース</h4><p>インバウンド対策・価格ゾーニング・集客施策の3軸で現地ヒアリングと競合調査を実施。7月末までに「改善ロードマップ」を策定し経営会議に提出。</p></div>
+    <div class="ac"><div class="pr hi">優先度 高 ／ 6月中</div><h4>ぷれじでんとブランドの需要構造再確認</h4><p>ぷれじでんと5店の不振がBizニーズ低下によるものかコンセプト問題かを切り分け。CLV・リピート率データと照合し、ランチ/個室/宴会別の需要を分解する。</p></div>
+    <div class="ac hl"><div class="pr mi">優先度 中 ／ 6月中旬〜 <span class="nb">NEW</span></div><h4>ヨドバシHD池袋ビル支店 オープン対応</h4><p>商業施設のオープン遅延（6月中旬予定）により5月は予算未達（87.9%）だったが構造的問題ではない。開業販促・SNS・近隣告知施策を6月初旬から準備し、開業後の集客を最大化する。</p></div>
+    <div class="ac"><div class="pr mi">優先度 中 ／ 上期中</div><h4>成功パターンの定型化と横展開</h4><p>有明ガーデン・舞イクスピアリ・ルミネ立川の成功要因（立地特性、販促手法、メニュー構成）を言語化し、類似立地店舗への横展開プログラムを設計。</p></div>
+    <div class="ac"><div class="pr mi">優先度 中 ／ 上期中</div><h4>客数回復の全社施策（MAKE FAN MORE連動）</h4><p>全社客数前年比96.1%は構造問題。SNS・GBP・リピーター施策を統合したFANMAKING施策を全社展開。客数▲20%超の道頓堀・曽根崎・P北を重点対象に集中投下。</p></div>
+    <div class="ac"><div class="pr lo">優先度 中 ／ 次期予算</div><h4>予算設定ロジックの見直し</h4><p>ヨドバシ池袋（前年比116%・予算未達）等、急成長店の予算が実力を反映できていないケースを精査。立地特性・成熟度・開業スケジュールを加味したガイドラインを策定。</p></div>
+  </div>
+</div>
+
+<div class="ft"><span>千房ホールディングス株式会社 ／ 営業推進本部　2026年6月作成</span><span>機密資料 ― 社内限り</span></div>
+</div><!-- /page -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ── DATA (sorted by sales desc) ──
+const D=[
+  {n:"道頓堀ビル店",      s:5263,b:6000,p:6023,y:87.7, z:87.3, k:21869,kr:82.0, t:2407, tp:2259, type:"basic"},
+  {n:"千日前本店",        s:2014,b:2050,p:2058,y:98.2, z:97.8, k:8737, kr:97.3, t:2306, tp:2293, type:"basic"},
+  {n:"シェラトン都ホテル大阪",s:1599,b:1380,p:1372,y:115.8,z:116.5,k:1937, kr:104.8,t:8253, tp:7426, type:"president"},
+  {n:"大丸心斎橋",        s:1453,b:1500,p:1479,y:96.8, z:98.2, k:2141, kr:98.0, t:6786, tp:6774, type:"president"},
+  {n:"舞 イクスピアリ店",  s:1148,b:1100,p:1125,y:104.3,z:101.9,k:5338, kr:100.6,t:2150, tp:2123, type:"basic"},
+  {n:"有明ガーデン支店",   s:1138,b:960, p:1004,y:118.5,z:113.3,k:5024, kr:107.9,t:2266, tp:2157, type:"basic"},
+  {n:"恵比寿GP店",       s:1111,b:1080,p:1092,y:102.8,z:101.7,k:1813, kr:101.7,t:6129, tp:6132, type:"elegance"},
+  {n:"有楽町ビックカメラ", s:1012,b:1050,p:1030,y:96.4, z:98.3, k:3842, kr:96.0, t:2635, tp:2573, type:"basic"},
+  {n:"日航ビル店",        s:981, b:1050,p:1072,y:93.4, z:91.5, k:1350, kr:106.3,t:7269, tp:8448, type:"president"},
+  {n:"そごう横浜店",      s:918, b:920, p:932, y:99.7, z:98.4, k:3947, kr:101.6,t:2325, tp:2401, type:"basic"},
+  {n:"あべのQsMall",     s:904, b:900, p:894, y:100.4,z:101.1,k:4833, kr:99.4, t:1870, tp:1839, type:"basic"},
+  {n:"ぷれじでんと北店",   s:848, b:1000,p:1061,y:84.8, z:79.9, k:661,  kr:74.6, t:12836,tp:11977,type:"president"},
+  {n:"京都アバンティ支店", s:836, b:820, p:829, y:101.9,z:100.8,k:3591, kr:99.6, t:2329, tp:2301, type:"basic"},
+  {n:"曽根崎支店",        s:812, b:950, p:957, y:85.4, z:84.8, k:2671, kr:78.6, t:3041, tp:2818, type:"basic"},
+  {n:"ハービスPLAZA梅田", s:777, b:800, p:807, y:97.1, z:96.3, k:3254, kr:91.2, t:2388, tp:2262, type:"basic"},
+  {n:"名古屋みなとアクルス",s:772, b:700, p:734, y:110.2,z:105.1,k:4460, kr:101.9,t:1730, tp:1679, type:"basic"},
+  {n:"高槻阪急スクエア",   s:757, b:700, p:698, y:108.1,z:108.4,k:4154, kr:111.4,t:1823, tp:1873, type:"basic"},
+  {n:"堺東支店",          s:753, b:628, p:926, y:119.8,z:81.2, k:3716, kr:77.9, t:2025, tp:1941, type:"basic"},
+  {n:"リノアス八尾支店",   s:733, b:630, p:647, y:116.3,z:113.3,k:3907, kr:114.9,t:1875, tp:1903, type:"basic"},
+  {n:"ルミネ立川支店",     s:731, b:720, p:687, y:101.5,z:106.4,k:3515, kr:105.1,t:2080, tp:2055, type:"basic"},
+  {n:"名代JO-TERRACE",   s:697, b:650, p:613, y:107.2,z:113.8,k:3581, kr:110.4,t:1948, tp:1889, type:"basic"},
+  {n:"京橋京阪モール",     s:636, b:620, p:580, y:102.6,z:109.6,k:3099, kr:104.4,t:2053, tp:1955, type:"basic"},
+  {n:"ぷれじでんと南本店", s:667, b:750, p:756, y:88.9, z:88.2, k:566,  kr:77.0, t:11785,tp:10283,type:"president"},
+  {n:"ヨドバシHD池袋",    s:571, b:650, p:491, y:87.9, z:116.3,k:2577, kr:111.5,t:2217, tp:2126, type:"basic"},
+  {n:"琥 虎ノ門",         s:530, b:680, p:600, y:77.8, z:88.3, k:321,  kr:87.9, t:16499,tp:16429,type:"president"},
+  {n:"セレオ八王子支店",   s:507, b:470, p:406, y:107.9,z:124.9,k:2723, kr:125.3,t:1864, tp:1870, type:"basic"},
+  {n:"ららぽーと甲子園",   s:492, b:510, p:470, y:96.4, z:104.6,k:4536, kr:100.3,t:1085, tp:1040, type:"basic"},
+  {n:"各務原インター",     s:386, b:350, p:365, y:110.3,z:105.7,k:2604, kr:107.5,t:1483, tp:1508, type:"basic"},
+  {n:"P Retreat",        s:187, b:210, p:201, y:89.2, z:93.2, k:126,  kr:82.8, t:14872,tp:13218,type:"president"},
+];
+
+const LABS = D.map(d=>d.n);
+
+// ── Chart.js default: make sure no animation delay ──
+Chart.defaults.animation = false;
+Chart.defaults.responsive = false; // KEY: disable responsive for bar charts with explicit size
+
+function makeBar(id, datasets, opts={}) {
+  const canvas = document.getElementById(id);
+  const wrapper = canvas.parentElement;
+  const W = wrapper.clientWidth || 900;
+  const H = parseInt(canvas.style.height) || 900;
+  canvas.width  = W;
+  canvas.height = H;
+  return new Chart(canvas, {
+    type: 'bar',
+    data: { labels: LABS, datasets },
+    options: {
+      indexAxis: 'y',
+      animation: false,
+      responsive: false,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...opts.tooltip }
+      },
+      scales: {
+        x: {
+          min: opts.xMin ?? undefined,
+          ticks: { font:{size:11}, callback: opts.xFmt ?? (v=>v) },
+          grid: { color:'rgba(0,0,0,0.05)' }
+        },
+        y: {
+          ticks: { font:{size:11.5}, color:'#1a1917' },
+          grid: { display:false }
+        }
+      }
+    }
+  });
+}
+
+// ① Sales
+makeBar('cSales',
+  [
+    { label:'実績', data:D.map(d=>d.s), backgroundColor:'rgba(139,26,26,0.85)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 },
+    { label:'予算', data:D.map(d=>d.b), backgroundColor:'rgba(181,212,244,0.75)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 }
+  ],
+  { xFmt: v=>v.toLocaleString()+'万', tooltip:{ callbacks:{ label:c=>c.dataset.label+': '+c.parsed.x.toLocaleString()+'万円' } } }
+);
+
+// ② 予算比
+makeBar('cYosan',
+  [{
+    data: D.map(d=>d.y),
+    backgroundColor: D.map(d=>d.n==='ヨドバシHD池袋'?'rgba(239,159,39,0.9)':d.y>=100?'rgba(45,106,63,0.85)':'rgba(163,45,45,0.85)'),
+    borderRadius:3, barPercentage:0.7, categoryPercentage:0.85
+  }],
+  { xMin:65, xFmt:v=>v+'%', tooltip:{ callbacks:{ label:c=>'予算比: '+c.parsed.x+'%'+(D[c.dataIndex].n==='ヨドバシHD池袋'?' ★オープン遅延':'') } } }
+);
+
+// ③ 前年比
+makeBar('cZennen',
+  [{
+    data: D.map(d=>d.z),
+    backgroundColor: D.map(d=>d.z>=100?'rgba(24,95,165,0.8)':'rgba(186,117,23,0.85)'),
+    borderRadius:3, barPercentage:0.7, categoryPercentage:0.85
+  }],
+  { xMin:65, xFmt:v=>v+'%', tooltip:{ callbacks:{ label:c=>'前年比: '+c.parsed.x+'%' } } }
+);
+
+// ④ 客数前年比
+makeBar('cKyaku',
+  [{
+    data: D.map(d=>d.kr),
+    backgroundColor: D.map(d=>d.kr>=100?'rgba(24,95,165,0.8)':'rgba(186,117,23,0.85)'),
+    borderRadius:3, barPercentage:0.7, categoryPercentage:0.85
+  }],
+  { xMin:65, xFmt:v=>v+'%', tooltip:{ callbacks:{ label:c=>'客数前年比: '+c.parsed.x+'%' } } }
+);
+
+// ⑤ 客単価
+makeBar('cTanka',
+  [
+    { label:'実績', data:D.map(d=>d.t), backgroundColor:'rgba(139,26,26,0.85)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 },
+    { label:'前年', data:D.map(d=>d.tp), backgroundColor:'rgba(211,209,199,0.8)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 }
+  ],
+  { xFmt:v=>'¥'+v.toLocaleString(), tooltip:{ callbacks:{ label:c=>c.dataset.label+': ¥'+c.parsed.x.toLocaleString() } } }
+);
+
+// ── Summary charts (responsive OK, fixed height container) ──
+Chart.defaults.responsive = true;
+Chart.defaults.animation = false;
+
+new Chart(document.getElementById('cTotal'),{
+  type:'bar',
+  data:{labels:['売上実績','予算','前年実績'],
+    datasets:[{data:[292,298,299],backgroundColor:['#8B1A1A','#B5D4F4','#D3D1C7'],borderRadius:5,barThickness:56}]},
+  options:{responsive:true,maintainAspectRatio:false,animation:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(0)+'百万円'}}},
+    scales:{y:{ticks:{callback:v=>v+'M'},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+const bins={'~85%':0,'85~95%':0,'95~100%':0,'100~110%':0,'110%~':0};
+D.forEach(d=>{if(d.y<85)bins['~85%']++;else if(d.y<95)bins['85~95%']++;else if(d.y<100)bins['95~100%']++;else if(d.y<110)bins['100~110%']++;else bins['110%~']++;});
+new Chart(document.getElementById('cDist'),{
+  type:'bar',
+  data:{labels:Object.keys(bins),datasets:[{data:Object.values(bins),backgroundColor:['#a32d2d','#E24B4A','#888780','#2d6a3f','#639922'],borderRadius:5,barThickness:48}]},
+  options:{responsive:true,maintainAspectRatio:false,animation:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'店舗'}}},
+    scales:{y:{ticks:{stepSize:1},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+new Chart(document.getElementById('cScatter'),{
+  type:'scatter',
+  data:{datasets:[
+    {label:'ベーシック/FC',data:D.filter(d=>d.type==='basic').map(d=>({x:d.y,y:d.z,label:d.n})),backgroundColor:'rgba(139,26,26,0.65)',pointRadius:5,pointHoverRadius:7},
+    {label:'ぷれじでんと',data:D.filter(d=>d.type==='president').map(d=>({x:d.y,y:d.z,label:d.n})),backgroundColor:'rgba(24,95,165,0.7)',pointRadius:6,pointHoverRadius:8},
+    {label:'エレガンス',data:D.filter(d=>d.type==='elegance').map(d=>({x:d.y,y:d.z,label:d.n})),backgroundColor:'rgba(239,159,39,0.85)',pointRadius:6,pointHoverRadius:8}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,animation:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.label}：予算${c.parsed.x}% 前年${c.parsed.y}%`}}},
+    scales:{
+      x:{min:70,max:125,title:{display:true,text:'予算比（%）',font:{size:11}},grid:{color:'rgba(0,0,0,0.04)'},ticks:{callback:v=>v+'%',font:{size:10}}},
+      y:{min:75,max:130,title:{display:true,text:'前年比（%）',font:{size:11}},grid:{color:'rgba(0,0,0,0.04)'},ticks:{callback:v=>v+'%',font:{size:10}}}
+    }
+  }
+});
+
+// ── Table ──
+function renderTbl(){
+  const k=document.getElementById('tS').value;
+  const dir=document.getElementById('tD').value;
+  const sd=[...D].sort((a,b)=>{
+    const av=k==='s'?a.s:k==='y'?a.y:k==='z'?a.z:a.k;
+    const bv=k==='s'?b.s:k==='y'?b.y:k==='z'?b.z:b.k;
+    return dir==='d'?bv-av:av-bv;
+  });
+  document.getElementById('tB').innerHTML=sd.map((d,i)=>{
+    const yc=d.y>=100?'pg':d.y>=95?'pn':'pr2';
+    const zc=d.z>=100?'pg':d.z>=95?'pn':'pr2';
+    const kc=d.kr>=100?'pg':d.kr>=95?'pn':'pr2';
+    const note=d.n==='ヨドバシHD池袋'?' <span style="font-size:9px;color:var(--amber);">★オープン遅延</span>':'';
+    return `<tr>
+      <td style="color:var(--hint)">${i+1}</td>
+      <td>${d.n}${note}</td>
+      <td class="r">${d.s.toLocaleString()}万</td>
+      <td class="r" style="color:var(--hint)">${d.b.toLocaleString()}万</td>
+      <td class="r"><span class="pi ${yc}">${d.y}%</span></td>
+      <td class="r" style="color:var(--hint)">${d.p.toLocaleString()}万</td>
+      <td class="r"><span class="pi ${zc}">${d.z}%</span></td>
+      <td class="r">${d.k.toLocaleString()}</td>
+      <td class="r"><span class="pi ${kc}">${d.kr}%</span></td>
+      <td class="r">¥${d.t.toLocaleString()}</td>
+      <td class="r" style="color:var(--hint)">¥${d.tp.toLocaleString()}</td>
+    </tr>`;
+  }).join('');
+}
+renderTbl();
+
+// ── Sticky nav ──
+const secs=['s0','s1','s2','s3','s4','s5'];
+const navAs=document.querySelectorAll('.nav a');
+window.addEventListener('scroll',()=>{
+  let cur='s0';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.getBoundingClientRect().top+window.scrollY-90)cur=id;});
+  navAs.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+
+</div>
+<div class="panel" id="tab2">
+
+
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">PRESIDENT RESTAURANT GROUP ／ SALES ANALYSIS REPORT</div>
+  <div class="cover-title">新メニュー<br>販売分析レポート</div>
+  <div class="cover-subtitle">ぷれじでんと 5店舗｜2026年5月（新メニュー導入後21日間）</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">集計期間</div>
+      <div class="cover-meta-val">2026/05/11〜05/31（21日間）</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">対象店舗数</div>
+      <div class="cover-meta-val">5店舗</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">対象新メニュー数</div>
+      <div class="cover-meta-val">7品</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">新メニュー総販売数</div>
+      <div class="cover-meta-val">203食</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#overview">① 概要</a>
+  <a href="#store">② 店舗別</a>
+  <a href="#menu">③ 商品別</a>
+  <a href="#ratio">④ 客数比率</a>
+  <a href="#time">⑤ 時間帯</a>
+  <a href="#insight">⑥ 考察・示唆</a>
+</nav>
+
+<div class="container">
+
+<!-- ① 概要 -->
+<section class="section" id="overview">
+  <div class="section-header">
+    <div class="section-num">SECTION 01</div>
+    <div class="section-title">全体概要</div>
+    <div class="section-desc">新メニュー7品、5店舗における導入後21日間の販売実績サマリー</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">新メニュー総販売数</div>
+      <div class="kpi-val">203<span class="kpi-unit">食</span></div>
+      <div class="kpi-sub">5店舗合計 / 21日間</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">1日あたり平均販売数</div>
+      <div class="kpi-val">9.7<span class="kpi-unit">食/日</span></div>
+      <div class="kpi-sub">全店合計ベース</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">最多販売商品</div>
+      <div class="kpi-val" style="font-size:20px; padding-top:6px;">炙りローストビーフ</div>
+      <div class="kpi-sub">48食（構成比 23.6%）</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ディナー帯集中率</div>
+      <div class="kpi-val">85.7<span class="kpi-unit">%</span></div>
+      <div class="kpi-sub">17〜21時で173食／203食</div>
+    </div>
+  </div>
+
+  <div class="chart-2col">
+    <div class="chart-box">
+      <div class="chart-box-title">商品別販売数（全店合計）</div>
+      <div style="position:relative;height:220px;">
+        <canvas id="menuBarChart" role="img" aria-label="商品別販売数棒グラフ"></canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-box-title">商品別販売数構成比</div>
+      <div style="position:relative;height:220px;">
+        <canvas id="menuPieChart" role="img" aria-label="商品別販売数構成比ドーナツグラフ"></canvas>
+      </div>
+      <div class="chart-legend" id="pieLegend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 店舗別 -->
+<section class="section" id="store">
+  <div class="section-header">
+    <div class="section-num">SECTION 02</div>
+    <div class="section-title">店舗別販売実績</div>
+    <div class="section-desc">5店舗の販売数・総客数・客数比率・1日平均の比較</div>
+  </div>
+
+  <div class="store-grid">
+    <div class="store-card">
+      <div class="store-name">シェラトン都ホテル大阪店</div>
+      <div class="store-stat"><div class="store-stat-label">新メニュー販売数</div><div class="store-stat-val">53食</div></div>
+      <div class="store-stat"><div class="store-stat-label">総客数</div><div class="store-stat-val">1,104名</div></div>
+      <div class="store-stat"><div class="store-stat-label">客数比率</div><div class="store-stat-val">4.80%</div></div>
+      <div class="store-stat"><div class="store-stat-label">日平均</div><div class="store-stat-val">2.5食/日</div></div>
+      <span class="store-badge badge-note">ランチ・ディナー分散型</span>
+    </div>
+    <div class="store-card">
+      <div class="store-name">大丸心斎橋店</div>
+      <div class="store-stat"><div class="store-stat-label">新メニュー販売数</div><div class="store-stat-val">44食</div></div>
+      <div class="store-stat"><div class="store-stat-label">総客数</div><div class="store-stat-val">1,244名</div></div>
+      <div class="store-stat"><div class="store-stat-label">客数比率</div><div class="store-stat-val" style="color:#a06010;">3.54%</div></div>
+      <div class="store-stat"><div class="store-stat-label">日平均</div><div class="store-stat-val">2.1食/日</div></div>
+      <span class="store-badge badge-note">客数比率 最低</span>
+    </div>
+    <div class="store-card">
+      <div class="store-name">OM日航ビル店</div>
+      <div class="store-stat"><div class="store-stat-label">新メニュー販売数</div><div class="store-stat-val">43食</div></div>
+      <div class="store-stat"><div class="store-stat-label">総客数</div><div class="store-stat-val">822名</div></div>
+      <div class="store-stat"><div class="store-stat-label">客数比率</div><div class="store-stat-val">5.23%</div></div>
+      <div class="store-stat"><div class="store-stat-label">日平均</div><div class="store-stat-val">2.0食/日</div></div>
+      <span class="store-badge badge-note">クレープ需要が高い</span>
+    </div>
+    <div class="store-card top-ratio">
+      <div class="store-name">北店</div>
+      <div class="store-stat"><div class="store-stat-label">新メニュー販売数</div><div class="store-stat-val">41食</div></div>
+      <div class="store-stat"><div class="store-stat-label">総客数</div><div class="store-stat-val">491名</div></div>
+      <div class="store-stat"><div class="store-stat-label">客数比率</div><div class="store-stat-val highlight">8.35%</div></div>
+      <div class="store-stat"><div class="store-stat-label">日平均</div><div class="store-stat-val">2.0食/日</div></div>
+      <span class="store-badge badge-top">客数比率 No.1</span>
+    </div>
+    <div class="store-card">
+      <div class="store-name">南本店</div>
+      <div class="store-stat"><div class="store-stat-label">新メニュー販売数</div><div class="store-stat-val">22食</div></div>
+      <div class="store-stat"><div class="store-stat-label">総客数</div><div class="store-stat-val">391名</div></div>
+      <div class="store-stat"><div class="store-stat-label">客数比率</div><div class="store-stat-val">5.63%</div></div>
+      <div class="store-stat"><div class="store-stat-label">日平均</div><div class="store-stat-val">1.0食/日</div></div>
+      <span class="store-badge badge-note">販売数 最低</span>
+    </div>
+  </div>
+
+  <div class="chart-full">
+    <div class="chart-box-title">店舗別 商品別内訳（積み上げ棒グラフ）</div>
+    <div style="position:relative;height:260px;">
+      <canvas id="storeStackChart" role="img" aria-label="店舗別商品別積み上げ棒グラフ"></canvas>
+    </div>
+    <div class="chart-legend" id="storeLegend"></div>
+  </div>
+
+  <div class="chart-full">
+    <div class="chart-box-title">店舗別 客数比率（%）比較</div>
+    <div style="position:relative;height:180px;">
+      <canvas id="ratioBarChart" role="img" aria-label="店舗別客数比率棒グラフ"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 商品別 -->
+<section class="section" id="menu">
+  <div class="section-header">
+    <div class="section-num">SECTION 03</div>
+    <div class="section-title">商品別・店舗別クロス分析</div>
+    <div class="section-desc">販売数・売上・ABCランクを店舗横断で比較</div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr>
+          <th class="left" rowspan="2">商品名</th>
+          <th rowspan="2">売価</th>
+          <th rowspan="2">全店<br>販売数</th>
+          <th colspan="2">シェラトン都ホテル</th>
+          <th colspan="2">大丸心斎橋店</th>
+          <th colspan="2">OM日航ビル店</th>
+          <th colspan="2">北店</th>
+          <th colspan="2">南本店</th>
+        </tr>
+        <tr>
+          <th>販売数</th><th>ランク</th>
+          <th>販売数</th><th>ランク</th>
+          <th>販売数</th><th>ランク</th>
+          <th>販売数</th><th>ランク</th>
+          <th>販売数</th><th>ランク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">炙りローストビーフ</td>
+          <td>¥1,400</td><td><strong>48</strong></td>
+          <td>12</td><td><span class="rank rank-A">A</span></td>
+          <td>8</td><td><span class="rank rank-A">A</span></td>
+          <td>10</td><td><span class="rank rank-A">A</span></td>
+          <td>12</td><td><span class="rank rank-A">A</span></td>
+          <td>6</td><td><span class="rank rank-A">A</span></td>
+        </tr>
+        <tr>
+          <td class="left">ポテトのチーズ焼</td>
+          <td>¥1,200</td><td><strong>46</strong></td>
+          <td>13</td><td><span class="rank rank-B">B</span></td>
+          <td>13</td><td><span class="rank rank-C">C</span></td>
+          <td>6</td><td><span class="rank rank-B">B</span></td>
+          <td>6</td><td><span class="rank rank-C">C</span></td>
+          <td>8</td><td><span class="rank rank-B">B</span></td>
+        </tr>
+        <tr>
+          <td class="left">クレープシュゼット</td>
+          <td>¥1,080</td><td><strong>41</strong></td>
+          <td>10</td><td><span class="rank rank-A">A</span></td>
+          <td>8</td><td><span class="rank rank-A">A</span></td>
+          <td>14</td><td><span class="rank rank-A">A</span></td>
+          <td>8</td><td><span class="rank rank-A">A</span></td>
+          <td>1</td><td><span class="rank rank-A">A</span></td>
+        </tr>
+        <tr>
+          <td class="left">たまごサラダ</td>
+          <td>¥980</td><td><strong>33</strong></td>
+          <td>8</td><td><span class="rank rank-A">A</span></td>
+          <td>6</td><td><span class="rank rank-B">B</span></td>
+          <td>10</td><td><span class="rank rank-A">A</span></td>
+          <td>4</td><td><span class="rank rank-B">B</span></td>
+          <td>5</td><td><span class="rank rank-A">A</span></td>
+        </tr>
+        <tr>
+          <td class="left">フレッシュドレッシングのサラダ</td>
+          <td>¥1,600</td><td><strong>20</strong></td>
+          <td>5</td><td><span class="rank rank-A">A</span></td>
+          <td>7</td><td><span class="rank rank-A">A</span></td>
+          <td>2</td><td><span class="rank rank-A">A</span></td>
+          <td>4</td><td><span class="rank rank-B">B</span></td>
+          <td>2</td><td><span class="rank rank-B">B</span></td>
+        </tr>
+        <tr>
+          <td class="left">フォアグラ ococotte</td>
+          <td>¥2,800</td><td><strong>9</strong></td>
+          <td>4</td><td><span class="rank rank-C">C</span></td>
+          <td>1</td><td><span class="rank rank-C">C</span></td>
+          <td>1</td><td><span class="rank rank-C">C</span></td>
+          <td>3</td><td><span class="rank rank-C">C</span></td>
+          <td>0</td><td><span class="rank-none">—</span></td>
+        </tr>
+        <tr>
+          <td class="left">アクアパッツァ ococotte</td>
+          <td>¥1,800</td><td><strong>6</strong></td>
+          <td>1</td><td><span class="rank rank-C">C</span></td>
+          <td>1</td><td><span class="rank rank-C">C</span></td>
+          <td>0</td><td><span class="rank-none">—</span></td>
+          <td>4</td><td><span class="rank rank-C">C</span></td>
+          <td>0</td><td><span class="rank-none">—</span></td>
+        </tr>
+        <tr class="total">
+          <td class="left">合計</td>
+          <td>—</td><td>203</td>
+          <td>53</td><td>—</td>
+          <td>44</td><td>—</td>
+          <td>43</td><td>—</td>
+          <td>41</td><td>—</td>
+          <td>22</td><td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ④ 客数比率 -->
+<section class="section" id="ratio">
+  <div class="section-header">
+    <div class="section-num">SECTION 04</div>
+    <div class="section-title">客数比率・1日平均販売数</div>
+    <div class="section-desc">総客数に対する新メニュー注文率と、日割り平均の比較（集計期間21日）</div>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:28px;">
+    <table class="data">
+      <thead>
+        <tr>
+          <th class="left">商品名</th>
+          <th colspan="2">シェラトン<br><small style="font-weight:400;">客数1,104名</small></th>
+          <th colspan="2">大丸心斎橋<br><small style="font-weight:400;">客数1,244名</small></th>
+          <th colspan="2">OM日航ビル<br><small style="font-weight:400;">客数822名</small></th>
+          <th colspan="2">北店<br><small style="font-weight:400;">客数491名</small></th>
+          <th colspan="2">南本店<br><small style="font-weight:400;">客数391名</small></th>
+        </tr>
+        <tr>
+          <th class="left"></th>
+          <th>比率%</th><th>日平均</th>
+          <th>比率%</th><th>日平均</th>
+          <th>比率%</th><th>日平均</th>
+          <th>比率%</th><th>日平均</th>
+          <th>比率%</th><th>日平均</th>
+        </tr>
+      </thead>
+      <tbody id="ratioDetailTable"></tbody>
+    </table>
+  </div>
+
+  <div class="chart-full">
+    <div class="chart-box-title">商品別 客数比率（%）— 店舗比較</div>
+    <div style="position:relative;height:260px;">
+      <canvas id="ratioGroupChart" role="img" aria-label="商品別店舗別客数比率グループ棒グラフ"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 時間帯 -->
+<section class="section" id="time">
+  <div class="section-header">
+    <div class="section-num">SECTION 05</div>
+    <div class="section-title">時間帯別販売分析</div>
+    <div class="section-desc">10〜21時の時間帯別販売数。商品・店舗それぞれのピークパターンを比較</div>
+  </div>
+
+  <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);">
+    <div class="kpi-card">
+      <div class="kpi-label">ピーク時間帯</div>
+      <div class="kpi-val">18時<span class="kpi-unit">台</span></div>
+      <div class="kpi-sub">56食（全体の27.6%）</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ディナー帯（17〜21時）</div>
+      <div class="kpi-val">173<span class="kpi-unit">食</span></div>
+      <div class="kpi-sub">全体の85.7%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ランチ帯（11〜14時）</div>
+      <div class="kpi-val">27<span class="kpi-unit">食</span></div>
+      <div class="kpi-sub">全体の13.3%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">アイドル帯（15〜16時）</div>
+      <div class="kpi-val">4<span class="kpi-unit">食</span></div>
+      <div class="kpi-sub">全体の2.0%</div>
+    </div>
+  </div>
+
+  <div class="chart-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <div class="chart-box-title" style="margin-bottom:0;">時間帯別販売数（全店合計）</div>
+      <span class="zone-badge zone-lunch">ランチ</span>
+      <span class="zone-badge zone-pm">アイドル</span>
+      <span class="zone-badge zone-dinner">ディナー</span>
+    </div>
+    <div style="position:relative;height:220px;">
+      <canvas id="timeAllChart" role="img" aria-label="時間帯別全店合計販売数"></canvas>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTimeTab('menu', this)">商品別</button>
+    <button class="tab-btn" onclick="switchTimeTab('store', this)">店舗別</button>
+  </div>
+
+  <div class="chart-full" id="timeDetailWrap">
+    <div style="position:relative;height:280px;">
+      <canvas id="timeDetailChart" role="img" aria-label="時間帯別詳細"></canvas>
+    </div>
+    <div class="chart-legend" id="timeDetailLegend"></div>
+  </div>
+
+  <div style="margin-top:24px;">
+    <div class="chart-box-title" style="margin-bottom:14px;">商品×時間帯 ヒートマップ（販売数）</div>
+    <div class="table-wrap">
+      <table class="data" id="menuHeatTable"></table>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;">
+    <div class="chart-box-title" style="margin-bottom:14px;">店舗×時間帯 ヒートマップ（販売数）</div>
+    <div class="table-wrap">
+      <table class="data" id="storeHeatTable"></table>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 考察 -->
+<section class="section" id="insight">
+  <div class="section-header">
+    <div class="section-num">SECTION 06</div>
+    <div class="section-title">考察と今後の示唆</div>
+    <div class="section-desc">販売数・客数比率・時間帯データを統合した評価と施策提言</div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card green">
+      <div class="insight-title">✓ 炙りローストビーフ — 全店Aランク・ディナー序盤の定番化</div>
+      <div class="insight-body">5店舗全てでAランクを獲得した唯一の商品。18時台に22食と突出し、ディナー序盤の「最初の一皿」として定着しつつある。北店では客数比率2.44%と特に高く、引き続きメインの訴求商品として強化推奨。</div>
+    </div>
+    <div class="insight-card green">
+      <div class="insight-title">✓ クレープシュゼット — デザート需要の獲得に成功</div>
+      <div class="insight-body">20〜21時台に12食・7食と、他の商品とは逆のピーク形状。食後デザートとして食事終盤に機能していることが時間帯データから明確。OM日航ビル店（1.70%）が特に高く、立地特性との相性が良い。</div>
+    </div>
+    <div class="insight-card blue">
+      <div class="insight-title">△ 大丸心斎橋店 — 客数比率3.54%と全店最低</div>
+      <div class="insight-body">客数1,244名と最多ながら、比率は最低水準。17〜18時台に販売が集中しており、ランチ需要の取り込みができていない。たまごサラダ・フレッシュドレッシングのサラダはランチ適性が高く、ランチメニューへの組み込みを検討する余地あり。</div>
+    </div>
+    <div class="insight-card blue">
+      <div class="insight-title">△ 南本店 — 全般的な浸透不足</div>
+      <div class="insight-body">日平均1.0食/日と他店（2.0〜2.5食）の半分以下。フォアグラ・アクアパッツァ・クレープシュゼットはほぼ販売なし。客層・価格帯とのミスマッチがないか確認が必要。フロアでの声かけや卓上POPによる認知向上施策を優先すべき店舗。</div>
+    </div>
+    <div class="insight-card amber">
+      <div class="insight-title">⚠ フォアグラ・アクアパッツァ — 存続検討が必要な水準</div>
+      <div class="insight-body">フォアグラ9食（0.10〜0.36%）、アクアパッツァ6食（0〜0.81%）と全店で低調。全店でCランク。日平均は0〜0.2食と採算ライン以下の可能性あり。今後1ヶ月のデータを見て継続・メニュー改訂・価格見直しを判断する必要がある。</div>
+    </div>
+    <div class="insight-card amber">
+      <div class="insight-title">⚠ たまごサラダ — ランチ需要を潜在的に持つ</div>
+      <div class="insight-body">11〜12時台で計6食と、新メニュー中最もランチ適性が高い。シェラトン都ホテル・OM日航ビル店でランチ時間帯に売れており、ランチ訴求メニューへの組み込みにより販売数拡大の余地がある。</div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="footer">
+  ぷれじでんと 新メニュー販売分析レポート｜対象期間：2026年5月11日〜5月31日｜集計ベース：メニュー別ABC分析・時間帯別販売実績表
+</div>
+
+<script>
+const MENU_NAMES  = ['炙りローストビーフ','ポテトのチーズ焼','クレープシュゼット','たまごサラダ','フレッシュドレッシング','フォアグラ','アクアパッツァ'];
+const MENU_COLORS = ['#8B1A1A','#c9963a','#1D7A55','#1a4fa0','#6B3FA0','#A02040','#888070'];
+const STORE_NAMES = ['シェラトン都ホテル','大丸心斎橋店','OM日航ビル店','北店','南本店'];
+const STORE_COLORS= ['#8B1A1A','#c9963a','#1D7A55','#1a4fa0','#777'];
+const HOURS       = ['10時','11時','12時','13時','14時','15時','16時','17時','18時','19時','20時','21時'];
+
+const menuTotals  = [48, 46, 41, 33, 20, 9, 6];
+const custCounts  = [1104, 1244, 822, 491, 391];
+const DAYS = 21;
+
+// Store × Menu qty matrix [store][menu]
+const storeMenuQty = [
+  [12, 13, 10, 8, 5, 4, 1],   // シェラトン
+  [8,  13, 8,  6, 7, 1, 1],   // 大丸
+  [10, 6,  14, 10, 2, 1, 0],  // OM
+  [12, 6,  8,  4, 4, 3, 4],   // 北
+  [6,  8,  1,  5, 2, 0, 0],   // 南
+];
+
+// Menu × Hour [menu][hour]
+const menuHourQty = [
+  [0,2,1,0,0,0,2,7,22,7,5,2],   // 炙りロースト
+  [0,0,1,2,2,0,1,5,14,12,7,2],  // ポテト
+  [0,0,0,6,1,1,0,3,4,7,12,7],   // クレープ
+  [0,3,3,1,0,0,0,5,6,11,3,1],   // たまご
+  [1,1,0,1,0,0,0,3,6,6,2,0],    // ドレッシング
+  [0,0,1,1,0,0,0,1,1,4,1,0],    // フォアグラ
+  [0,0,0,0,0,0,0,1,3,0,1,1],    // アクアパッツァ
+];
+
+// Store × Hour [store][hour]
+const storeHourQty = [
+  [0,3,5,4,3,0,0,10,7,13,8,0],  // シェラトン
+  [1,3,1,4,0,1,1,10,17,3,3,0],  // 大丸
+  [0,0,0,3,0,0,2,4,11,11,7,5],  // OM
+  [0,0,0,0,0,0,0,0,18,9,9,5],   // 北
+  [0,0,0,0,0,0,0,1,3,11,4,3],   // 南
+];
+
+function pct(v, total){ return (v/total*100).toFixed(2); }
+function daily(v){ return (v/DAYS).toFixed(1); }
+
+// ---- Chart 1: Menu Bar ----
+new Chart(document.getElementById('menuBarChart'), {
+  type: 'bar',
+  data: {
+    labels: MENU_NAMES,
+    datasets: [{
+      label: '販売数',
+      data: menuTotals,
+      backgroundColor: MENU_COLORS,
+      borderRadius: 4, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw}食` } } },
+    scales:{
+      x:{ grid:{display:false}, ticks:{font:{size:10}, maxRotation:30} },
+      y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}}, beginAtZero:true }
+    }
+  }
+});
+
+// ---- Chart 2: Menu Pie ----
+const pieChart = new Chart(document.getElementById('menuPieChart'), {
+  type: 'doughnut',
+  data: {
+    labels: MENU_NAMES,
+    datasets: [{ data: menuTotals, backgroundColor: MENU_COLORS, borderWidth: 2, borderColor: '#faf8f5' }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.label}: ${c.raw}食 (${(c.raw/203*100).toFixed(1)}%)` } } },
+    cutout: '60%'
+  }
+});
+const pieLeg = document.getElementById('pieLegend');
+MENU_NAMES.forEach((n,i) => {
+  pieLeg.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${MENU_COLORS[i]}"></span>${n} ${menuTotals[i]}食</span>`;
+});
+
+// ---- Chart 3: Store stacked ----
+const storeStack = new Chart(document.getElementById('storeStackChart'), {
+  type: 'bar',
+  data: {
+    labels: STORE_NAMES,
+    datasets: MENU_NAMES.map((name,mi) => ({
+      label: name,
+      data: storeMenuQty.map(row => row[mi]),
+      backgroundColor: MENU_COLORS[mi], borderRadius:2, borderSkipped:false
+    }))
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}食` } } },
+    scales:{
+      x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}},
+      y:{stacked:true, grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:11}}, beginAtZero:true}
+    }
+  }
+});
+const storeLeg = document.getElementById('storeLegend');
+MENU_NAMES.forEach((n,i) => {
+  storeLeg.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${MENU_COLORS[i]}"></span>${n}</span>`;
+});
+
+// ---- Chart 4: Ratio bar ----
+new Chart(document.getElementById('ratioBarChart'), {
+  type: 'bar',
+  data: {
+    labels: STORE_NAMES,
+    datasets: [{
+      label: '客数比率(%)',
+      data: [4.80, 3.54, 5.23, 8.35, 5.63],
+      backgroundColor: ['#8B1A1A','#c9963a','#1D7A55','#1a4fa0','#777'],
+      borderRadius: 4, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw}%` } } },
+    scales:{
+      x:{grid:{display:false}, ticks:{font:{size:11}}},
+      y:{grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:11}, callback: v => v+'%'}, beginAtZero:true, max:10}
+    }
+  }
+});
+
+// ---- Section 4: Ratio Detail Table ----
+const ratioTbody = document.getElementById('ratioDetailTable');
+const menuFullNames = ['炙りローストビーフ','ポテトのチーズ焼','クレープシュゼット','たまごサラダ','フレッシュドレッシングのサラダ','フォアグラ ococotte','アクアパッツァ ococotte'];
+const ratioData = storeMenuQty[0].map((_,mi) => storeMenuQty.map(row => row[mi]));
+
+function heatCls(r) {
+  if (r >= 1.5) return 'heat-high';
+  if (r >= 0.8) return 'heat-mid';
+  if (r >= 0.3) return 'heat-low';
+  return 'heat-zero';
+}
+
+menuFullNames.forEach((name, mi) => {
+  let html = `<tr><td class="left">${name}</td>`;
+  for (let si=0;si<5;si++){
+    const q = storeMenuQty[si][mi];
+    const r = parseFloat(pct(q, custCounts[si]));
+    const d = daily(q);
+    html += `<td class="${heatCls(r)}">${r}%</td><td>${d}食</td>`;
+  }
+  html += '</tr>';
+  ratioTbody.innerHTML += html;
+});
+// Total row
+let thtml = '<tr class="total"><td class="left">全商品合計</td>';
+[[53,1104],[44,1244],[43,822],[41,491],[22,391]].forEach(([t,c]) => {
+  thtml += `<td>${pct(t,c)}%</td><td>${daily(t)}食</td>`;
+});
+ratioTbody.innerHTML += thtml + '</tr>';
+
+// ---- Chart 5: Ratio Group ----
+new Chart(document.getElementById('ratioGroupChart'), {
+  type: 'bar',
+  data: {
+    labels: STORE_NAMES,
+    datasets: MENU_NAMES.map((name,mi) => ({
+      label: name,
+      data: custCounts.map((c,si) => parseFloat(pct(storeMenuQty[si][mi], c))),
+      backgroundColor: MENU_COLORS[mi], borderRadius:2, borderSkipped:false
+    }))
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{ position:'bottom', labels:{font:{size:10}, boxWidth:10, boxHeight:10, padding:8} },
+      tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}%` } }
+    },
+    scales:{
+      x:{grid:{display:false}, ticks:{font:{size:11}}},
+      y:{grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}, callback: v=>v+'%'}, beginAtZero:true}
+    }
+  }
+});
+
+// ---- Chart 6: Time All ----
+const timeColors = HOURS.map(h => {
+  const n = parseInt(h);
+  if (n>=17) return '#8B1A1A';
+  if (n>=15) return '#1a4fa0';
+  return '#c9963a';
+});
+new Chart(document.getElementById('timeAllChart'), {
+  type: 'bar',
+  data: {
+    labels: HOURS,
+    datasets: [{
+      label: '販売数',
+      data: [1,6,6,11,3,1,3,25,56,47,31,13],
+      backgroundColor: timeColors,
+      borderRadius: 4, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c=>`${c.raw}食` } } },
+    scales:{
+      x:{grid:{display:false}, ticks:{font:{size:11}}, ticks:{autoSkip:false}},
+      y:{grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}}, beginAtZero:true}
+    }
+  }
+});
+
+// ---- Chart 7: Time Detail ----
+let timeDetailChart = null;
+
+function buildTimeDetailChart(view) {
+  if (timeDetailChart) timeDetailChart.destroy();
+  const names  = view==='menu' ? MENU_NAMES  : STORE_NAMES;
+  const colors = view==='menu' ? MENU_COLORS : STORE_COLORS;
+  const qdata  = view==='menu' ? menuHourQty : storeHourQty;
+  timeDetailChart = new Chart(document.getElementById('timeDetailChart'), {
+    type:'bar',
+    data:{
+      labels: HOURS,
+      datasets: names.map((name,i) => ({
+        label:name, data:qdata[i],
+        backgroundColor: colors[i]+'BB', borderRadius:2, borderSkipped:false
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}食` } }
+      },
+      scales:{
+        x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}, autoSkip:false}},
+        y:{stacked:true, grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}}, beginAtZero:true}
+      }
+    }
+  });
+  const leg = document.getElementById('timeDetailLegend');
+  leg.innerHTML = '';
+  names.forEach((n,i) => {
+    leg.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${colors[i]}"></span>${n}</span>`;
+  });
+}
+buildTimeDetailChart('menu');
+
+function switchTimeTab(view, el) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  buildTimeDetailChart(view);
+}
+
+// ---- Heatmap helper ----
+function buildHeatTable(tableId, rowNames, rowData) {
+  const tbl = document.getElementById(tableId);
+  const maxVal = Math.max(...rowData.flat());
+  let html = '<thead><tr><th class="left">商品 / 時間帯</th>';
+  HOURS.forEach(h => html += `<th>${h}</th>`);
+  html += '<th>合計</th></tr></thead><tbody>';
+  rowNames.forEach((name,ri) => {
+    html += `<tr><td class="left">${name}</td>`;
+    let tot=0;
+    rowData[ri].forEach(v => {
+      tot+=v;
+      const r = v/maxVal;
+      const cls = r>=0.7?'heat-high': r>=0.35?'heat-mid': r>=0.1?'heat-low':'heat-zero';
+      html += `<td class="${cls}">${v>0?v:'—'}</td>`;
+    });
+    html += `<td><strong>${tot}</strong></td></tr>`;
+  });
+  const totals = HOURS.map((_,hi) => rowData.reduce((s,r)=>s+r[hi],0));
+  html += `<tr class="total"><td class="left">合計</td>${totals.map(v=>`<td>${v}</td>`).join('')}<td>${totals.reduce((a,b)=>a+b,0)}</td></tr>`;
+  html += '</tbody>';
+  tbl.innerHTML = html;
+}
+
+buildHeatTable('menuHeatTable', MENU_NAMES, menuHourQty);
+buildHeatTable('storeHeatTable', STORE_NAMES, storeHourQty);
+</script>
+
+</div>
+<div class="panel" id="tab3">
+
+
+
+<div class="header">
+  <div>
+    <div class="header-brand">千房ホールディングス株式会社｜営業推進本部</div>
+    <div class="header-title">新メニュー 販売分析ダッシュボード</div>
+    <div class="header-period">集計期間：2026/05/11〜05/31　｜　対象：16品　｜　対象店舗：20店舗</div>
+  </div>
+  <div class="header-right">MAKE FAN MORE<br>営業推進本部</div>
+</div>
+
+<nav class="nav">
+  <a href="#kpi">KPIサマリ</a>
+  <a href="#menu-rank">メニューランキング</a>
+  <a href="#store-rank">店舗別販売数</a>
+  <a href="#category">カテゴリ構成</a>
+  <a href="#store-detail">店舗別詳細</a>
+  <a href="#heatmap">ヒートマップ</a>
+</nav>
+
+<div class="main">
+
+  <!-- ① KPI -->
+  <div id="kpi" class="section" style="margin-top:0;padding-top:8px;">
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">KPIサマリ</div><div class="sec-hd-sub">2026/05/11〜05/31</div></div>
+    <div class="kpi-grid">
+      <div class="kpi accent">
+        <div class="kpi-label">総販売数</div>
+        <div class="kpi-val">3,690<span class="kpi-unit">食</span></div>
+      </div>
+      <div class="kpi accent">
+        <div class="kpi-label">総販売額</div>
+        <div class="kpi-val">7,138<span class="kpi-unit">千円</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">1位メニュー</div>
+        <div class="kpi-val" style="font-size:15px;">チーズフォンデュ焼</div>
+        <div class="kpi-sub">716食（19.4%）</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">最多販売店</div>
+        <div class="kpi-val" style="font-size:15px;">道頓堀ビル店</div>
+        <div class="kpi-sub">511食</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② メニューランキング -->
+  <div id="menu-rank" class="section">
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">メニュー別販売数ランキング</div></div>
+    <div class="card">
+      <div class="legend">
+        <span class="leg"><span class="leg-dot" style="background:var(--enzo);"></span>お好み焼・焼そば</span>
+        <span class="leg"><span class="leg-dot" style="background:var(--ippin);"></span>一品料理</span>
+      </div>
+      <div style="position:relative;width:100%;height:400px;">
+        <canvas id="c-menu" role="img" aria-label="メニュー別販売数横棒グラフ">メニュー別販売数</canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 店舗別販売数 -->
+  <div id="store-rank" class="section">
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">店舗別販売数</div><div class="sec-hd-sub">上位10店舗</div></div>
+    <div class="card">
+      <div class="legend"><span class="leg"><span class="leg-dot" style="background:var(--blue);"></span>販売数（食）</span></div>
+      <div style="position:relative;width:100%;height:380px;">
+        <canvas id="c-store" role="img" aria-label="店舗別販売数横棒グラフ">店舗別販売数</canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ カテゴリ構成 -->
+  <div id="category" class="section">
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">カテゴリ別構成</div><div class="sec-hd-sub">販売数ベース</div></div>
+    <div class="card">
+      <div class="cat-row">
+        <div style="position:relative;width:160px;height:160px;">
+          <canvas id="c-cat" role="img" aria-label="カテゴリ別構成ドーナツグラフ">カテゴリ別構成</canvas>
+        </div>
+        <div>
+          <div class="cat-bar-item">
+            <div class="cat-lbl">お好み焼・焼そば　<strong>1,865食</strong>（50.5%）</div>
+            <div class="cat-bg"><div class="cat-fill" style="width:50.5%;background:var(--enzo);"></div></div>
+          </div>
+          <div class="cat-bar-item">
+            <div class="cat-lbl">一品料理　<strong>1,825食</strong>（49.5%）</div>
+            <div class="cat-bg"><div class="cat-fill" style="width:49.5%;background:var(--ippin);"></div></div>
+          </div>
+          <div class="insight-box">
+            ・チーズフォンデュ焼が全体の <strong style="color:var(--enzo);">19.4%</strong> を占め断トツ1位<br>
+            ・厚切り牛タンステーキはAランク16店舗と安定した高評価<br>
+            ・お好み焼・焼そばと一品料理はほぼ均等（50:50）<br>
+            ・海老チリチーズ玉・あわび鉄板焼は全店Cランクで要検討
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 店舗別詳細 -->
+  <div id="store-detail" class="section">
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">店舗別詳細</div><div class="sec-hd-sub">店舗を選択して売れ筋メニューを確認</div></div>
+    <div class="card">
+      <div class="st-btns" id="st-btns"></div>
+      <div id="store-meta" class="store-meta"></div>
+      <div style="position:relative;width:100%;" id="store-chart-wrap">
+        <canvas id="c-storedet" role="img" aria-label="店舗別メニュー販売数">店舗メニュー詳細</canvas>
+      </div>
+      <div style="margin-top:16px;" id="rank-list"></div>
+    </div>
+  </div>
+
+  <!-- ⑥ ヒートマップ -->
+  <div id="heatmap" class="section">
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">店舗×メニュー ヒートマップ</div><div class="sec-hd-sub">ABCランク色分け</div></div>
+    <div class="card">
+      <div class="htbl-wrap">
+        <table class="htable" id="htable"></table>
+      </div>
+      <div class="badge-legend">
+        <span class="bl"><span class="bl-sq rA">A</span>Aランク（上位）</span>
+        <span class="bl"><span class="bl-sq rB">B</span>Bランク（中位）</span>
+        <span class="bl"><span class="bl-sq rC">C</span>Cランク（下位）</span>
+        <span class="bl"><span class="bl-sq rX">—</span>未設定・取扱なし</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  千房ホールディングス株式会社　営業推進本部｜集計期間：2026/05/11〜05/31　｜　メニュー別ABC分析データより作成
+</div>
+
+<script>
+const DATA = {
+  menus:[
+    {code:712, name:"チーズフォンデュ焼",    cat:"お好み焼・焼そば", total:716},
+    {code:558, name:"厚切り牛タンステーキ",   cat:"一品料理",         total:479},
+    {code:1397,name:"野菜玉",                 cat:"お好み焼・焼そば", total:392},
+    {code:727, name:"海鮮鉄板焼3種",          cat:"一品料理",         total:294},
+    {code:745, name:"牛ハラミ鉄板焼",         cat:"一品料理",         total:275},
+    {code:557, name:"特製海老マヨ",           cat:"一品料理",         total:230},
+    {code:736, name:"青とうがらし塩焼そば",   cat:"お好み焼・焼そば", total:223},
+    {code:737, name:"ピリ辛スタミナ焼そば",   cat:"お好み焼・焼そば", total:196},
+    {code:724, name:"お好みつくね串",         cat:"一品料理",         total:188},
+    {code:1398,name:"野菜焼そば",             cat:"お好み焼・焼そば", total:167},
+    {code:742, name:"スペシャル海鮮盛り",     cat:"一品料理",         total:151},
+    {code:735, name:"鶏キムチーズねぎ焼",     cat:"お好み焼・焼そば", total:122},
+    {code:738, name:"チーズつくね串",         cat:"一品料理",         total:90},
+    {code:744, name:"鶏もも肉鉄板焼",         cat:"一品料理",         total:82},
+    {code:734, name:"海老チリチーズ玉",       cat:"お好み焼・焼そば", total:49},
+    {code:743, name:"あわび鉄板焼",           cat:"一品料理",         total:36}
+  ],
+  store_summary:[
+    {store:"道頓堀ビル店",                    qty:511, sales:1364530},
+    {store:"千日前本店",                       qty:389, sales:815770},
+    {store:"舞 イクスピアリ店",               qty:320, sales:592683},
+    {store:"有明ガーデン支店",                 qty:265, sales:534504},
+    {store:"曽根崎支店",                       qty:257, sales:493510},
+    {store:"あべのキューズモール支店",         qty:215, sales:335600},
+    {store:"有楽町ビックカメラ支店",           qty:213, sales:396524},
+    {store:"ハービスPLAZA梅田支店",            qty:169, sales:291020},
+    {store:"京都アバンティ支店",               qty:158, sales:343820},
+    {store:"ヨドバシHD池袋ビル支店",           qty:148, sales:246347},
+    {store:"そごう横浜店",                     qty:146, sales:281045},
+    {store:"ららぽーと名古屋みなとアクルス店", qty:134, sales:214702},
+    {store:"ルミネ立川支店",                   qty:133, sales:219757},
+    {store:"京橋京阪モール支店",               qty:130, sales:199900},
+    {store:"堺東支店",                         qty:130, sales:189918},
+    {store:"リノアス八尾支店",                 qty:113, sales:182708},
+    {store:"セレオ八王子支店",                 qty:110, sales:170691},
+    {store:"高槻阪急スクエア支店",             qty:103, sales:158840},
+    {store:"名代JO-TERRACE OSAKA店",           qty:29,  sales:75920},
+    {store:"イオンモール各務原インター支店",   qty:17,  sales:30260}
+  ],
+  matrix:[
+    {store:"道頓堀ビル店","チーズフォンデュ焼":0,"厚切り牛タンステーキ":0,"野菜玉":217,"海鮮鉄板焼3種":51,"牛ハラミ鉄板焼":0,"特製海老マヨ":0,"青とうがらし塩焼そば":68,"ピリ辛スタミナ焼そば":51,"お好みつくね串":0,"野菜焼そば":87,"スペシャル海鮮盛り":32,"鶏キムチーズねぎ焼":0,"チーズつくね串":0,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":0,"あわび鉄板焼":5},
+    {store:"千日前本店","チーズフォンデュ焼":92,"厚切り牛タンステーキ":70,"野菜玉":44,"海鮮鉄板焼3種":13,"牛ハラミ鉄板焼":0,"特製海老マヨ":15,"青とうがらし塩焼そば":22,"ピリ辛スタミナ焼そば":25,"お好みつくね串":17,"野菜焼そば":19,"スペシャル海鮮盛り":35,"鶏キムチーズねぎ焼":19,"チーズつくね串":11,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":4,"あわび鉄板焼":3},
+    {store:"舞 イクスピアリ店","チーズフォンデュ焼":80,"厚切り牛タンステーキ":72,"野菜玉":10,"海鮮鉄板焼3種":17,"牛ハラミ鉄板焼":0,"特製海老マヨ":25,"青とうがらし塩焼そば":8,"ピリ辛スタミナ焼そば":16,"お好みつくね串":28,"野菜焼そば":9,"スペシャル海鮮盛り":13,"鶏キムチーズねぎ焼":18,"チーズつくね串":17,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":5,"あわび鉄板焼":2},
+    {store:"有明ガーデン支店","チーズフォンデュ焼":64,"厚切り牛タンステーキ":49,"野菜玉":12,"海鮮鉄板焼3種":8,"牛ハラミ鉄板焼":0,"特製海老マヨ":17,"青とうがらし塩焼そば":25,"ピリ辛スタミナ焼そば":9,"お好みつくね串":16,"野菜焼そば":4,"スペシャル海鮮盛り":27,"鶏キムチーズねぎ焼":15,"チーズつくね串":7,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":4,"あわび鉄板焼":8},
+    {store:"曽根崎支店","チーズフォンデュ焼":28,"厚切り牛タンステーキ":42,"野菜玉":4,"海鮮鉄板焼3種":4,"牛ハラミ鉄板焼":56,"特製海老マヨ":18,"青とうがらし塩焼そば":15,"ピリ辛スタミナ焼そば":12,"お好みつくね串":2,"野菜焼そば":6,"スペシャル海鮮盛り":18,"鶏キムチーズねぎ焼":11,"チーズつくね串":6,"鶏もも肉鉄板焼":23,"海老チリチーズ玉":6,"あわび鉄板焼":6},
+    {store:"あべのキューズモール支店","チーズフォンデュ焼":55,"厚切り牛タンステーキ":19,"野菜玉":5,"海鮮鉄板焼3種":20,"牛ハラミ鉄板焼":29,"特製海老マヨ":23,"青とうがらし塩焼そば":10,"ピリ辛スタミナ焼そば":8,"お好みつくね串":17,"野菜焼そば":3,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":13,"チーズつくね串":2,"鶏もも肉鉄板焼":7,"海老チリチーズ玉":4,"あわび鉄板焼":0},
+    {store:"有楽町ビックカメラ支店","チーズフォンデュ焼":52,"厚切り牛タンステーキ":46,"野菜玉":11,"海鮮鉄板焼3種":12,"牛ハラミ鉄板焼":0,"特製海老マヨ":20,"青とうがらし塩焼そば":7,"ピリ辛スタミナ焼そば":7,"お好みつくね串":21,"野菜焼そば":2,"スペシャル海鮮盛り":7,"鶏キムチーズねぎ焼":6,"チーズつくね串":8,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":4,"あわび鉄板焼":10},
+    {store:"ハービスPLAZA梅田支店","チーズフォンデュ焼":32,"厚切り牛タンステーキ":27,"野菜玉":18,"海鮮鉄板焼3種":16,"牛ハラミ鉄板焼":20,"特製海老マヨ":10,"青とうがらし塩焼そば":5,"ピリ辛スタミナ焼そば":6,"お好みつくね串":11,"野菜焼そば":5,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":3,"チーズつくね串":4,"鶏もも肉鉄板焼":9,"海老チリチーズ玉":3,"あわび鉄板焼":0},
+    {store:"京都アバンティ支店","チーズフォンデュ焼":31,"厚切り牛タンステーキ":27,"野菜玉":29,"海鮮鉄板焼3種":5,"牛ハラミ鉄板焼":0,"特製海老マヨ":2,"青とうがらし塩焼そば":15,"ピリ辛スタミナ焼そば":8,"お好みつくね串":5,"野菜焼そば":21,"スペシャル海鮮盛り":6,"鶏キムチーズねぎ焼":2,"チーズつくね串":3,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":3,"あわび鉄板焼":1},
+    {store:"ヨドバシHD池袋ビル支店","チーズフォンデュ焼":37,"厚切り牛タンステーキ":26,"野菜玉":3,"海鮮鉄板焼3種":18,"牛ハラミ鉄板焼":18,"特製海老マヨ":11,"青とうがらし塩焼そば":4,"ピリ辛スタミナ焼そば":5,"お好みつくね串":7,"野菜焼そば":1,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":6,"チーズつくね串":4,"鶏もも肉鉄板焼":8,"海老チリチーズ玉":0,"あわび鉄板焼":0},
+    {store:"そごう横浜店","チーズフォンデュ焼":34,"厚切り牛タンステーキ":22,"野菜玉":7,"海鮮鉄板焼3種":6,"牛ハラミ鉄板焼":15,"特製海老マヨ":11,"青とうがらし塩焼そば":8,"ピリ辛スタミナ焼そば":4,"お好みつくね串":8,"野菜焼そば":5,"スペシャル海鮮盛り":9,"鶏キムチーズねぎ焼":8,"チーズつくね串":5,"鶏もも肉鉄板焼":3,"海老チリチーズ玉":0,"あわび鉄板焼":1},
+    {store:"ららぽーと名古屋みなとアクルス店","チーズフォンデュ焼":42,"厚切り牛タンステーキ":13,"野菜玉":2,"海鮮鉄板焼3種":15,"牛ハラミ鉄板焼":18,"特製海老マヨ":12,"青とうがらし塩焼そば":10,"ピリ辛スタミナ焼そば":6,"お好みつくね串":7,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":4,"チーズつくね串":1,"鶏もも肉鉄板焼":3,"海老チリチーズ玉":1,"あわび鉄板焼":0},
+    {store:"ルミネ立川支店","チーズフォンデュ焼":32,"厚切り牛タンステーキ":19,"野菜玉":3,"海鮮鉄板焼3種":16,"牛ハラミ鉄板焼":21,"特製海老マヨ":10,"青とうがらし塩焼そば":7,"ピリ辛スタミナ焼そば":0,"お好みつくね串":9,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":4,"チーズつくね串":1,"鶏もも肉鉄板焼":5,"海老チリチーズ玉":6,"あわび鉄板焼":0},
+    {store:"京橋京阪モール支店","チーズフォンデュ焼":24,"厚切り牛タンステーキ":12,"野菜玉":2,"海鮮鉄板焼3種":20,"牛ハラミ鉄板焼":18,"特製海老マヨ":14,"青とうがらし塩焼そば":0,"ピリ辛スタミナ焼そば":11,"お好みつくね串":6,"野菜焼そば":2,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":2,"チーズつくね串":6,"鶏もも肉鉄板焼":9,"海老チリチーズ玉":4,"あわび鉄板焼":0},
+    {store:"堺東支店","チーズフォンデュ焼":21,"厚切り牛タンステーキ":12,"野菜玉":2,"海鮮鉄板焼3種":21,"牛ハラミ鉄板焼":27,"特製海老マヨ":18,"青とうがらし塩焼そば":4,"ピリ辛スタミナ焼そば":2,"お好みつくね串":12,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":2,"チーズつくね串":4,"鶏もも肉鉄板焼":4,"海老チリチーズ玉":1,"あわび鉄板焼":0},
+    {store:"リノアス八尾支店","チーズフォンデュ焼":25,"厚切り牛タンステーキ":12,"野菜玉":1,"海鮮鉄板焼3種":22,"牛ハラミ鉄板焼":17,"特製海老マヨ":9,"青とうがらし塩焼そば":3,"ピリ辛スタミナ焼そば":9,"お好みつくね串":5,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":3,"チーズつくね串":1,"鶏もも肉鉄板焼":3,"海老チリチーズ玉":3,"あわび鉄板焼":0},
+    {store:"セレオ八王子支店","チーズフォンデュ焼":22,"厚切り牛タンステーキ":8,"野菜玉":8,"海鮮鉄板焼3種":16,"牛ハラミ鉄板焼":18,"特製海老マヨ":8,"青とうがらし塩焼そば":5,"ピリ辛スタミナ焼そば":4,"お好みつくね串":11,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":2,"チーズつくね串":3,"鶏もも肉鉄板焼":4,"海老チリチーズ玉":1,"あわび鉄板焼":0},
+    {store:"高槻阪急スクエア支店","チーズフォンデュ焼":28,"厚切り牛タンステーキ":3,"野菜玉":5,"海鮮鉄板焼3種":13,"牛ハラミ鉄板焼":18,"特製海老マヨ":7,"青とうがらし塩焼そば":3,"ピリ辛スタミナ焼そば":5,"お好みつくね串":6,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":4,"チーズつくね串":7,"鶏もも肉鉄板焼":4,"海老チリチーズ玉":0,"あわび鉄板焼":0},
+    {store:"名代JO-TERRACE OSAKA店","チーズフォンデュ焼":0,"厚切り牛タンステーキ":0,"野菜玉":9,"海鮮鉄板焼3種":1,"牛ハラミ鉄板焼":0,"特製海老マヨ":0,"青とうがらし塩焼そば":4,"ピリ辛スタミナ焼そば":8,"お好みつくね串":0,"野菜焼そば":3,"スペシャル海鮮盛り":4,"鶏キムチーズねぎ焼":0,"チーズつくね串":0,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":0,"あわび鉄板焼":0},
+    {store:"イオンモール各務原インター支店","チーズフォンデュ焼":17,"厚切り牛タンステーキ":0,"野菜玉":0,"海鮮鉄板焼3種":0,"牛ハラミ鉄板焼":0,"特製海老マヨ":0,"青とうがらし塩焼そば":0,"ピリ辛スタミナ焼そば":0,"お好みつくね串":0,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":0,"チーズつくね串":0,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":0,"あわび鉄板焼":0}
+  ],
+  rank_matrix:[
+    {store:"道頓堀ビル店","チーズフォンデュ焼":"-","厚切り牛タンステーキ":"-","野菜玉":"A","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"-","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"B","お好みつくね串":"-","野菜焼そば":"A","スペシャル海鮮盛り":"C","鶏キムチーズねぎ焼":"-","チーズつくね串":"-","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"-","あわび鉄板焼":"C"},
+    {store:"千日前本店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"C","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"舞 イクスピアリ店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"B","牛ハラミ鉄板焼":"-","特製海老マヨ":"B","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"B","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"有明ガーデン支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"B","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"曽根崎支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"A","特製海老マヨ":"C","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"B","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"あべのキューズモール支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"有楽町ビックカメラ支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"B","牛ハラミ鉄板焼":"-","特製海老マヨ":"A","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"C","スペシャル海鮮盛り":"C","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"ハービスPLAZA梅田支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"B","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"京都アバンティ支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"A","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"C","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"B","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"ヨドバシHD池袋ビル支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"C","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"-","あわび鉄板焼":"-"},
+    {store:"そごう横浜店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"B","特製海老マヨ":"C","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"-","あわび鉄板焼":"C"},
+    {store:"ららぽーと名古屋みなとアクルス店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"ルミネ立川支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"C","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"京橋京阪モール支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"-","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"C","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"堺東支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"C","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"リノアス八尾支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"セレオ八王子支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"高槻阪急スクエア支店","チーズフォンデュ焼":"C","厚切り牛タンステーキ":"C","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"C","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"-","あわび鉄板焼":"-"},
+    {store:"名代JO-TERRACE OSAKA店","チーズフォンデュ焼":"-","厚切り牛タンステーキ":"-","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"-","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"B","お好みつくね串":"-","野菜焼そば":"C","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"-","チーズつくね串":"-","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"-","あわび鉄板焼":"-"},
+    {store:"イオンモール各務原インター支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"-","野菜玉":"-","海鮮鉄板焼3種":"-","牛ハラミ鉄板焼":"-","特製海老マヨ":"-","青とうがらし塩焼そば":"-","ピリ辛スタミナ焼そば":"-","お好みつくね串":"-","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"-","チーズつくね串":"-","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"-","あわび鉄板焼":"-"}
+  ]
+};
+
+const menuNames = DATA.menus.map(m => m.name);
+let detChart = null;
+let curStore = DATA.store_summary[0].store;
+
+function catColor(cat){ return cat === 'お好み焼・焼そば' ? '#8B1A1A' : '#C97A2F'; }
+function rankCls(r){ return r==='A'?'rA':r==='B'?'rB':r==='C'?'rC':'rX'; }
+
+/* ---- グラフ初期化 ---- */
+function initCharts(){
+  // メニュー別横棒
+  new Chart(document.getElementById('c-menu'), {
+    type: 'bar',
+    data: {
+      labels: DATA.menus.map(m => m.name),
+      datasets: [{
+        label: '販売数', data: DATA.menus.map(m => m.total),
+        backgroundColor: DATA.menus.map(m => catColor(m.cat)),
+        borderRadius: 3, borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.raw + '食' } } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 11 }, color: '#6B5E52' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#1A1410', autoSkip: false } }
+      }
+    }
+  });
+
+  // 店舗別上位10
+  const top10 = DATA.store_summary.slice(0, 10);
+  new Chart(document.getElementById('c-store'), {
+    type: 'bar',
+    data: {
+      labels: top10.map(s => s.store.length > 10 ? s.store.slice(0,10) + '…' : s.store),
+      datasets: [{
+        label: '販売数', data: top10.map(s => s.qty),
+        backgroundColor: '#4A6FA5', borderRadius: 3, borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: c => ' ' + c.raw + '食',
+          title: t => top10[t[0].dataIndex] ? top10[t[0].dataIndex].store : t[0].label
+        }}
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 11 }, color: '#6B5E52' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#1A1410' } }
+      }
+    }
+  });
+
+  // ドーナツ
+  new Chart(document.getElementById('c-cat'), {
+    type: 'doughnut',
+    data: {
+      labels: ['お好み焼・焼そば', '一品料理'],
+      datasets: [{ data: [1865, 1825], backgroundColor: ['#8B1A1A', '#C97A2F'], borderWidth: 2, borderColor: '#FAF8F5', hoverOffset: 6 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '60%',
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ': ' + c.raw.toLocaleString() + '食' } } }
+    }
+  });
+
+  // 店舗ボタン生成
+  const el = document.getElementById('st-btns');
+  el.innerHTML = DATA.store_summary.map(s =>
+    `<button class="st-btn${s.store === curStore ? ' on' : ''}" onclick="selStore(this,'${s.store.replace(/'/g, "\\'")}')">${s.store}</button>`
+  ).join('');
+
+  renderStore(curStore);
+  buildHeatmap();
+}
+
+/* ---- 店舗切り替え ---- */
+function selStore(btn, store){
+  curStore = store;
+  document.querySelectorAll('.st-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderStore(store);
+}
+
+function renderStore(store){
+  const mRow = DATA.matrix.find(r => r.store === store);
+  const rRow = DATA.rank_matrix.find(r => r.store === store);
+  const sumRow = DATA.store_summary.find(s => s.store === store);
+
+  const entries = DATA.menus.map(m => ({
+    name: m.name, cat: m.cat,
+    qty: mRow[m.name] || 0,
+    rank: rRow[m.name] || '-'
+  })).filter(e => e.qty > 0).sort((a, b) => b.qty - a.qty);
+
+  const maxQ = Math.max(...entries.map(e => e.qty));
+  const total = entries.reduce((s, e) => s + e.qty, 0);
+
+  document.getElementById('store-meta').innerHTML =
+    `<strong>${store}</strong>　合計 <strong>${total.toLocaleString()}食</strong>　｜　売上 <strong>${Math.round((sumRow ? sumRow.sales : 0) / 1000).toLocaleString()}千円</strong>`;
+
+  const wrap = document.getElementById('store-chart-wrap');
+  wrap.style.height = Math.max(200, entries.length * 36 + 60) + 'px';
+
+  const ctx = document.getElementById('c-storedet');
+  if(detChart){ detChart.destroy(); detChart = null; }
+  detChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: entries.map(e => e.name),
+      datasets: [{
+        label: '販売数', data: entries.map(e => e.qty),
+        backgroundColor: entries.map(e => catColor(e.cat)),
+        borderRadius: 4, borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.raw + '食' } } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 11 }, color: '#6B5E52' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#1A1410', autoSkip: false } }
+      }
+    }
+  });
+
+  document.getElementById('rank-list').innerHTML = entries.map((e, i) => {
+    const pct = Math.round(e.qty / total * 100);
+    const bw  = Math.round(e.qty / maxQ * 100);
+    return `<div class="rank-row">
+      <span class="rn">${i + 1}</span>
+      <span class="rname">${e.name}</span>
+      <div class="rbar-w"><div class="rbar" style="width:${bw}%;background:${catColor(e.cat)};"></div></div>
+      <span class="rqty">${e.qty}食</span>
+      <span class="rbadge ${rankCls(e.rank)}">${e.rank}</span>
+      <span class="rpct">${pct}%</span>
+    </div>`;
+  }).join('');
+}
+
+/* ---- ヒートマップ ---- */
+function buildHeatmap(){
+  const t = document.getElementById('htable');
+  let h = `<thead><tr>
+    <th style="position:sticky;left:0;background:#fff;min-width:110px;z-index:2;">店舗</th>`;
+  menuNames.forEach(m => { h += `<th class="rot">${m}</th>`; });
+  h += `<th style="text-align:right;white-space:nowrap;">合計</th></tr></thead><tbody>`;
+
+  DATA.matrix.forEach(row => {
+    const rRow = DATA.rank_matrix.find(r => r.store === row.store);
+    const tot = menuNames.reduce((s, m) => s + (row[m] || 0), 0);
+    h += `<tr><td class="sticky">${row.store}</td>`;
+    menuNames.forEach(m => {
+      const v = row[m] || 0;
+      const rk = rRow ? rRow[m] : '-';
+      h += v === 0
+        ? `<td style="text-align:center;color:#C0B4A8;">—</td>`
+        : `<td style="text-align:center;"><span class="hcell ${rankCls(rk)}">${v}</span></td>`;
+    });
+    h += `<td class="htot">${tot}</td></tr>`;
+  });
+  h += '</tbody>';
+  t.innerHTML = h;
+}
+
+/* ---- スムーズスクロール ---- */
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){ target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+initCharts();
+</script>
+
+</div>
+<div class="panel" id="tab4">
+
+
+
+<header class="site-header">
+  <div>
+    <h1>千房 Diversity 台中漢神洲際店</h1>
+    <div class="sub">2026年5月 月次分析レポート</div>
+  </div>
+  <div class="meta">単位：台湾ドル（NT$） / 日本円（×5）<br>4月：オープン月比較含む</div>
+</header>
+
+<nav class="sticky-nav">
+  <a class="nav-item active" href="#sec1">1. 売上概要</a>
+  <a class="nav-item" href="#sec2">2. 時間帯分析</a>
+  <a class="nav-item" href="#sec3">3. 曜日・日別</a>
+  <a class="nav-item" href="#sec4">4. メニュー分析</a>
+  <a class="nav-item" href="#sec5">5. GBP分析</a>
+  <a class="nav-item" href="#sec6">6. クチコミ</a>
+  <a class="nav-item" href="#sec7">7. 4月比較</a>
+</nav>
+
+<div class="container">
+
+<!-- 1. 売上概要 -->
+<section class="section" id="sec1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">売上概要</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">月間売上実績</div><div class="kpi-val">NT$2,895,082</div><div class="kpi-sub">¥14,475,410</div><span class="badge badge-up">予算比 +32.3%</span></div>
+    <div class="kpi"><div class="kpi-label">売上予算</div><div class="kpi-val">NT$2,189,000</div><div class="kpi-sub">¥10,945,000</div></div>
+    <div class="kpi"><div class="kpi-label">来客数</div><div class="kpi-val">2,682名</div><div class="kpi-sub">日平均 86.5名</div><span class="badge badge-up">4月比 +22.5%</span></div>
+    <div class="kpi"><div class="kpi-label">客単価</div><div class="kpi-val">NT$1,079</div><div class="kpi-sub">¥5,397</div><span class="badge badge-dn">4月比 −4.7%</span></div>
+    <div class="kpi"><div class="kpi-label">最高売上日</div><div class="kpi-val">5/16（土）</div><div class="kpi-sub">NT$154,785 / ¥773,925</div></div>
+    <div class="kpi"><div class="kpi-label">最低売上日</div><div class="kpi-val">5/25（月）</div><div class="kpi-sub">NT$34,155 / ¥170,775</div></div>
+  </div>
+  <div class="legend">
+    <span><span class="ld" style="background:#8B1A1A"></span>平日実績</span>
+    <span><span class="ld" style="background:#C0392B"></span>土曜実績</span>
+    <span><span class="ld" style="background:#E67E73"></span>日曜実績</span>
+    <span><span class="ld" style="width:26px;height:3px;border-radius:2px;background:#2980B9;vertical-align:middle"></span>予算</span>
+  </div>
+  <div class="chart-wrap" style="height:270px"><canvas id="c-overview"></canvas></div>
+  <div class="insight">5月累計NT$2,895,082（¥14,475,410）、予算比132.3%達成。土日が平日の約2.5倍の売上。5/25（月・振替休日明け）がNT$34,155で月最低。5/16（土）がNT$154,785で月最高。</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 2. 時間帯分析 -->
+<section class="section" id="sec2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">時間帯分析（ランチ10-14時 / アイドル15-16時 / ディナー17-23時）</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">ランチ売上</div><div class="kpi-val">NT$985,811</div><div class="kpi-sub">¥4,929,055</div><span class="badge badge-neu">構成比 34.0%</span></div>
+    <div class="kpi"><div class="kpi-label">アイドル売上</div><div class="kpi-val">NT$310,982</div><div class="kpi-sub">¥1,554,910</div><span class="badge badge-warn">構成比 10.7%</span></div>
+    <div class="kpi"><div class="kpi-label">ディナー売上</div><div class="kpi-val">NT$1,598,289</div><div class="kpi-sub">¥7,991,445</div><span class="badge badge-up">構成比 55.1%</span></div>
+    <div class="kpi"><div class="kpi-label">ディナー客単価</div><div class="kpi-val">NT$1,531</div><div class="kpi-sub">ランチ比 約2.2倍</div></div>
+  </div>
+  <div class="row2">
+    <div>
+      <div class="legend"><span><span class="ld" style="background:#378ADD"></span>ランチ</span><span><span class="ld" style="background:#EF9F27"></span>アイドル</span><span><span class="ld" style="background:#8B1A1A"></span>ディナー</span></div>
+      <div class="chart-wrap" style="height:210px"><canvas id="c-period-pie"></canvas></div>
+    </div>
+    <div>
+      <div class="legend"><span style="font-size:11px;color:var(--text-tertiary)">時間別累計売上（NT$）</span></div>
+      <div class="chart-wrap" style="height:210px"><canvas id="c-hourly"></canvas></div>
+    </div>
+  </div>
+  <div class="insight">来客数ではランチ1,431名 > ディナー1,044名だが、売上はディナー55%が最大。18〜20時が最高収益帯。アイドル帯（15-16時）は来客207名ながらNT$310,982を確保。</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 3. 曜日別分析 -->
+<section class="section" id="sec3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">曜日別・日別分析</div>
+  </div>
+  <div class="row2">
+    <div>
+      <div class="legend"><span><span class="ld" style="background:#8B1A1A"></span>平日</span><span><span class="ld" style="background:#C0392B"></span>土</span><span><span class="ld" style="background:#E67E73"></span>日</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-dow"></canvas></div>
+    </div>
+    <div>
+      <div class="legend"><span style="font-size:11px;color:var(--text-tertiary)">曜日別平均来客数（名）</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-dow-guests"></canvas></div>
+    </div>
+  </div>
+  <div class="legend" style="margin-top:8px">
+    <span><span class="ld" style="background:#8B1A1A"></span>平日実績</span>
+    <span><span class="ld" style="background:#C0392B"></span>土曜実績</span>
+    <span><span class="ld" style="background:#E67E73"></span>日曜実績</span>
+    <span><span class="ld" style="width:26px;height:2px;border-radius:2px;background:#2980B9;vertical-align:middle"></span>予算（破線）</span>
+  </div>
+  <div class="chart-wrap" style="height:240px"><canvas id="c-daily-color"></canvas></div>
+  <div class="insight">土曜平均NT$137,173・日曜NT$137,067 vs 月曜NT$54,867。週末／平日比は約2.5倍。金曜はNT$94,276と中間。5/25（月・振替）は月最低NT$34,155。</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 4. メニュー分析 -->
+<section class="section" id="sec4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">メニュー販売分析</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">コース売上計</div><div class="kpi-val">NT$2,528,640</div><div class="kpi-sub">¥12,643,200</div><span class="badge badge-up">構成比 96.0%</span></div>
+    <div class="kpi"><div class="kpi-label">単品・ドリンク売上</div><div class="kpi-val">NT$105,410</div><div class="kpi-sub">¥527,050</div><span class="badge badge-neu">構成比 4.0%</span></div>
+    <div class="kpi"><div class="kpi-label">ディナーコース計</div><div class="kpi-val">NT$1,662,450</div><div class="kpi-sub">雅・極・風・翠宴　計1,092食</div></div>
+    <div class="kpi"><div class="kpi-label">ランチコース計</div><div class="kpi-val">NT$866,190</div><div class="kpi-sub">匠心・浪花・彩蔬　計1,412食</div></div>
+    <div class="kpi"><div class="kpi-label">無料提供計</div><div class="kpi-val">1,397食</div><div class="kpi-sub">果汁・烏龍茶・白飯（NT$0）</div></div>
+    <div class="kpi"><div class="kpi-label">最大成長</div><div class="kpi-val">匠心（ランチ）</div><div class="kpi-sub">前月比 +45.7%</div><span class="badge badge-up">+NT$180,125</span></div>
+  </div>
+  <div class="row2">
+    <div>
+      <div class="legend"><span><span class="ld" style="background:#8B1A1A"></span>ディナーコース</span><span><span class="ld" style="background:#378ADD"></span>ランチコース</span><span><span class="ld" style="background:#639922"></span>単品料理</span><span><span class="ld" style="background:#EF9F27"></span>ドリンク</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-cat-pie"></canvas></div>
+    </div>
+    <div>
+      <div class="legend"><span><span class="ld" style="background:#639922"></span>前月比増</span><span><span class="ld" style="background:#D85A30"></span>前月比減</span><span style="font-size:11px;color:var(--text-tertiary)">（コース7品・販売数）</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-course-bar"></canvas></div>
+    </div>
+  </div>
+  <div class="sub-label">売上上位10品</div>
+  <div class="chart-wrap" style="height:260px"><canvas id="c-top10"></canvas></div>
+  <div class="sub-label">全商品一覧</div>
+  <div class="filter-row">
+    <button class="fbtn active" onclick="filterTable('all',this)">すべて</button>
+    <button class="fbtn" onclick="filterTable('dinner',this)">ディナーコース</button>
+    <button class="fbtn" onclick="filterTable('lunch',this)">ランチコース</button>
+    <button class="fbtn" onclick="filterTable('single',this)">単品料理</button>
+    <button class="fbtn" onclick="filterTable('drink',this)">ドリンク</button>
+    <button class="fbtn" onclick="filterTable('free',this)">無料提供</button>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:28px">#</th>
+          <th>商品名</th>
+          <th>区分</th>
+          <th class="r">販売数</th>
+          <th class="r">売上（NT$）</th>
+          <th class="r">売上（¥）</th>
+          <th class="r">構成比</th>
+          <th style="min-width:100px">構成比バー</th>
+          <th class="r">前月比</th>
+        </tr>
+      </thead>
+      <tbody id="tbl-body"></tbody>
+    </table>
+  </div>
+  <div class="insight">コース売上が全体の96.0%を占め、ディナー「雅」単品でNT$1,097,550（41.7%）と圧倒的。ランチ「匠心」が前月比+45.7%（+NT$180,125）と最大成長。ディナー「極・風」は微減。単品では大阪燒（59食・+28%）と和牛サーロイン（11食・+25%）が伸長。飲料は全般的にマイナス傾向。無料提供（果汁770食・烏龍茶497食・白飯130食 計1,397食）はセット付属として機能。</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 5. GBP分析 -->
+<section class="section" id="sec5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">Google ビジネスプロフィール（GBP）分析</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">5月総ビュー数</div><div class="kpi-val">24,900</div><div class="kpi-sub">日平均 803ビュー</div></div>
+    <div class="kpi"><div class="kpi-label">売上との相関（ビュー）</div><div class="kpi-val">r = 0.74</div><div class="kpi-sub">ビュー数 vs 売上</div><span class="badge badge-up">強い正の相関</span></div>
+    <div class="kpi"><div class="kpi-label">売上との相関（経路）</div><div class="kpi-val">r = 0.68</div><div class="kpi-sub">経路検索数 vs 売上</div><span class="badge badge-up">正の相関</span></div>
+    <div class="kpi"><div class="kpi-label">総アクション数</div><div class="kpi-val">517件</div><div class="kpi-sub">Webクリック182 / 電話154</div></div>
+  </div>
+  <div class="legend"><span><span class="ld" style="background:#378ADD"></span>ビュー数</span><span><span class="ld" style="width:26px;height:2px;border-radius:2px;background:#8B1A1A;vertical-align:middle"></span>経路検索数（右軸・破線）</span></div>
+  <div class="chart-wrap" style="height:210px"><canvas id="c-gbp-views"></canvas></div>
+  <div class="row2" style="margin-top:14px">
+    <div>
+      <div class="legend"><span style="font-size:11px;color:var(--text-tertiary)">GBPビュー数 vs 売上（r=0.74）</span></div>
+      <div class="chart-wrap" style="height:210px"><canvas id="c-gbp-corr"></canvas></div>
+    </div>
+    <div>
+      <div class="legend"><span style="font-size:11px;color:var(--text-tertiary)">経路検索数 vs 売上（r=0.68）</span></div>
+      <div class="chart-wrap" style="height:210px"><canvas id="c-dir-corr"></canvas></div>
+    </div>
+  </div>
+  <div class="insight">ビュー数（r=0.74）と経路検索数（r=0.68）がいずれも売上と強い正相関。週末にGBP接触が集中し、そのまま来店につながるパターンが確認できる。経路検索は「来店意向の高い訪問者」を示す指標として有効。GBP施策の強化が売上向上に直結する可能性が高い。</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 6. クチコミ -->
+<section class="section" id="sec6">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">クチコミ分析（5月 27件）</div>
+  </div>
+  <div class="row2">
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
+        <div>
+          <div class="star-avg">4.04</div>
+          <div style="font-size:11px;color:var(--text-tertiary);text-align:center">平均評価（27件）</div>
+        </div>
+        <div style="flex:1">
+          <div class="review-bars">
+            <div class="rb-row"><span style="width:14px;text-align:right;color:var(--text-secondary)">5</span><div style="flex:1;background:#ece9e3;border-radius:4px;height:10px"><div class="rb-fill" style="background:#8B1A1A;width:70%"></div></div><span style="color:var(--text-secondary);min-width:22px">19</span></div>
+            <div class="rb-row"><span style="width:14px;text-align:right;color:var(--text-secondary)">4</span><div style="flex:1;background:#ece9e3;border-radius:4px;height:10px"><div class="rb-fill" style="background:#8B1A1A;width:0%"></div></div><span style="color:var(--text-secondary);min-width:22px">0</span></div>
+            <div class="rb-row"><span style="width:14px;text-align:right;color:var(--text-secondary)">3</span><div style="flex:1;background:#ece9e3;border-radius:4px;height:10px"><div class="rb-fill" style="background:#8B1A1A;width:7%"></div></div><span style="color:var(--text-secondary);min-width:22px">2</span></div>
+            <div class="rb-row"><span style="width:14px;text-align:right;color:var(--text-secondary)">2</span><div style="flex:1;background:#ece9e3;border-radius:4px;height:10px"><div class="rb-fill" style="background:#8B1A1A;width:7%"></div></div><span style="color:var(--text-secondary);min-width:22px">2</span></div>
+            <div class="rb-row"><span style="width:14px;text-align:right;color:var(--text-secondary)">1</span><div style="flex:1;background:#ece9e3;border-radius:4px;height:10px"><div class="rb-fill" style="background:#E24B4A;width:15%"></div></div><span style="color:var(--text-secondary);min-width:22px">4</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrap" style="height:170px"><canvas id="c-review-trend"></canvas></div>
+    </div>
+    <div>
+      <div class="legend"><span style="font-size:11px;color:var(--text-tertiary)">評価分布</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-review-pie"></canvas></div>
+    </div>
+  </div>
+  <div class="review-cards">
+    <div class="rv-card"><div class="rv-head"><span>Jill</span><span class="stars-gold">★★★★★</span></div><div class="rv-text">750元套餐で5道料理。蒜香炒飯が絶品。主廚 堀内昭宏・服務員 陳芝茜のサービスが最高。</div></div>
+    <div class="rv-card"><div class="rv-head"><span>邱邱</span><span class="stars-gold">★★★★★</span></div><div class="rv-text">職人の調理を目の前で。750元でこの品質は驚き。スタッフの質が高く員工素質卓越。</div></div>
+    <div class="rv-card" style="border-color:#F7C1C1"><div class="rv-head"><span>Net K</span><span class="stars-red">★☆☆☆☆</span></div><div class="rv-text">ディナー1,500元+サービス料で量が少なく不満足。価格と内容のバランス改善を要望。</div></div>
+    <div class="rv-card"><div class="rv-head"><span>Allan Chiang</span><span class="stars-gold">★★★★★</span></div><div class="rv-text">料理は最高だが、LINE特典案内漏れ・白飯説明不足など接客の均一化が課題と指摘。</div></div>
+  </div>
+  <div class="insight">低評価4件はすべてディナーの「量が少ない・価格に見合わない」。高評価はランチのCPV、職人のライブ調理体験、甜点クオリティへの言及が多い。ディナー価格帯の期待値マネジメントが急務。</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 7. 4月比較 -->
+<section class="section" id="sec7">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">4月（オープン月）との比較</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">4月 月間売上</div><div class="kpi-val">NT$2,477,572</div><div class="kpi-sub">¥12,387,860（21日営業）</div></div>
+    <div class="kpi"><div class="kpi-label">5月 月間売上</div><div class="kpi-val">NT$2,895,082</div><div class="kpi-sub">¥14,475,410（31日営業）</div></div>
+    <div class="kpi"><div class="kpi-label">日商 4月平均</div><div class="kpi-val">NT$117,979</div><div class="kpi-sub">¥589,893</div></div>
+    <div class="kpi"><div class="kpi-label">日商 5月平均</div><div class="kpi-val">NT$93,390</div><div class="kpi-sub">¥466,948</div><span class="badge badge-dn">−20.8%</span></div>
+    <div class="kpi"><div class="kpi-label">客単価 4月</div><div class="kpi-val">NT$1,132</div><div class="kpi-sub">¥5,659</div></div>
+    <div class="kpi"><div class="kpi-label">客単価 5月</div><div class="kpi-val">NT$1,079</div><div class="kpi-sub">¥5,397</div><span class="badge badge-dn">−4.7%</span></div>
+  </div>
+  <div class="row2">
+    <div>
+      <div class="legend"><span><span class="ld" style="background:#378ADD"></span>4月</span><span><span class="ld" style="background:#8B1A1A"></span>5月</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-compare"></canvas></div>
+    </div>
+    <div>
+      <div class="legend"><span><span class="ld" style="background:#378ADD"></span>4月予算達成率</span><span><span class="ld" style="background:#8B1A1A"></span>5月予算達成率</span></div>
+      <div class="chart-wrap" style="height:220px"><canvas id="c-achieve"></canvas></div>
+    </div>
+  </div>
+  <div class="insight">4月はオープン景気でNT$1,132の高客単価・日商NT$117,979（予算比206.7%）。5月は通常化し日商NT$93,390と−20.8%ながら予算比132.3%は高水準を維持。ランチ比率増加が客単価低下の主因。累計来客数は+22.5%増加しており顧客基盤は拡大中。</div>
+</section>
+
+</div>
+
+<footer class="footer">
+  千房 Diversity 台中漢神洲際店 &nbsp;|&nbsp; 2026年5月 月次分析レポート &nbsp;|&nbsp; 千房ホールディングス株式会社 営業推進本部
+</footer>
+
+<script>
+const C = '#8B1A1A', CS = '#C0392B', CL = '#E67E73';
+const BLUE = '#378ADD', AMB = '#EF9F27', GRAY = '#888780', GRN = '#639922', COR = '#D85A30', BUD = '#2980B9';
+const GY = {color:'rgba(0,0,0,0.06)'};
+const BASE = {responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}};
+
+const sales31 = [125730,124480,140393,61160,89760,88039,80229,113465,138809,137775,62940,51370,89760,70455,89185,154785,110440,61215,46750,56595,65645,86130,129140,151885,34155,63815,66862,63745,56870,138655,144845];
+const bud31   = [51000,111800,111800,51000,51000,51000,51000,51000,111800,111800,51000,51000,51000,51000,51000,111800,111800,51000,51000,51000,51000,51000,111800,111800,51000,51000,51000,51000,51000,111800,111800];
+const dows    = ['金','土','日','月','火','水','木','金','土','日','月','火','水','木','金','土','日','月','火','水','木','金','土','日','月','火','水','木','金','土','日'];
+const lbl31   = Array.from({length:31},(_,i)=>(i+1)+'日');
+const gbpV    = [1469,1485,1327,754,711,749,653,775,1057,1295,708,634,661,572,695,1057,1092,656,561,574,561,653,944,972,555,574,545,510,559,930,612];
+const gbpD    = [8,13,1,3,6,5,0,8,6,7,0,0,6,9,1,6,12,2,0,0,6,6,0,4,1,6,6,7,1,6,8];
+
+const menuData = [
+  {name:'雅（ディナーコース）',       cat:'dinner', lbl:'ディナーコース', qty:721,  sales:1097550, chg:16.2},
+  {name:'匠心（ランチコース）',        cat:'lunch',  lbl:'ランチコース',   qty:680,  sales:573910,  chg:45.74},
+  {name:'極（ディナーコース）',        cat:'dinner', lbl:'ディナーコース', qty:172,  sales:359700,  chg:-3.79},
+  {name:'浪花（ランチコース）',        cat:'lunch',  lbl:'ランチコース',   qty:622,  sales:248320,  chg:35.37},
+  {name:'風（ディナーコース）',        cat:'dinner', lbl:'ディナーコース', qty:176,  sales:175300,  chg:-0.12},
+  {name:'彩蔬（ランチコース）',        cat:'lunch',  lbl:'ランチコース',   qty:110,  sales:43960,   chg:22.11},
+  {name:'翠宴（ディナーコース）',      cat:'dinner', lbl:'ディナーコース', qty:23,   sales:29900,   chg:-8.0},
+  {name:'千房招牌大阪燒',              cat:'single', lbl:'単品料理',       qty:59,   sales:23440,   chg:27.98},
+  {name:'日本黑毛和牛菲力牛排(60g)',   cat:'single', lbl:'単品料理',       qty:23,   sales:18320,   chg:-11.92},
+  {name:'蒜香炒飯',                    cat:'single', lbl:'単品料理',       qty:104,  sales:15585,   chg:-6.4},
+  {name:'千房特製炒麵',                cat:'single', lbl:'単品料理',       qty:33,   sales:13200,   chg:-8.08},
+  {name:'日式豚平燒',                  cat:'single', lbl:'単品料理',       qty:41,   sales:10190,   chg:-24.1},
+  {name:'日本黑毛和牛沙朗牛排(60g)',   cat:'single', lbl:'単品料理',       qty:11,   sales:8175,    chg:25.29},
+  {name:'千房特製蘇打',                cat:'drink',  lbl:'ドリンク',       qty:19,   sales:3800,    chg:-40.63},
+  {name:'札幌啤酒（瓶裝）',            cat:'drink',  lbl:'ドリンク',       qty:9,    sales:2700,    chg:-25.0},
+  {name:'蔥香大阪燒',                  cat:'single', lbl:'単品料理',       qty:6,    sales:2100,    chg:50.0},
+  {name:'果汁（有料）',                cat:'drink',  lbl:'ドリンク',       qty:8,    sales:2000,    chg:-49.37},
+  {name:'鹽味炒麵',                    cat:'single', lbl:'単品料理',       qty:4,    sales:1400,    chg:-50.0},
+  {name:'可樂（有料）',                cat:'drink',  lbl:'ドリンク',       qty:12,   sales:1200,    chg:-20.0},
+  {name:'烏龍茶（有料）',              cat:'drink',  lbl:'ドリンク',       qty:6,    sales:600,     chg:-66.48},
+  {name:'可樂（小）',                  cat:'drink',  lbl:'ドリンク',       qty:391,  sales:500,     chg:400.0},
+  {name:'台灣金牌（瓶）',              cat:'drink',  lbl:'ドリンク',       qty:2,    sales:500,     chg:-71.43},
+  {name:'National Choice 18年（単杯）',cat:'drink',  lbl:'ドリンク',       qty:1,    sales:400,     chg:-66.67},
+  {name:'紀州鶯屋 梅酒 黑牛仕立（単杯）',cat:'drink',lbl:'ドリンク',      qty:2,    sales:400,     chg:-50.0},
+  {name:'綠茶',                        cat:'drink',  lbl:'ドリンク',       qty:4,    sales:400,     chg:-73.33},
+  {name:'百富12年（単杯）',            cat:'drink',  lbl:'ドリンク',       qty:1,    sales:300,     chg:null},
+  {name:'三得利角瓶威士忌（単杯）',    cat:'drink',  lbl:'ドリンク',       qty:1,    sales:200,     chg:-75.0},
+  {name:'果汁（無料付属）',            cat:'free',   lbl:'無料提供',       qty:770,  sales:0,       chg:null},
+  {name:'烏龍茶（無料付属）',          cat:'free',   lbl:'無料提供',       qty:497,  sales:0,       chg:null},
+  {name:'白飯（無料付属）',            cat:'free',   lbl:'無料提供',       qty:130,  sales:0,       chg:null},
+];
+const totalMS = menuData.reduce((s,r)=>s+r.sales,0);
+const catClr  = {dinner:C, lunch:BLUE, single:GRN, drink:AMB, free:GRAY};
+const catBdg  = {dinner:'cat-d', lunch:'cat-l', single:'cat-s', drink:'cat-b', free:'cat-f'};
+
+function mk(id,type,data,opts){
+  const el=document.getElementById(id);
+  if(!el) return;
+  return new Chart(el,{type,data,options:{...BASE,...opts}});
+}
+function dc(dow){ return dow==='土'?CS: dow==='日'?CL: C; }
+const tx10 = {maxRotation:0,font:{size:10},callback:(_,i)=>i%4===0?lbl31[i]:''};
+const sY10 = {ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY};
+
+/* 1 */
+mk('c-overview','bar',{labels:lbl31,datasets:[
+  {label:'売上実績',data:sales31,backgroundColor:dows.map(dc),borderRadius:2,order:2},
+  {label:'予算',data:bud31,type:'line',borderColor:BUD,backgroundColor:BUD+'22',fill:true,pointRadius:0,tension:.4,borderWidth:2,borderDash:[6,3],order:1}
+]},{scales:{x:{ticks:tx10,grid:{display:false}},y:sY10}});
+
+/* 2 */
+mk('c-period-pie','doughnut',{labels:['ランチ（10-14時）','アイドル（15-16時）','ディナー（17-23時）'],datasets:[{data:[985811,310982,1598289],backgroundColor:[BLUE,AMB,C],borderWidth:0}]},{plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:10}}}});
+
+(function(){
+  const h={};for(let i=11;i<=21;i++)h[i]=0;
+  [[12,13805],[13,17325],[14,11440],[15,9240],[16,5830],[17,5500],[18,16555],[19,12980],[20,17105],[21,15950],[12,21560],[13,4730],[14,14575],[15,3700],[16,12760],[17,4950],[18,35090],[20,18865],[21,8250],[11,2970],[12,15070],[13,2838],[14,18425],[15,3300],[16,7480],[17,5940],[18,19250],[19,26125],[20,25245],[21,13750],[12,7205],[13,9240],[14,6270],[15,7700],[16,7150],[17,4950],[18,9625],[19,17875],[20,19800],[21,23650],[11,1265],[12,11660],[13,18590],[14,6875],[15,7700],[16,6380],[18,19360],[19,10824],[12,14905],[13,10285],[14,10434],[15,6050],[17,2750],[18,14740],[19,10450],[20,15675],[21,2750]].forEach(([hr,v])=>{if(h[hr]!==undefined)h[hr]+=v;});
+  const hrs=Array.from({length:11},(_,i)=>i+11);
+  mk('c-hourly','bar',{labels:hrs.map(i=>i+'時'),datasets:[{data:hrs.map(i=>h[i]),backgroundColor:hrs.map(i=>i<=14?BLUE:(i<=16?AMB:C)),borderRadius:2}]},{scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY}}});
+})();
+
+/* 3 */
+const dowOrd=['月','火','水','木','金','土','日'];
+const dowS=[54867,62923,75314,70018,94276,137173,137067];
+const dowG=[59.8,67.0,73.8,64.5,88.4,119.6,116.4];
+const dowCl=[C,C,C,C,C,CS,CL];
+mk('c-dow','bar',{labels:dowOrd,datasets:[{data:dowS,backgroundColor:dowCl,borderRadius:4}]},{scales:{x:{grid:{display:false}},y:sY10}});
+mk('c-dow-guests','bar',{labels:dowOrd,datasets:[{data:dowG,backgroundColor:dowCl,borderRadius:4}]},{scales:{x:{grid:{display:false}},y:{ticks:{font:{size:10}},grid:GY}}});
+mk('c-daily-color','line',{labels:lbl31,datasets:[
+  {label:'売上実績',data:sales31,borderColor:C,backgroundColor:'transparent',pointBackgroundColor:dows.map(dc),pointRadius:4,tension:.3,borderWidth:1.5,order:2},
+  {label:'予算',data:bud31,borderColor:BUD,backgroundColor:'transparent',pointRadius:0,tension:.4,borderDash:[5,3],borderWidth:1.5,order:1}
+]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{ticks:tx10,grid:{display:false}},y:sY10}});
+
+/* 4 */
+mk('c-cat-pie','doughnut',{labels:['ディナーコース','ランチコース','単品料理','ドリンク'],datasets:[{data:[1662450,866190,92405,13600],backgroundColor:[C,BLUE,GRN,AMB],borderWidth:0}]},{plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:10}}}});
+mk('c-course-bar','bar',{labels:['雅（D）','匠心（L）','極（D）','浪花（L）','風（D）','彩蔬（L）','翠宴（D）'],datasets:[{data:[721,680,172,622,176,110,23],backgroundColor:[16.2,45.74,-3.79,35.37,-0.12,22.11,-8.0].map(v=>v>=0?GRN:COR),borderRadius:3}]},{indexAxis:'y',scales:{x:{ticks:{font:{size:10}},grid:GY},y:{ticks:{font:{size:10}},grid:{display:false}}}});
+
+(function(){
+  const t10=menuData.filter(r=>r.sales>0).slice(0,10);
+  mk('c-top10','bar',{labels:t10.map(r=>r.name.length>14?r.name.slice(0,14)+'…':r.name),datasets:[{data:t10.map(r=>r.sales),backgroundColor:t10.map(r=>catClr[r.cat]),borderRadius:3}]},{indexAxis:'y',scales:{x:{ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY},y:{ticks:{font:{size:10}},grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>`NT$${ctx.parsed.x.toLocaleString()} (${(ctx.parsed.x/totalMS*100).toFixed(1)}%)`}}}});
+})();
+
+function filterTable(filter,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const body=document.getElementById('tbl-body');
+  const rows=filter==='all'?menuData:menuData.filter(r=>r.cat===filter);
+  const mx=Math.max(...rows.map(r=>r.sales));
+  body.innerHTML=rows.map((r,i)=>{
+    const pct=totalMS>0?(r.sales/totalMS*100):0;
+    const bw=mx>0?Math.round(r.sales/mx*100):0;
+    const chg=r.chg===null?'<span class="chg-neu">—</span>':r.chg>0?`<span class="chg-up">+${r.chg.toFixed(1)}%</span>`:`<span class="chg-dn">${r.chg.toFixed(1)}%</span>`;
+    return `<tr data-cat="${r.cat}"><td class="muted">${i+1}</td><td style="max-width:170px;word-break:break-all">${r.name}</td><td><span class="cat-badge ${catBdg[r.cat]}">${r.lbl}</span></td><td class="r">${r.qty.toLocaleString()}</td><td class="r">${r.sales>0?r.sales.toLocaleString():'—'}</td><td class="r">${r.sales>0?(r.sales*5).toLocaleString():'—'}</td><td class="r">${r.sales>0?pct.toFixed(1)+'%':'—'}</td><td><div class="bar-cell"><div class="mini-bar" style="background:${catClr[r.cat]};width:${bw}%"></div></div></td><td class="r">${chg}</td></tr>`;
+  }).join('');
+  if(filter==='all'){
+    const tot=menuData.filter(r=>r.sales>0).reduce((s,r)=>s+r.qty,0);
+    body.innerHTML+=`<tr class="total-row"><td colspan="3">合計（有料商品）</td><td class="r">${tot.toLocaleString()}</td><td class="r">${totalMS.toLocaleString()}</td><td class="r">${(totalMS*5).toLocaleString()}</td><td class="r">100%</td><td></td><td></td></tr>`;
+  }
+}
+filterTable('all');
+
+/* 5 */
+mk('c-gbp-views','line',{labels:lbl31,datasets:[
+  {label:'ビュー数',data:gbpV,borderColor:BLUE,backgroundColor:BLUE+'18',fill:true,pointRadius:2,tension:.4,borderWidth:1.5,yAxisID:'y'},
+  {label:'経路検索数',data:gbpD,borderColor:C,backgroundColor:'transparent',pointRadius:2,tension:.4,borderWidth:1.5,borderDash:[4,3],yAxisID:'y2'}
+]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{ticks:tx10,grid:{display:false}},y:{ticks:{font:{size:10}},grid:GY,position:'left'},y2:{ticks:{font:{size:10}},grid:{display:false},position:'right'}}});
+
+mk('c-gbp-corr','scatter',{datasets:[{data:gbpV.map((v,i)=>({x:v,y:sales31[i]})),backgroundColor:BLUE+'BB',pointRadius:5,pointHoverRadius:7}]},{scales:{x:{title:{display:true,text:'GBPビュー数',font:{size:10}},ticks:{font:{size:10}},grid:GY},y:{title:{display:true,text:'売上（NT$）',font:{size:10}},ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY}},plugins:{tooltip:{callbacks:{label:ctx=>`ビュー${ctx.parsed.x} / NT$${ctx.parsed.y.toLocaleString()}`}}}});
+
+mk('c-dir-corr','scatter',{datasets:[{data:gbpD.map((v,i)=>({x:v,y:sales31[i]})),backgroundColor:C+'BB',pointRadius:5,pointHoverRadius:7}]},{scales:{x:{title:{display:true,text:'経路検索数',font:{size:10}},ticks:{font:{size:10}},grid:GY},y:{title:{display:true,text:'売上（NT$）',font:{size:10}},ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY}},plugins:{tooltip:{callbacks:{label:ctx=>`経路${ctx.parsed.x}件 / NT$${ctx.parsed.y.toLocaleString()}`}}}});
+
+/* 6 */
+mk('c-review-trend','line',{labels:['5/5','5/6','5/9','5/10','5/12','5/14','5/16','5/17','5/20','5/24','5/27','5/28','5/30'],datasets:[
+  {label:'投稿数',data:[5,1,1,1,1,1,2,1,1,1,1,2,1],borderColor:BLUE,backgroundColor:'transparent',pointRadius:3,tension:.3,yAxisID:'y'},
+  {label:'平均評価',data:[4.6,2,5,4,2,5,4.5,5,5,5,3,2.5,1],borderColor:C,backgroundColor:'transparent',pointRadius:3,tension:.3,borderDash:[4,3],yAxisID:'y2'}
+]},{plugins:{legend:{display:true,labels:{font:{size:10},boxWidth:8}}},scales:{x:{ticks:{font:{size:9},maxRotation:45},grid:{display:false}},y:{min:0,max:7,ticks:{font:{size:10},stepSize:2},grid:GY,position:'left'},y2:{min:0,max:6,ticks:{font:{size:10}},grid:{display:false},position:'right'}}});
+
+mk('c-review-pie','doughnut',{labels:['5星（19件）','3星（2件）','2星（2件）','1星（4件）'],datasets:[{data:[19,2,2,4],backgroundColor:[C,AMB,COR,'#E24B4A'],borderWidth:0}]},{plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:10}}}});
+
+/* 7 */
+mk('c-compare','bar',{labels:['日商平均（千NT$）','累計来客数（名）','客単価（NT$）'],datasets:[
+  {label:'4月',data:[117.979,2189,1131.8],backgroundColor:BLUE,borderRadius:3},
+  {label:'5月',data:[93.39,2682,1079.45],backgroundColor:C,borderRadius:3}
+]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{ticks:{font:{size:10}},grid:GY}}});
+
+(function(){
+  const aS=[108000,161315,174028,137225,135810,131841,121385,111155,124025,130515,95552,90420,99770,75625,114510,157165,157311,90205,89705,64100,107910];
+  const aB=[46400,87000,87000,45000,45000,45000,45000,45000,87000,87000,45000,45000,45000,45000,45000,87000,87000,45000,45000,45000,45000];
+  mk('c-achieve','line',{labels:Array.from({length:Math.max(aS.length,sales31.length)},(_,i)=>(i+1)+'日'),datasets:[
+    {label:'4月達成率',data:aS.map((s,i)=>Math.round(s/aB[i]*100)),borderColor:BLUE,backgroundColor:'transparent',pointRadius:2,tension:.3,borderWidth:1.5},
+    {label:'5月達成率',data:sales31.map((s,i)=>Math.round(s/bud31[i]*100)),borderColor:C,backgroundColor:'transparent',pointRadius:2,tension:.3,borderWidth:1.5,borderDash:[4,3]}
+  ]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{ticks:{maxRotation:0,font:{size:10},callback:(_,i)=>i%4===0?(i+1)+'日':''},grid:{display:false}},y:{ticks:{callback:v=>v+'%',font:{size:10}},grid:GY}}});
+})();
+
+/* NAV highlight */
+(function(){
+  const secs=document.querySelectorAll('section[id]');
+  const navs=document.querySelectorAll('.nav-item');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        navs.forEach(n=>n.classList.remove('active'));
+        const a=document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+        if(a)a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(s=>obs.observe(s));
+})();
+</script>
+
+</div>
+<script>
+// ===== PORTAL ENGINE =====
+const _tabScripts = {};
+const _tabInited = new Set();
+
+function switchTab(tabId) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.getElementById('btn-' + tabId).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  if (!_tabInited.has(tabId)) {
+    _tabInited.add(tabId);
+    if (_tabScripts[tabId]) {
+      try { _tabScripts[tabId](); } catch(e) { console.error('Tab init error [' + tabId + ']:', e); }
+    }
+  }
+}
+
+// Init first tab after DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  _tabInited.add('tab1');
+  if (_tabScripts['tab1']) {
+    try { _tabScripts['tab1'](); } catch(e) { console.error('Tab1 init error:', e); }
+  }
+});
+</script>
+<script>
+_tabScripts['tab1'] = (function() {
+  let _inited = false;
+  return function() {
+    if (_inited) return;
+    _inited = true;
+    (function() {
+// ── DATA (sorted by sales desc) ──
+const D=[
+  {n:"道頓堀ビル店",      s:5263,b:6000,p:6023,y:87.7, z:87.3, k:21869,kr:82.0, t:2407, tp:2259, type:"basic"},
+  {n:"千日前本店",        s:2014,b:2050,p:2058,y:98.2, z:97.8, k:8737, kr:97.3, t:2306, tp:2293, type:"basic"},
+  {n:"シェラトン都ホテル大阪",s:1599,b:1380,p:1372,y:115.8,z:116.5,k:1937, kr:104.8,t:8253, tp:7426, type:"president"},
+  {n:"大丸心斎橋",        s:1453,b:1500,p:1479,y:96.8, z:98.2, k:2141, kr:98.0, t:6786, tp:6774, type:"president"},
+  {n:"舞 イクスピアリ店",  s:1148,b:1100,p:1125,y:104.3,z:101.9,k:5338, kr:100.6,t:2150, tp:2123, type:"basic"},
+  {n:"有明ガーデン支店",   s:1138,b:960, p:1004,y:118.5,z:113.3,k:5024, kr:107.9,t:2266, tp:2157, type:"basic"},
+  {n:"恵比寿GP店",       s:1111,b:1080,p:1092,y:102.8,z:101.7,k:1813, kr:101.7,t:6129, tp:6132, type:"elegance"},
+  {n:"有楽町ビックカメラ", s:1012,b:1050,p:1030,y:96.4, z:98.3, k:3842, kr:96.0, t:2635, tp:2573, type:"basic"},
+  {n:"日航ビル店",        s:981, b:1050,p:1072,y:93.4, z:91.5, k:1350, kr:106.3,t:7269, tp:8448, type:"president"},
+  {n:"そごう横浜店",      s:918, b:920, p:932, y:99.7, z:98.4, k:3947, kr:101.6,t:2325, tp:2401, type:"basic"},
+  {n:"あべのQsMall",     s:904, b:900, p:894, y:100.4,z:101.1,k:4833, kr:99.4, t:1870, tp:1839, type:"basic"},
+  {n:"ぷれじでんと北店",   s:848, b:1000,p:1061,y:84.8, z:79.9, k:661,  kr:74.6, t:12836,tp:11977,type:"president"},
+  {n:"京都アバンティ支店", s:836, b:820, p:829, y:101.9,z:100.8,k:3591, kr:99.6, t:2329, tp:2301, type:"basic"},
+  {n:"曽根崎支店",        s:812, b:950, p:957, y:85.4, z:84.8, k:2671, kr:78.6, t:3041, tp:2818, type:"basic"},
+  {n:"ハービスPLAZA梅田", s:777, b:800, p:807, y:97.1, z:96.3, k:3254, kr:91.2, t:2388, tp:2262, type:"basic"},
+  {n:"名古屋みなとアクルス",s:772, b:700, p:734, y:110.2,z:105.1,k:4460, kr:101.9,t:1730, tp:1679, type:"basic"},
+  {n:"高槻阪急スクエア",   s:757, b:700, p:698, y:108.1,z:108.4,k:4154, kr:111.4,t:1823, tp:1873, type:"basic"},
+  {n:"堺東支店",          s:753, b:628, p:926, y:119.8,z:81.2, k:3716, kr:77.9, t:2025, tp:1941, type:"basic"},
+  {n:"リノアス八尾支店",   s:733, b:630, p:647, y:116.3,z:113.3,k:3907, kr:114.9,t:1875, tp:1903, type:"basic"},
+  {n:"ルミネ立川支店",     s:731, b:720, p:687, y:101.5,z:106.4,k:3515, kr:105.1,t:2080, tp:2055, type:"basic"},
+  {n:"名代JO-TERRACE",   s:697, b:650, p:613, y:107.2,z:113.8,k:3581, kr:110.4,t:1948, tp:1889, type:"basic"},
+  {n:"京橋京阪モール",     s:636, b:620, p:580, y:102.6,z:109.6,k:3099, kr:104.4,t:2053, tp:1955, type:"basic"},
+  {n:"ぷれじでんと南本店", s:667, b:750, p:756, y:88.9, z:88.2, k:566,  kr:77.0, t:11785,tp:10283,type:"president"},
+  {n:"ヨドバシHD池袋",    s:571, b:650, p:491, y:87.9, z:116.3,k:2577, kr:111.5,t:2217, tp:2126, type:"basic"},
+  {n:"琥 虎ノ門",         s:530, b:680, p:600, y:77.8, z:88.3, k:321,  kr:87.9, t:16499,tp:16429,type:"president"},
+  {n:"セレオ八王子支店",   s:507, b:470, p:406, y:107.9,z:124.9,k:2723, kr:125.3,t:1864, tp:1870, type:"basic"},
+  {n:"ららぽーと甲子園",   s:492, b:510, p:470, y:96.4, z:104.6,k:4536, kr:100.3,t:1085, tp:1040, type:"basic"},
+  {n:"各務原インター",     s:386, b:350, p:365, y:110.3,z:105.7,k:2604, kr:107.5,t:1483, tp:1508, type:"basic"},
+  {n:"P Retreat",        s:187, b:210, p:201, y:89.2, z:93.2, k:126,  kr:82.8, t:14872,tp:13218,type:"president"},
+];
+
+const LABS = D.map(d=>d.n);
+
+// ── Chart.js default: make sure no animation delay ──
+Chart.defaults.animation = false;
+Chart.defaults.responsive = false; // KEY: disable responsive for bar charts with explicit size
+
+function makeBar(id, datasets, opts={}) {
+  const canvas = document.getElementById(id);
+  const wrapper = canvas.parentElement;
+  const W = wrapper.clientWidth || 900;
+  const H = parseInt(canvas.style.height) || 900;
+  canvas.width  = W;
+  canvas.height = H;
+  return new Chart(canvas, {
+    type: 'bar',
+    data: { labels: LABS, datasets },
+    options: {
+      indexAxis: 'y',
+      animation: false,
+      responsive: false,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { ...opts.tooltip }
+      },
+      scales: {
+        x: {
+          min: opts.xMin ?? undefined,
+          ticks: { font:{size:11}, callback: opts.xFmt ?? (v=>v) },
+          grid: { color:'rgba(0,0,0,0.05)' }
+        },
+        y: {
+          ticks: { font:{size:11.5}, color:'#1a1917' },
+          grid: { display:false }
+        }
+      }
+    }
+  });
+}
+
+// ① Sales
+makeBar('cSales',
+  [
+    { label:'実績', data:D.map(d=>d.s), backgroundColor:'rgba(139,26,26,0.85)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 },
+    { label:'予算', data:D.map(d=>d.b), backgroundColor:'rgba(181,212,244,0.75)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 }
+  ],
+  { xFmt: v=>v.toLocaleString()+'万', tooltip:{ callbacks:{ label:c=>c.dataset.label+': '+c.parsed.x.toLocaleString()+'万円' } } }
+);
+
+// ② 予算比
+makeBar('cYosan',
+  [{
+    data: D.map(d=>d.y),
+    backgroundColor: D.map(d=>d.n==='ヨドバシHD池袋'?'rgba(239,159,39,0.9)':d.y>=100?'rgba(45,106,63,0.85)':'rgba(163,45,45,0.85)'),
+    borderRadius:3, barPercentage:0.7, categoryPercentage:0.85
+  }],
+  { xMin:65, xFmt:v=>v+'%', tooltip:{ callbacks:{ label:c=>'予算比: '+c.parsed.x+'%'+(D[c.dataIndex].n==='ヨドバシHD池袋'?' ★オープン遅延':'') } } }
+);
+
+// ③ 前年比
+makeBar('cZennen',
+  [{
+    data: D.map(d=>d.z),
+    backgroundColor: D.map(d=>d.z>=100?'rgba(24,95,165,0.8)':'rgba(186,117,23,0.85)'),
+    borderRadius:3, barPercentage:0.7, categoryPercentage:0.85
+  }],
+  { xMin:65, xFmt:v=>v+'%', tooltip:{ callbacks:{ label:c=>'前年比: '+c.parsed.x+'%' } } }
+);
+
+// ④ 客数前年比
+makeBar('cKyaku',
+  [{
+    data: D.map(d=>d.kr),
+    backgroundColor: D.map(d=>d.kr>=100?'rgba(24,95,165,0.8)':'rgba(186,117,23,0.85)'),
+    borderRadius:3, barPercentage:0.7, categoryPercentage:0.85
+  }],
+  { xMin:65, xFmt:v=>v+'%', tooltip:{ callbacks:{ label:c=>'客数前年比: '+c.parsed.x+'%' } } }
+);
+
+// ⑤ 客単価
+makeBar('cTanka',
+  [
+    { label:'実績', data:D.map(d=>d.t), backgroundColor:'rgba(139,26,26,0.85)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 },
+    { label:'前年', data:D.map(d=>d.tp), backgroundColor:'rgba(211,209,199,0.8)', borderRadius:3, barPercentage:0.55, categoryPercentage:0.85 }
+  ],
+  { xFmt:v=>'¥'+v.toLocaleString(), tooltip:{ callbacks:{ label:c=>c.dataset.label+': ¥'+c.parsed.x.toLocaleString() } } }
+);
+
+// ── Summary charts (responsive OK, fixed height container) ──
+Chart.defaults.responsive = true;
+Chart.defaults.animation = false;
+
+new Chart(document.getElementById('cTotal'),{
+  type:'bar',
+  data:{labels:['売上実績','予算','前年実績'],
+    datasets:[{data:[292,298,299],backgroundColor:['#8B1A1A','#B5D4F4','#D3D1C7'],borderRadius:5,barThickness:56}]},
+  options:{responsive:true,maintainAspectRatio:false,animation:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(0)+'百万円'}}},
+    scales:{y:{ticks:{callback:v=>v+'M'},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+const bins={'~85%':0,'85~95%':0,'95~100%':0,'100~110%':0,'110%~':0};
+D.forEach(d=>{if(d.y<85)bins['~85%']++;else if(d.y<95)bins['85~95%']++;else if(d.y<100)bins['95~100%']++;else if(d.y<110)bins['100~110%']++;else bins['110%~']++;});
+new Chart(document.getElementById('cDist'),{
+  type:'bar',
+  data:{labels:Object.keys(bins),datasets:[{data:Object.values(bins),backgroundColor:['#a32d2d','#E24B4A','#888780','#2d6a3f','#639922'],borderRadius:5,barThickness:48}]},
+  options:{responsive:true,maintainAspectRatio:false,animation:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'店舗'}}},
+    scales:{y:{ticks:{stepSize:1},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+new Chart(document.getElementById('cScatter'),{
+  type:'scatter',
+  data:{datasets:[
+    {label:'ベーシック/FC',data:D.filter(d=>d.type==='basic').map(d=>({x:d.y,y:d.z,label:d.n})),backgroundColor:'rgba(139,26,26,0.65)',pointRadius:5,pointHoverRadius:7},
+    {label:'ぷれじでんと',data:D.filter(d=>d.type==='president').map(d=>({x:d.y,y:d.z,label:d.n})),backgroundColor:'rgba(24,95,165,0.7)',pointRadius:6,pointHoverRadius:8},
+    {label:'エレガンス',data:D.filter(d=>d.type==='elegance').map(d=>({x:d.y,y:d.z,label:d.n})),backgroundColor:'rgba(239,159,39,0.85)',pointRadius:6,pointHoverRadius:8}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,animation:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.label}：予算${c.parsed.x}% 前年${c.parsed.y}%`}}},
+    scales:{
+      x:{min:70,max:125,title:{display:true,text:'予算比（%）',font:{size:11}},grid:{color:'rgba(0,0,0,0.04)'},ticks:{callback:v=>v+'%',font:{size:10}}},
+      y:{min:75,max:130,title:{display:true,text:'前年比（%）',font:{size:11}},grid:{color:'rgba(0,0,0,0.04)'},ticks:{callback:v=>v+'%',font:{size:10}}}
+    }
+  }
+});
+
+// ── Table ──
+function renderTbl(){
+  const k=document.getElementById('tS').value;
+  const dir=document.getElementById('tD').value;
+  const sd=[...D].sort((a,b)=>{
+    const av=k==='s'?a.s:k==='y'?a.y:k==='z'?a.z:a.k;
+    const bv=k==='s'?b.s:k==='y'?b.y:k==='z'?b.z:b.k;
+    return dir==='d'?bv-av:av-bv;
+  });
+  document.getElementById('tB').innerHTML=sd.map((d,i)=>{
+    const yc=d.y>=100?'pg':d.y>=95?'pn':'pr2';
+    const zc=d.z>=100?'pg':d.z>=95?'pn':'pr2';
+    const kc=d.kr>=100?'pg':d.kr>=95?'pn':'pr2';
+    const note=d.n==='ヨドバシHD池袋'?' <span style="font-size:9px;color:var(--amber);">★オープン遅延</span>':'';
+    return `<tr>
+      <td style="color:var(--hint)">${i+1}</td>
+      <td>${d.n}${note}</td>
+      <td class="r">${d.s.toLocaleString()}万</td>
+      <td class="r" style="color:var(--hint)">${d.b.toLocaleString()}万</td>
+      <td class="r"><span class="pi ${yc}">${d.y}%</span></td>
+      <td class="r" style="color:var(--hint)">${d.p.toLocaleString()}万</td>
+      <td class="r"><span class="pi ${zc}">${d.z}%</span></td>
+      <td class="r">${d.k.toLocaleString()}</td>
+      <td class="r"><span class="pi ${kc}">${d.kr}%</span></td>
+      <td class="r">¥${d.t.toLocaleString()}</td>
+      <td class="r" style="color:var(--hint)">¥${d.tp.toLocaleString()}</td>
+    </tr>`;
+  }).join('');
+}
+renderTbl();
+
+// ── Sticky nav ──
+const secs=['s0','s1','s2','s3','s4','s5'];
+const navAs=document.querySelectorAll('.nav a');
+window.addEventListener('scroll',()=>{
+  let cur='s0';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.getBoundingClientRect().top+window.scrollY-90)cur=id;});
+  navAs.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+    })();
+  };
+})();
+</script>
+<script>
+_tabScripts['tab2'] = (function() {
+  let _inited = false;
+  return function() {
+    if (_inited) return;
+    _inited = true;
+    (function() {
+const MENU_NAMES  = ['炙りローストビーフ','ポテトのチーズ焼','クレープシュゼット','たまごサラダ','フレッシュドレッシング','フォアグラ','アクアパッツァ'];
+const MENU_COLORS = ['#8B1A1A','#c9963a','#1D7A55','#1a4fa0','#6B3FA0','#A02040','#888070'];
+const STORE_NAMES = ['シェラトン都ホテル','大丸心斎橋店','OM日航ビル店','北店','南本店'];
+const STORE_COLORS= ['#8B1A1A','#c9963a','#1D7A55','#1a4fa0','#777'];
+const HOURS       = ['10時','11時','12時','13時','14時','15時','16時','17時','18時','19時','20時','21時'];
+
+const menuTotals  = [48, 46, 41, 33, 20, 9, 6];
+const custCounts  = [1104, 1244, 822, 491, 391];
+const DAYS = 21;
+
+// Store × Menu qty matrix [store][menu]
+const storeMenuQty = [
+  [12, 13, 10, 8, 5, 4, 1],   // シェラトン
+  [8,  13, 8,  6, 7, 1, 1],   // 大丸
+  [10, 6,  14, 10, 2, 1, 0],  // OM
+  [12, 6,  8,  4, 4, 3, 4],   // 北
+  [6,  8,  1,  5, 2, 0, 0],   // 南
+];
+
+// Menu × Hour [menu][hour]
+const menuHourQty = [
+  [0,2,1,0,0,0,2,7,22,7,5,2],   // 炙りロースト
+  [0,0,1,2,2,0,1,5,14,12,7,2],  // ポテト
+  [0,0,0,6,1,1,0,3,4,7,12,7],   // クレープ
+  [0,3,3,1,0,0,0,5,6,11,3,1],   // たまご
+  [1,1,0,1,0,0,0,3,6,6,2,0],    // ドレッシング
+  [0,0,1,1,0,0,0,1,1,4,1,0],    // フォアグラ
+  [0,0,0,0,0,0,0,1,3,0,1,1],    // アクアパッツァ
+];
+
+// Store × Hour [store][hour]
+const storeHourQty = [
+  [0,3,5,4,3,0,0,10,7,13,8,0],  // シェラトン
+  [1,3,1,4,0,1,1,10,17,3,3,0],  // 大丸
+  [0,0,0,3,0,0,2,4,11,11,7,5],  // OM
+  [0,0,0,0,0,0,0,0,18,9,9,5],   // 北
+  [0,0,0,0,0,0,0,1,3,11,4,3],   // 南
+];
+
+function pct(v, total){ return (v/total*100).toFixed(2); }
+function daily(v){ return (v/DAYS).toFixed(1); }
+
+// ---- Chart 1: Menu Bar ----
+new Chart(document.getElementById('menuBarChart'), {
+  type: 'bar',
+  data: {
+    labels: MENU_NAMES,
+    datasets: [{
+      label: '販売数',
+      data: menuTotals,
+      backgroundColor: MENU_COLORS,
+      borderRadius: 4, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw}食` } } },
+    scales:{
+      x:{ grid:{display:false}, ticks:{font:{size:10}, maxRotation:30} },
+      y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}}, beginAtZero:true }
+    }
+  }
+});
+
+// ---- Chart 2: Menu Pie ----
+const pieChart = new Chart(document.getElementById('menuPieChart'), {
+  type: 'doughnut',
+  data: {
+    labels: MENU_NAMES,
+    datasets: [{ data: menuTotals, backgroundColor: MENU_COLORS, borderWidth: 2, borderColor: '#faf8f5' }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.label}: ${c.raw}食 (${(c.raw/203*100).toFixed(1)}%)` } } },
+    cutout: '60%'
+  }
+});
+const pieLeg = document.getElementById('pieLegend');
+MENU_NAMES.forEach((n,i) => {
+  pieLeg.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${MENU_COLORS[i]}"></span>${n} ${menuTotals[i]}食</span>`;
+});
+
+// ---- Chart 3: Store stacked ----
+const storeStack = new Chart(document.getElementById('storeStackChart'), {
+  type: 'bar',
+  data: {
+    labels: STORE_NAMES,
+    datasets: MENU_NAMES.map((name,mi) => ({
+      label: name,
+      data: storeMenuQty.map(row => row[mi]),
+      backgroundColor: MENU_COLORS[mi], borderRadius:2, borderSkipped:false
+    }))
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}食` } } },
+    scales:{
+      x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}}},
+      y:{stacked:true, grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:11}}, beginAtZero:true}
+    }
+  }
+});
+const storeLeg = document.getElementById('storeLegend');
+MENU_NAMES.forEach((n,i) => {
+  storeLeg.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${MENU_COLORS[i]}"></span>${n}</span>`;
+});
+
+// ---- Chart 4: Ratio bar ----
+new Chart(document.getElementById('ratioBarChart'), {
+  type: 'bar',
+  data: {
+    labels: STORE_NAMES,
+    datasets: [{
+      label: '客数比率(%)',
+      data: [4.80, 3.54, 5.23, 8.35, 5.63],
+      backgroundColor: ['#8B1A1A','#c9963a','#1D7A55','#1a4fa0','#777'],
+      borderRadius: 4, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw}%` } } },
+    scales:{
+      x:{grid:{display:false}, ticks:{font:{size:11}}},
+      y:{grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:11}, callback: v => v+'%'}, beginAtZero:true, max:10}
+    }
+  }
+});
+
+// ---- Section 4: Ratio Detail Table ----
+const ratioTbody = document.getElementById('ratioDetailTable');
+const menuFullNames = ['炙りローストビーフ','ポテトのチーズ焼','クレープシュゼット','たまごサラダ','フレッシュドレッシングのサラダ','フォアグラ ococotte','アクアパッツァ ococotte'];
+const ratioData = storeMenuQty[0].map((_,mi) => storeMenuQty.map(row => row[mi]));
+
+function heatCls(r) {
+  if (r >= 1.5) return 'heat-high';
+  if (r >= 0.8) return 'heat-mid';
+  if (r >= 0.3) return 'heat-low';
+  return 'heat-zero';
+}
+
+menuFullNames.forEach((name, mi) => {
+  let html = `<tr><td class="left">${name}</td>`;
+  for (let si=0;si<5;si++){
+    const q = storeMenuQty[si][mi];
+    const r = parseFloat(pct(q, custCounts[si]));
+    const d = daily(q);
+    html += `<td class="${heatCls(r)}">${r}%</td><td>${d}食</td>`;
+  }
+  html += '</tr>';
+  ratioTbody.innerHTML += html;
+});
+// Total row
+let thtml = '<tr class="total"><td class="left">全商品合計</td>';
+[[53,1104],[44,1244],[43,822],[41,491],[22,391]].forEach(([t,c]) => {
+  thtml += `<td>${pct(t,c)}%</td><td>${daily(t)}食</td>`;
+});
+ratioTbody.innerHTML += thtml + '</tr>';
+
+// ---- Chart 5: Ratio Group ----
+new Chart(document.getElementById('ratioGroupChart'), {
+  type: 'bar',
+  data: {
+    labels: STORE_NAMES,
+    datasets: MENU_NAMES.map((name,mi) => ({
+      label: name,
+      data: custCounts.map((c,si) => parseFloat(pct(storeMenuQty[si][mi], c))),
+      backgroundColor: MENU_COLORS[mi], borderRadius:2, borderSkipped:false
+    }))
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{ position:'bottom', labels:{font:{size:10}, boxWidth:10, boxHeight:10, padding:8} },
+      tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}%` } }
+    },
+    scales:{
+      x:{grid:{display:false}, ticks:{font:{size:11}}},
+      y:{grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}, callback: v=>v+'%'}, beginAtZero:true}
+    }
+  }
+});
+
+// ---- Chart 6: Time All ----
+const timeColors = HOURS.map(h => {
+  const n = parseInt(h);
+  if (n>=17) return '#8B1A1A';
+  if (n>=15) return '#1a4fa0';
+  return '#c9963a';
+});
+new Chart(document.getElementById('timeAllChart'), {
+  type: 'bar',
+  data: {
+    labels: HOURS,
+    datasets: [{
+      label: '販売数',
+      data: [1,6,6,11,3,1,3,25,56,47,31,13],
+      backgroundColor: timeColors,
+      borderRadius: 4, borderSkipped: false
+    }]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c=>`${c.raw}食` } } },
+    scales:{
+      x:{grid:{display:false}, ticks:{font:{size:11}}, ticks:{autoSkip:false}},
+      y:{grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}}, beginAtZero:true}
+    }
+  }
+});
+
+// ---- Chart 7: Time Detail ----
+let timeDetailChart = null;
+
+function buildTimeDetailChart(view) {
+  if (timeDetailChart) timeDetailChart.destroy();
+  const names  = view==='menu' ? MENU_NAMES  : STORE_NAMES;
+  const colors = view==='menu' ? MENU_COLORS : STORE_COLORS;
+  const qdata  = view==='menu' ? menuHourQty : storeHourQty;
+  timeDetailChart = new Chart(document.getElementById('timeDetailChart'), {
+    type:'bar',
+    data:{
+      labels: HOURS,
+      datasets: names.map((name,i) => ({
+        label:name, data:qdata[i],
+        backgroundColor: colors[i]+'BB', borderRadius:2, borderSkipped:false
+      }))
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}食` } }
+      },
+      scales:{
+        x:{stacked:true, grid:{display:false}, ticks:{font:{size:11}, autoSkip:false}},
+        y:{stacked:true, grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:10}}, beginAtZero:true}
+      }
+    }
+  });
+  const leg = document.getElementById('timeDetailLegend');
+  leg.innerHTML = '';
+  names.forEach((n,i) => {
+    leg.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${colors[i]}"></span>${n}</span>`;
+  });
+}
+buildTimeDetailChart('menu');
+
+function switchTimeTab(view, el) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  buildTimeDetailChart(view);
+}
+
+// ---- Heatmap helper ----
+function buildHeatTable(tableId, rowNames, rowData) {
+  const tbl = document.getElementById(tableId);
+  const maxVal = Math.max(...rowData.flat());
+  let html = '<thead><tr><th class="left">商品 / 時間帯</th>';
+  HOURS.forEach(h => html += `<th>${h}</th>`);
+  html += '<th>合計</th></tr></thead><tbody>';
+  rowNames.forEach((name,ri) => {
+    html += `<tr><td class="left">${name}</td>`;
+    let tot=0;
+    rowData[ri].forEach(v => {
+      tot+=v;
+      const r = v/maxVal;
+      const cls = r>=0.7?'heat-high': r>=0.35?'heat-mid': r>=0.1?'heat-low':'heat-zero';
+      html += `<td class="${cls}">${v>0?v:'—'}</td>`;
+    });
+    html += `<td><strong>${tot}</strong></td></tr>`;
+  });
+  const totals = HOURS.map((_,hi) => rowData.reduce((s,r)=>s+r[hi],0));
+  html += `<tr class="total"><td class="left">合計</td>${totals.map(v=>`<td>${v}</td>`).join('')}<td>${totals.reduce((a,b)=>a+b,0)}</td></tr>`;
+  html += '</tbody>';
+  tbl.innerHTML = html;
+}
+
+buildHeatTable('menuHeatTable', MENU_NAMES, menuHourQty);
+buildHeatTable('storeHeatTable', STORE_NAMES, storeHourQty);
+    })();
+  };
+})();
+</script>
+<script>
+_tabScripts['tab3'] = (function() {
+  let _inited = false;
+  return function() {
+    if (_inited) return;
+    _inited = true;
+    (function() {
+const DATA = {
+  menus:[
+    {code:712, name:"チーズフォンデュ焼",    cat:"お好み焼・焼そば", total:716},
+    {code:558, name:"厚切り牛タンステーキ",   cat:"一品料理",         total:479},
+    {code:1397,name:"野菜玉",                 cat:"お好み焼・焼そば", total:392},
+    {code:727, name:"海鮮鉄板焼3種",          cat:"一品料理",         total:294},
+    {code:745, name:"牛ハラミ鉄板焼",         cat:"一品料理",         total:275},
+    {code:557, name:"特製海老マヨ",           cat:"一品料理",         total:230},
+    {code:736, name:"青とうがらし塩焼そば",   cat:"お好み焼・焼そば", total:223},
+    {code:737, name:"ピリ辛スタミナ焼そば",   cat:"お好み焼・焼そば", total:196},
+    {code:724, name:"お好みつくね串",         cat:"一品料理",         total:188},
+    {code:1398,name:"野菜焼そば",             cat:"お好み焼・焼そば", total:167},
+    {code:742, name:"スペシャル海鮮盛り",     cat:"一品料理",         total:151},
+    {code:735, name:"鶏キムチーズねぎ焼",     cat:"お好み焼・焼そば", total:122},
+    {code:738, name:"チーズつくね串",         cat:"一品料理",         total:90},
+    {code:744, name:"鶏もも肉鉄板焼",         cat:"一品料理",         total:82},
+    {code:734, name:"海老チリチーズ玉",       cat:"お好み焼・焼そば", total:49},
+    {code:743, name:"あわび鉄板焼",           cat:"一品料理",         total:36}
+  ],
+  store_summary:[
+    {store:"道頓堀ビル店",                    qty:511, sales:1364530},
+    {store:"千日前本店",                       qty:389, sales:815770},
+    {store:"舞 イクスピアリ店",               qty:320, sales:592683},
+    {store:"有明ガーデン支店",                 qty:265, sales:534504},
+    {store:"曽根崎支店",                       qty:257, sales:493510},
+    {store:"あべのキューズモール支店",         qty:215, sales:335600},
+    {store:"有楽町ビックカメラ支店",           qty:213, sales:396524},
+    {store:"ハービスPLAZA梅田支店",            qty:169, sales:291020},
+    {store:"京都アバンティ支店",               qty:158, sales:343820},
+    {store:"ヨドバシHD池袋ビル支店",           qty:148, sales:246347},
+    {store:"そごう横浜店",                     qty:146, sales:281045},
+    {store:"ららぽーと名古屋みなとアクルス店", qty:134, sales:214702},
+    {store:"ルミネ立川支店",                   qty:133, sales:219757},
+    {store:"京橋京阪モール支店",               qty:130, sales:199900},
+    {store:"堺東支店",                         qty:130, sales:189918},
+    {store:"リノアス八尾支店",                 qty:113, sales:182708},
+    {store:"セレオ八王子支店",                 qty:110, sales:170691},
+    {store:"高槻阪急スクエア支店",             qty:103, sales:158840},
+    {store:"名代JO-TERRACE OSAKA店",           qty:29,  sales:75920},
+    {store:"イオンモール各務原インター支店",   qty:17,  sales:30260}
+  ],
+  matrix:[
+    {store:"道頓堀ビル店","チーズフォンデュ焼":0,"厚切り牛タンステーキ":0,"野菜玉":217,"海鮮鉄板焼3種":51,"牛ハラミ鉄板焼":0,"特製海老マヨ":0,"青とうがらし塩焼そば":68,"ピリ辛スタミナ焼そば":51,"お好みつくね串":0,"野菜焼そば":87,"スペシャル海鮮盛り":32,"鶏キムチーズねぎ焼":0,"チーズつくね串":0,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":0,"あわび鉄板焼":5},
+    {store:"千日前本店","チーズフォンデュ焼":92,"厚切り牛タンステーキ":70,"野菜玉":44,"海鮮鉄板焼3種":13,"牛ハラミ鉄板焼":0,"特製海老マヨ":15,"青とうがらし塩焼そば":22,"ピリ辛スタミナ焼そば":25,"お好みつくね串":17,"野菜焼そば":19,"スペシャル海鮮盛り":35,"鶏キムチーズねぎ焼":19,"チーズつくね串":11,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":4,"あわび鉄板焼":3},
+    {store:"舞 イクスピアリ店","チーズフォンデュ焼":80,"厚切り牛タンステーキ":72,"野菜玉":10,"海鮮鉄板焼3種":17,"牛ハラミ鉄板焼":0,"特製海老マヨ":25,"青とうがらし塩焼そば":8,"ピリ辛スタミナ焼そば":16,"お好みつくね串":28,"野菜焼そば":9,"スペシャル海鮮盛り":13,"鶏キムチーズねぎ焼":18,"チーズつくね串":17,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":5,"あわび鉄板焼":2},
+    {store:"有明ガーデン支店","チーズフォンデュ焼":64,"厚切り牛タンステーキ":49,"野菜玉":12,"海鮮鉄板焼3種":8,"牛ハラミ鉄板焼":0,"特製海老マヨ":17,"青とうがらし塩焼そば":25,"ピリ辛スタミナ焼そば":9,"お好みつくね串":16,"野菜焼そば":4,"スペシャル海鮮盛り":27,"鶏キムチーズねぎ焼":15,"チーズつくね串":7,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":4,"あわび鉄板焼":8},
+    {store:"曽根崎支店","チーズフォンデュ焼":28,"厚切り牛タンステーキ":42,"野菜玉":4,"海鮮鉄板焼3種":4,"牛ハラミ鉄板焼":56,"特製海老マヨ":18,"青とうがらし塩焼そば":15,"ピリ辛スタミナ焼そば":12,"お好みつくね串":2,"野菜焼そば":6,"スペシャル海鮮盛り":18,"鶏キムチーズねぎ焼":11,"チーズつくね串":6,"鶏もも肉鉄板焼":23,"海老チリチーズ玉":6,"あわび鉄板焼":6},
+    {store:"あべのキューズモール支店","チーズフォンデュ焼":55,"厚切り牛タンステーキ":19,"野菜玉":5,"海鮮鉄板焼3種":20,"牛ハラミ鉄板焼":29,"特製海老マヨ":23,"青とうがらし塩焼そば":10,"ピリ辛スタミナ焼そば":8,"お好みつくね串":17,"野菜焼そば":3,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":13,"チーズつくね串":2,"鶏もも肉鉄板焼":7,"海老チリチーズ玉":4,"あわび鉄板焼":0},
+    {store:"有楽町ビックカメラ支店","チーズフォンデュ焼":52,"厚切り牛タンステーキ":46,"野菜玉":11,"海鮮鉄板焼3種":12,"牛ハラミ鉄板焼":0,"特製海老マヨ":20,"青とうがらし塩焼そば":7,"ピリ辛スタミナ焼そば":7,"お好みつくね串":21,"野菜焼そば":2,"スペシャル海鮮盛り":7,"鶏キムチーズねぎ焼":6,"チーズつくね串":8,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":4,"あわび鉄板焼":10},
+    {store:"ハービスPLAZA梅田支店","チーズフォンデュ焼":32,"厚切り牛タンステーキ":27,"野菜玉":18,"海鮮鉄板焼3種":16,"牛ハラミ鉄板焼":20,"特製海老マヨ":10,"青とうがらし塩焼そば":5,"ピリ辛スタミナ焼そば":6,"お好みつくね串":11,"野菜焼そば":5,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":3,"チーズつくね串":4,"鶏もも肉鉄板焼":9,"海老チリチーズ玉":3,"あわび鉄板焼":0},
+    {store:"京都アバンティ支店","チーズフォンデュ焼":31,"厚切り牛タンステーキ":27,"野菜玉":29,"海鮮鉄板焼3種":5,"牛ハラミ鉄板焼":0,"特製海老マヨ":2,"青とうがらし塩焼そば":15,"ピリ辛スタミナ焼そば":8,"お好みつくね串":5,"野菜焼そば":21,"スペシャル海鮮盛り":6,"鶏キムチーズねぎ焼":2,"チーズつくね串":3,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":3,"あわび鉄板焼":1},
+    {store:"ヨドバシHD池袋ビル支店","チーズフォンデュ焼":37,"厚切り牛タンステーキ":26,"野菜玉":3,"海鮮鉄板焼3種":18,"牛ハラミ鉄板焼":18,"特製海老マヨ":11,"青とうがらし塩焼そば":4,"ピリ辛スタミナ焼そば":5,"お好みつくね串":7,"野菜焼そば":1,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":6,"チーズつくね串":4,"鶏もも肉鉄板焼":8,"海老チリチーズ玉":0,"あわび鉄板焼":0},
+    {store:"そごう横浜店","チーズフォンデュ焼":34,"厚切り牛タンステーキ":22,"野菜玉":7,"海鮮鉄板焼3種":6,"牛ハラミ鉄板焼":15,"特製海老マヨ":11,"青とうがらし塩焼そば":8,"ピリ辛スタミナ焼そば":4,"お好みつくね串":8,"野菜焼そば":5,"スペシャル海鮮盛り":9,"鶏キムチーズねぎ焼":8,"チーズつくね串":5,"鶏もも肉鉄板焼":3,"海老チリチーズ玉":0,"あわび鉄板焼":1},
+    {store:"ららぽーと名古屋みなとアクルス店","チーズフォンデュ焼":42,"厚切り牛タンステーキ":13,"野菜玉":2,"海鮮鉄板焼3種":15,"牛ハラミ鉄板焼":18,"特製海老マヨ":12,"青とうがらし塩焼そば":10,"ピリ辛スタミナ焼そば":6,"お好みつくね串":7,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":4,"チーズつくね串":1,"鶏もも肉鉄板焼":3,"海老チリチーズ玉":1,"あわび鉄板焼":0},
+    {store:"ルミネ立川支店","チーズフォンデュ焼":32,"厚切り牛タンステーキ":19,"野菜玉":3,"海鮮鉄板焼3種":16,"牛ハラミ鉄板焼":21,"特製海老マヨ":10,"青とうがらし塩焼そば":7,"ピリ辛スタミナ焼そば":0,"お好みつくね串":9,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":4,"チーズつくね串":1,"鶏もも肉鉄板焼":5,"海老チリチーズ玉":6,"あわび鉄板焼":0},
+    {store:"京橋京阪モール支店","チーズフォンデュ焼":24,"厚切り牛タンステーキ":12,"野菜玉":2,"海鮮鉄板焼3種":20,"牛ハラミ鉄板焼":18,"特製海老マヨ":14,"青とうがらし塩焼そば":0,"ピリ辛スタミナ焼そば":11,"お好みつくね串":6,"野菜焼そば":2,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":2,"チーズつくね串":6,"鶏もも肉鉄板焼":9,"海老チリチーズ玉":4,"あわび鉄板焼":0},
+    {store:"堺東支店","チーズフォンデュ焼":21,"厚切り牛タンステーキ":12,"野菜玉":2,"海鮮鉄板焼3種":21,"牛ハラミ鉄板焼":27,"特製海老マヨ":18,"青とうがらし塩焼そば":4,"ピリ辛スタミナ焼そば":2,"お好みつくね串":12,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":2,"チーズつくね串":4,"鶏もも肉鉄板焼":4,"海老チリチーズ玉":1,"あわび鉄板焼":0},
+    {store:"リノアス八尾支店","チーズフォンデュ焼":25,"厚切り牛タンステーキ":12,"野菜玉":1,"海鮮鉄板焼3種":22,"牛ハラミ鉄板焼":17,"特製海老マヨ":9,"青とうがらし塩焼そば":3,"ピリ辛スタミナ焼そば":9,"お好みつくね串":5,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":3,"チーズつくね串":1,"鶏もも肉鉄板焼":3,"海老チリチーズ玉":3,"あわび鉄板焼":0},
+    {store:"セレオ八王子支店","チーズフォンデュ焼":22,"厚切り牛タンステーキ":8,"野菜玉":8,"海鮮鉄板焼3種":16,"牛ハラミ鉄板焼":18,"特製海老マヨ":8,"青とうがらし塩焼そば":5,"ピリ辛スタミナ焼そば":4,"お好みつくね串":11,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":2,"チーズつくね串":3,"鶏もも肉鉄板焼":4,"海老チリチーズ玉":1,"あわび鉄板焼":0},
+    {store:"高槻阪急スクエア支店","チーズフォンデュ焼":28,"厚切り牛タンステーキ":3,"野菜玉":5,"海鮮鉄板焼3種":13,"牛ハラミ鉄板焼":18,"特製海老マヨ":7,"青とうがらし塩焼そば":3,"ピリ辛スタミナ焼そば":5,"お好みつくね串":6,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":4,"チーズつくね串":7,"鶏もも肉鉄板焼":4,"海老チリチーズ玉":0,"あわび鉄板焼":0},
+    {store:"名代JO-TERRACE OSAKA店","チーズフォンデュ焼":0,"厚切り牛タンステーキ":0,"野菜玉":9,"海鮮鉄板焼3種":1,"牛ハラミ鉄板焼":0,"特製海老マヨ":0,"青とうがらし塩焼そば":4,"ピリ辛スタミナ焼そば":8,"お好みつくね串":0,"野菜焼そば":3,"スペシャル海鮮盛り":4,"鶏キムチーズねぎ焼":0,"チーズつくね串":0,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":0,"あわび鉄板焼":0},
+    {store:"イオンモール各務原インター支店","チーズフォンデュ焼":17,"厚切り牛タンステーキ":0,"野菜玉":0,"海鮮鉄板焼3種":0,"牛ハラミ鉄板焼":0,"特製海老マヨ":0,"青とうがらし塩焼そば":0,"ピリ辛スタミナ焼そば":0,"お好みつくね串":0,"野菜焼そば":0,"スペシャル海鮮盛り":0,"鶏キムチーズねぎ焼":0,"チーズつくね串":0,"鶏もも肉鉄板焼":0,"海老チリチーズ玉":0,"あわび鉄板焼":0}
+  ],
+  rank_matrix:[
+    {store:"道頓堀ビル店","チーズフォンデュ焼":"-","厚切り牛タンステーキ":"-","野菜玉":"A","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"-","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"B","お好みつくね串":"-","野菜焼そば":"A","スペシャル海鮮盛り":"C","鶏キムチーズねぎ焼":"-","チーズつくね串":"-","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"-","あわび鉄板焼":"C"},
+    {store:"千日前本店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"C","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"舞 イクスピアリ店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"B","牛ハラミ鉄板焼":"-","特製海老マヨ":"B","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"B","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"有明ガーデン支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"B","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"曽根崎支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"A","特製海老マヨ":"C","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"B","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"あべのキューズモール支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"B","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"有楽町ビックカメラ支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"B","牛ハラミ鉄板焼":"-","特製海老マヨ":"A","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"C","スペシャル海鮮盛り":"C","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"ハービスPLAZA梅田支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"B","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"京都アバンティ支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"A","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"C","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"B","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"C","あわび鉄板焼":"C"},
+    {store:"ヨドバシHD池袋ビル支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"C","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"-","あわび鉄板焼":"-"},
+    {store:"そごう横浜店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"B","特製海老マヨ":"C","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"A","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"-","あわび鉄板焼":"C"},
+    {store:"ららぽーと名古屋みなとアクルス店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"ルミネ立川支店","チーズフォンデュ焼":"A","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"C","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"京橋京阪モール支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"-","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"C","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"B","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"堺東支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"A","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"C","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"リノアス八尾支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"セレオ八王子支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"A","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"B","青とうがらし塩焼そば":"A","ピリ辛スタミナ焼そば":"A","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"C","あわび鉄板焼":"-"},
+    {store:"高槻阪急スクエア支店","チーズフォンデュ焼":"C","厚切り牛タンステーキ":"C","野菜玉":"C","海鮮鉄板焼3種":"A","牛ハラミ鉄板焼":"A","特製海老マヨ":"C","青とうがらし塩焼そば":"B","ピリ辛スタミナ焼そば":"B","お好みつくね串":"C","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"C","チーズつくね串":"C","鶏もも肉鉄板焼":"C","海老チリチーズ玉":"-","あわび鉄板焼":"-"},
+    {store:"名代JO-TERRACE OSAKA店","チーズフォンデュ焼":"-","厚切り牛タンステーキ":"-","野菜玉":"C","海鮮鉄板焼3種":"C","牛ハラミ鉄板焼":"-","特製海老マヨ":"-","青とうがらし塩焼そば":"C","ピリ辛スタミナ焼そば":"B","お好みつくね串":"-","野菜焼そば":"C","スペシャル海鮮盛り":"A","鶏キムチーズねぎ焼":"-","チーズつくね串":"-","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"-","あわび鉄板焼":"-"},
+    {store:"イオンモール各務原インター支店","チーズフォンデュ焼":"B","厚切り牛タンステーキ":"-","野菜玉":"-","海鮮鉄板焼3種":"-","牛ハラミ鉄板焼":"-","特製海老マヨ":"-","青とうがらし塩焼そば":"-","ピリ辛スタミナ焼そば":"-","お好みつくね串":"-","野菜焼そば":"-","スペシャル海鮮盛り":"-","鶏キムチーズねぎ焼":"-","チーズつくね串":"-","鶏もも肉鉄板焼":"-","海老チリチーズ玉":"-","あわび鉄板焼":"-"}
+  ]
+};
+
+const menuNames = DATA.menus.map(m => m.name);
+let detChart = null;
+let curStore = DATA.store_summary[0].store;
+
+function catColor(cat){ return cat === 'お好み焼・焼そば' ? '#8B1A1A' : '#C97A2F'; }
+function rankCls(r){ return r==='A'?'rA':r==='B'?'rB':r==='C'?'rC':'rX'; }
+
+/* ---- グラフ初期化 ---- */
+function initCharts(){
+  // メニュー別横棒
+  new Chart(document.getElementById('c-menu'), {
+    type: 'bar',
+    data: {
+      labels: DATA.menus.map(m => m.name),
+      datasets: [{
+        label: '販売数', data: DATA.menus.map(m => m.total),
+        backgroundColor: DATA.menus.map(m => catColor(m.cat)),
+        borderRadius: 3, borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.raw + '食' } } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 11 }, color: '#6B5E52' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#1A1410', autoSkip: false } }
+      }
+    }
+  });
+
+  // 店舗別上位10
+  const top10 = DATA.store_summary.slice(0, 10);
+  new Chart(document.getElementById('c-store'), {
+    type: 'bar',
+    data: {
+      labels: top10.map(s => s.store.length > 10 ? s.store.slice(0,10) + '…' : s.store),
+      datasets: [{
+        label: '販売数', data: top10.map(s => s.qty),
+        backgroundColor: '#4A6FA5', borderRadius: 3, borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: c => ' ' + c.raw + '食',
+          title: t => top10[t[0].dataIndex] ? top10[t[0].dataIndex].store : t[0].label
+        }}
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 11 }, color: '#6B5E52' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#1A1410' } }
+      }
+    }
+  });
+
+  // ドーナツ
+  new Chart(document.getElementById('c-cat'), {
+    type: 'doughnut',
+    data: {
+      labels: ['お好み焼・焼そば', '一品料理'],
+      datasets: [{ data: [1865, 1825], backgroundColor: ['#8B1A1A', '#C97A2F'], borderWidth: 2, borderColor: '#FAF8F5', hoverOffset: 6 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '60%',
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ': ' + c.raw.toLocaleString() + '食' } } }
+    }
+  });
+
+  // 店舗ボタン生成
+  const el = document.getElementById('st-btns');
+  el.innerHTML = DATA.store_summary.map(s =>
+    `<button class="st-btn${s.store === curStore ? ' on' : ''}" onclick="selStore(this,'${s.store.replace(/'/g, "\\'")}')">${s.store}</button>`
+  ).join('');
+
+  renderStore(curStore);
+  buildHeatmap();
+}
+
+/* ---- 店舗切り替え ---- */
+function selStore(btn, store){
+  curStore = store;
+  document.querySelectorAll('.st-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderStore(store);
+}
+
+function renderStore(store){
+  const mRow = DATA.matrix.find(r => r.store === store);
+  const rRow = DATA.rank_matrix.find(r => r.store === store);
+  const sumRow = DATA.store_summary.find(s => s.store === store);
+
+  const entries = DATA.menus.map(m => ({
+    name: m.name, cat: m.cat,
+    qty: mRow[m.name] || 0,
+    rank: rRow[m.name] || '-'
+  })).filter(e => e.qty > 0).sort((a, b) => b.qty - a.qty);
+
+  const maxQ = Math.max(...entries.map(e => e.qty));
+  const total = entries.reduce((s, e) => s + e.qty, 0);
+
+  document.getElementById('store-meta').innerHTML =
+    `<strong>${store}</strong>　合計 <strong>${total.toLocaleString()}食</strong>　｜　売上 <strong>${Math.round((sumRow ? sumRow.sales : 0) / 1000).toLocaleString()}千円</strong>`;
+
+  const wrap = document.getElementById('store-chart-wrap');
+  wrap.style.height = Math.max(200, entries.length * 36 + 60) + 'px';
+
+  const ctx = document.getElementById('c-storedet');
+  if(detChart){ detChart.destroy(); detChart = null; }
+  detChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: entries.map(e => e.name),
+      datasets: [{
+        label: '販売数', data: entries.map(e => e.qty),
+        backgroundColor: entries.map(e => catColor(e.cat)),
+        borderRadius: 4, borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + c.raw + '食' } } },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 11 }, color: '#6B5E52' } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#1A1410', autoSkip: false } }
+      }
+    }
+  });
+
+  document.getElementById('rank-list').innerHTML = entries.map((e, i) => {
+    const pct = Math.round(e.qty / total * 100);
+    const bw  = Math.round(e.qty / maxQ * 100);
+    return `<div class="rank-row">
+      <span class="rn">${i + 1}</span>
+      <span class="rname">${e.name}</span>
+      <div class="rbar-w"><div class="rbar" style="width:${bw}%;background:${catColor(e.cat)};"></div></div>
+      <span class="rqty">${e.qty}食</span>
+      <span class="rbadge ${rankCls(e.rank)}">${e.rank}</span>
+      <span class="rpct">${pct}%</span>
+    </div>`;
+  }).join('');
+}
+
+/* ---- ヒートマップ ---- */
+function buildHeatmap(){
+  const t = document.getElementById('htable');
+  let h = `<thead><tr>
+    <th style="position:sticky;left:0;background:#fff;min-width:110px;z-index:2;">店舗</th>`;
+  menuNames.forEach(m => { h += `<th class="rot">${m}</th>`; });
+  h += `<th style="text-align:right;white-space:nowrap;">合計</th></tr></thead><tbody>`;
+
+  DATA.matrix.forEach(row => {
+    const rRow = DATA.rank_matrix.find(r => r.store === row.store);
+    const tot = menuNames.reduce((s, m) => s + (row[m] || 0), 0);
+    h += `<tr><td class="sticky">${row.store}</td>`;
+    menuNames.forEach(m => {
+      const v = row[m] || 0;
+      const rk = rRow ? rRow[m] : '-';
+      h += v === 0
+        ? `<td style="text-align:center;color:#C0B4A8;">—</td>`
+        : `<td style="text-align:center;"><span class="hcell ${rankCls(rk)}">${v}</span></td>`;
+    });
+    h += `<td class="htot">${tot}</td></tr>`;
+  });
+  h += '</tbody>';
+  t.innerHTML = h;
+}
+
+/* ---- スムーズスクロール ---- */
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){ target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+initCharts();
+    })();
+  };
+})();
+</script>
+<script>
+_tabScripts['tab4'] = (function() {
+  let _inited = false;
+  return function() {
+    if (_inited) return;
+    _inited = true;
+    (function() {
+const C = '#8B1A1A', CS = '#C0392B', CL = '#E67E73';
+const BLUE = '#378ADD', AMB = '#EF9F27', GRAY = '#888780', GRN = '#639922', COR = '#D85A30', BUD = '#2980B9';
+const GY = {color:'rgba(0,0,0,0.06)'};
+const BASE = {responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}};
+
+const sales31 = [125730,124480,140393,61160,89760,88039,80229,113465,138809,137775,62940,51370,89760,70455,89185,154785,110440,61215,46750,56595,65645,86130,129140,151885,34155,63815,66862,63745,56870,138655,144845];
+const bud31   = [51000,111800,111800,51000,51000,51000,51000,51000,111800,111800,51000,51000,51000,51000,51000,111800,111800,51000,51000,51000,51000,51000,111800,111800,51000,51000,51000,51000,51000,111800,111800];
+const dows    = ['金','土','日','月','火','水','木','金','土','日','月','火','水','木','金','土','日','月','火','水','木','金','土','日','月','火','水','木','金','土','日'];
+const lbl31   = Array.from({length:31},(_,i)=>(i+1)+'日');
+const gbpV    = [1469,1485,1327,754,711,749,653,775,1057,1295,708,634,661,572,695,1057,1092,656,561,574,561,653,944,972,555,574,545,510,559,930,612];
+const gbpD    = [8,13,1,3,6,5,0,8,6,7,0,0,6,9,1,6,12,2,0,0,6,6,0,4,1,6,6,7,1,6,8];
+
+const menuData = [
+  {name:'雅（ディナーコース）',       cat:'dinner', lbl:'ディナーコース', qty:721,  sales:1097550, chg:16.2},
+  {name:'匠心（ランチコース）',        cat:'lunch',  lbl:'ランチコース',   qty:680,  sales:573910,  chg:45.74},
+  {name:'極（ディナーコース）',        cat:'dinner', lbl:'ディナーコース', qty:172,  sales:359700,  chg:-3.79},
+  {name:'浪花（ランチコース）',        cat:'lunch',  lbl:'ランチコース',   qty:622,  sales:248320,  chg:35.37},
+  {name:'風（ディナーコース）',        cat:'dinner', lbl:'ディナーコース', qty:176,  sales:175300,  chg:-0.12},
+  {name:'彩蔬（ランチコース）',        cat:'lunch',  lbl:'ランチコース',   qty:110,  sales:43960,   chg:22.11},
+  {name:'翠宴（ディナーコース）',      cat:'dinner', lbl:'ディナーコース', qty:23,   sales:29900,   chg:-8.0},
+  {name:'千房招牌大阪燒',              cat:'single', lbl:'単品料理',       qty:59,   sales:23440,   chg:27.98},
+  {name:'日本黑毛和牛菲力牛排(60g)',   cat:'single', lbl:'単品料理',       qty:23,   sales:18320,   chg:-11.92},
+  {name:'蒜香炒飯',                    cat:'single', lbl:'単品料理',       qty:104,  sales:15585,   chg:-6.4},
+  {name:'千房特製炒麵',                cat:'single', lbl:'単品料理',       qty:33,   sales:13200,   chg:-8.08},
+  {name:'日式豚平燒',                  cat:'single', lbl:'単品料理',       qty:41,   sales:10190,   chg:-24.1},
+  {name:'日本黑毛和牛沙朗牛排(60g)',   cat:'single', lbl:'単品料理',       qty:11,   sales:8175,    chg:25.29},
+  {name:'千房特製蘇打',                cat:'drink',  lbl:'ドリンク',       qty:19,   sales:3800,    chg:-40.63},
+  {name:'札幌啤酒（瓶裝）',            cat:'drink',  lbl:'ドリンク',       qty:9,    sales:2700,    chg:-25.0},
+  {name:'蔥香大阪燒',                  cat:'single', lbl:'単品料理',       qty:6,    sales:2100,    chg:50.0},
+  {name:'果汁（有料）',                cat:'drink',  lbl:'ドリンク',       qty:8,    sales:2000,    chg:-49.37},
+  {name:'鹽味炒麵',                    cat:'single', lbl:'単品料理',       qty:4,    sales:1400,    chg:-50.0},
+  {name:'可樂（有料）',                cat:'drink',  lbl:'ドリンク',       qty:12,   sales:1200,    chg:-20.0},
+  {name:'烏龍茶（有料）',              cat:'drink',  lbl:'ドリンク',       qty:6,    sales:600,     chg:-66.48},
+  {name:'可樂（小）',                  cat:'drink',  lbl:'ドリンク',       qty:391,  sales:500,     chg:400.0},
+  {name:'台灣金牌（瓶）',              cat:'drink',  lbl:'ドリンク',       qty:2,    sales:500,     chg:-71.43},
+  {name:'National Choice 18年（単杯）',cat:'drink',  lbl:'ドリンク',       qty:1,    sales:400,     chg:-66.67},
+  {name:'紀州鶯屋 梅酒 黑牛仕立（単杯）',cat:'drink',lbl:'ドリンク',      qty:2,    sales:400,     chg:-50.0},
+  {name:'綠茶',                        cat:'drink',  lbl:'ドリンク',       qty:4,    sales:400,     chg:-73.33},
+  {name:'百富12年（単杯）',            cat:'drink',  lbl:'ドリンク',       qty:1,    sales:300,     chg:null},
+  {name:'三得利角瓶威士忌（単杯）',    cat:'drink',  lbl:'ドリンク',       qty:1,    sales:200,     chg:-75.0},
+  {name:'果汁（無料付属）',            cat:'free',   lbl:'無料提供',       qty:770,  sales:0,       chg:null},
+  {name:'烏龍茶（無料付属）',          cat:'free',   lbl:'無料提供',       qty:497,  sales:0,       chg:null},
+  {name:'白飯（無料付属）',            cat:'free',   lbl:'無料提供',       qty:130,  sales:0,       chg:null},
+];
+const totalMS = menuData.reduce((s,r)=>s+r.sales,0);
+const catClr  = {dinner:C, lunch:BLUE, single:GRN, drink:AMB, free:GRAY};
+const catBdg  = {dinner:'cat-d', lunch:'cat-l', single:'cat-s', drink:'cat-b', free:'cat-f'};
+
+function mk(id,type,data,opts){
+  const el=document.getElementById(id);
+  if(!el) return;
+  return new Chart(el,{type,data,options:{...BASE,...opts}});
+}
+function dc(dow){ return dow==='土'?CS: dow==='日'?CL: C; }
+const tx10 = {maxRotation:0,font:{size:10},callback:(_,i)=>i%4===0?lbl31[i]:''};
+const sY10 = {ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY};
+
+/* 1 */
+mk('c-overview','bar',{labels:lbl31,datasets:[
+  {label:'売上実績',data:sales31,backgroundColor:dows.map(dc),borderRadius:2,order:2},
+  {label:'予算',data:bud31,type:'line',borderColor:BUD,backgroundColor:BUD+'22',fill:true,pointRadius:0,tension:.4,borderWidth:2,borderDash:[6,3],order:1}
+]},{scales:{x:{ticks:tx10,grid:{display:false}},y:sY10}});
+
+/* 2 */
+mk('c-period-pie','doughnut',{labels:['ランチ（10-14時）','アイドル（15-16時）','ディナー（17-23時）'],datasets:[{data:[985811,310982,1598289],backgroundColor:[BLUE,AMB,C],borderWidth:0}]},{plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:10}}}});
+
+(function(){
+  const h={};for(let i=11;i<=21;i++)h[i]=0;
+  [[12,13805],[13,17325],[14,11440],[15,9240],[16,5830],[17,5500],[18,16555],[19,12980],[20,17105],[21,15950],[12,21560],[13,4730],[14,14575],[15,3700],[16,12760],[17,4950],[18,35090],[20,18865],[21,8250],[11,2970],[12,15070],[13,2838],[14,18425],[15,3300],[16,7480],[17,5940],[18,19250],[19,26125],[20,25245],[21,13750],[12,7205],[13,9240],[14,6270],[15,7700],[16,7150],[17,4950],[18,9625],[19,17875],[20,19800],[21,23650],[11,1265],[12,11660],[13,18590],[14,6875],[15,7700],[16,6380],[18,19360],[19,10824],[12,14905],[13,10285],[14,10434],[15,6050],[17,2750],[18,14740],[19,10450],[20,15675],[21,2750]].forEach(([hr,v])=>{if(h[hr]!==undefined)h[hr]+=v;});
+  const hrs=Array.from({length:11},(_,i)=>i+11);
+  mk('c-hourly','bar',{labels:hrs.map(i=>i+'時'),datasets:[{data:hrs.map(i=>h[i]),backgroundColor:hrs.map(i=>i<=14?BLUE:(i<=16?AMB:C)),borderRadius:2}]},{scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY}}});
+})();
+
+/* 3 */
+const dowOrd=['月','火','水','木','金','土','日'];
+const dowS=[54867,62923,75314,70018,94276,137173,137067];
+const dowG=[59.8,67.0,73.8,64.5,88.4,119.6,116.4];
+const dowCl=[C,C,C,C,C,CS,CL];
+mk('c-dow','bar',{labels:dowOrd,datasets:[{data:dowS,backgroundColor:dowCl,borderRadius:4}]},{scales:{x:{grid:{display:false}},y:sY10}});
+mk('c-dow-guests','bar',{labels:dowOrd,datasets:[{data:dowG,backgroundColor:dowCl,borderRadius:4}]},{scales:{x:{grid:{display:false}},y:{ticks:{font:{size:10}},grid:GY}}});
+mk('c-daily-color','line',{labels:lbl31,datasets:[
+  {label:'売上実績',data:sales31,borderColor:C,backgroundColor:'transparent',pointBackgroundColor:dows.map(dc),pointRadius:4,tension:.3,borderWidth:1.5,order:2},
+  {label:'予算',data:bud31,borderColor:BUD,backgroundColor:'transparent',pointRadius:0,tension:.4,borderDash:[5,3],borderWidth:1.5,order:1}
+]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{ticks:tx10,grid:{display:false}},y:sY10}});
+
+/* 4 */
+mk('c-cat-pie','doughnut',{labels:['ディナーコース','ランチコース','単品料理','ドリンク'],datasets:[{data:[1662450,866190,92405,13600],backgroundColor:[C,BLUE,GRN,AMB],borderWidth:0}]},{plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:10}}}});
+mk('c-course-bar','bar',{labels:['雅（D）','匠心（L）','極（D）','浪花（L）','風（D）','彩蔬（L）','翠宴（D）'],datasets:[{data:[721,680,172,622,176,110,23],backgroundColor:[16.2,45.74,-3.79,35.37,-0.12,22.11,-8.0].map(v=>v>=0?GRN:COR),borderRadius:3}]},{indexAxis:'y',scales:{x:{ticks:{font:{size:10}},grid:GY},y:{ticks:{font:{size:10}},grid:{display:false}}}});
+
+(function(){
+  const t10=menuData.filter(r=>r.sales>0).slice(0,10);
+  mk('c-top10','bar',{labels:t10.map(r=>r.name.length>14?r.name.slice(0,14)+'…':r.name),datasets:[{data:t10.map(r=>r.sales),backgroundColor:t10.map(r=>catClr[r.cat]),borderRadius:3}]},{indexAxis:'y',scales:{x:{ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY},y:{ticks:{font:{size:10}},grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>`NT$${ctx.parsed.x.toLocaleString()} (${(ctx.parsed.x/totalMS*100).toFixed(1)}%)`}}}});
+})();
+
+function filterTable(filter,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const body=document.getElementById('tbl-body');
+  const rows=filter==='all'?menuData:menuData.filter(r=>r.cat===filter);
+  const mx=Math.max(...rows.map(r=>r.sales));
+  body.innerHTML=rows.map((r,i)=>{
+    const pct=totalMS>0?(r.sales/totalMS*100):0;
+    const bw=mx>0?Math.round(r.sales/mx*100):0;
+    const chg=r.chg===null?'<span class="chg-neu">—</span>':r.chg>0?`<span class="chg-up">+${r.chg.toFixed(1)}%</span>`:`<span class="chg-dn">${r.chg.toFixed(1)}%</span>`;
+    return `<tr data-cat="${r.cat}"><td class="muted">${i+1}</td><td style="max-width:170px;word-break:break-all">${r.name}</td><td><span class="cat-badge ${catBdg[r.cat]}">${r.lbl}</span></td><td class="r">${r.qty.toLocaleString()}</td><td class="r">${r.sales>0?r.sales.toLocaleString():'—'}</td><td class="r">${r.sales>0?(r.sales*5).toLocaleString():'—'}</td><td class="r">${r.sales>0?pct.toFixed(1)+'%':'—'}</td><td><div class="bar-cell"><div class="mini-bar" style="background:${catClr[r.cat]};width:${bw}%"></div></div></td><td class="r">${chg}</td></tr>`;
+  }).join('');
+  if(filter==='all'){
+    const tot=menuData.filter(r=>r.sales>0).reduce((s,r)=>s+r.qty,0);
+    body.innerHTML+=`<tr class="total-row"><td colspan="3">合計（有料商品）</td><td class="r">${tot.toLocaleString()}</td><td class="r">${totalMS.toLocaleString()}</td><td class="r">${(totalMS*5).toLocaleString()}</td><td class="r">100%</td><td></td><td></td></tr>`;
+  }
+}
+filterTable('all');
+
+/* 5 */
+mk('c-gbp-views','line',{labels:lbl31,datasets:[
+  {label:'ビュー数',data:gbpV,borderColor:BLUE,backgroundColor:BLUE+'18',fill:true,pointRadius:2,tension:.4,borderWidth:1.5,yAxisID:'y'},
+  {label:'経路検索数',data:gbpD,borderColor:C,backgroundColor:'transparent',pointRadius:2,tension:.4,borderWidth:1.5,borderDash:[4,3],yAxisID:'y2'}
+]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{ticks:tx10,grid:{display:false}},y:{ticks:{font:{size:10}},grid:GY,position:'left'},y2:{ticks:{font:{size:10}},grid:{display:false},position:'right'}}});
+
+mk('c-gbp-corr','scatter',{datasets:[{data:gbpV.map((v,i)=>({x:v,y:sales31[i]})),backgroundColor:BLUE+'BB',pointRadius:5,pointHoverRadius:7}]},{scales:{x:{title:{display:true,text:'GBPビュー数',font:{size:10}},ticks:{font:{size:10}},grid:GY},y:{title:{display:true,text:'売上（NT$）',font:{size:10}},ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY}},plugins:{tooltip:{callbacks:{label:ctx=>`ビュー${ctx.parsed.x} / NT$${ctx.parsed.y.toLocaleString()}`}}}});
+
+mk('c-dir-corr','scatter',{datasets:[{data:gbpD.map((v,i)=>({x:v,y:sales31[i]})),backgroundColor:C+'BB',pointRadius:5,pointHoverRadius:7}]},{scales:{x:{title:{display:true,text:'経路検索数',font:{size:10}},ticks:{font:{size:10}},grid:GY},y:{title:{display:true,text:'売上（NT$）',font:{size:10}},ticks:{callback:v=>Math.round(v/1000)+'K',font:{size:10}},grid:GY}},plugins:{tooltip:{callbacks:{label:ctx=>`経路${ctx.parsed.x}件 / NT$${ctx.parsed.y.toLocaleString()}`}}}});
+
+/* 6 */
+mk('c-review-trend','line',{labels:['5/5','5/6','5/9','5/10','5/12','5/14','5/16','5/17','5/20','5/24','5/27','5/28','5/30'],datasets:[
+  {label:'投稿数',data:[5,1,1,1,1,1,2,1,1,1,1,2,1],borderColor:BLUE,backgroundColor:'transparent',pointRadius:3,tension:.3,yAxisID:'y'},
+  {label:'平均評価',data:[4.6,2,5,4,2,5,4.5,5,5,5,3,2.5,1],borderColor:C,backgroundColor:'transparent',pointRadius:3,tension:.3,borderDash:[4,3],yAxisID:'y2'}
+]},{plugins:{legend:{display:true,labels:{font:{size:10},boxWidth:8}}},scales:{x:{ticks:{font:{size:9},maxRotation:45},grid:{display:false}},y:{min:0,max:7,ticks:{font:{size:10},stepSize:2},grid:GY,position:'left'},y2:{min:0,max:6,ticks:{font:{size:10}},grid:{display:false},position:'right'}}});
+
+mk('c-review-pie','doughnut',{labels:['5星（19件）','3星（2件）','2星（2件）','1星（4件）'],datasets:[{data:[19,2,2,4],backgroundColor:[C,AMB,COR,'#E24B4A'],borderWidth:0}]},{plugins:{legend:{display:true,position:'bottom',labels:{font:{size:11},boxWidth:10}}}});
+
+/* 7 */
+mk('c-compare','bar',{labels:['日商平均（千NT$）','累計来客数（名）','客単価（NT$）'],datasets:[
+  {label:'4月',data:[117.979,2189,1131.8],backgroundColor:BLUE,borderRadius:3},
+  {label:'5月',data:[93.39,2682,1079.45],backgroundColor:C,borderRadius:3}
+]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{ticks:{font:{size:10}},grid:GY}}});
+
+(function(){
+  const aS=[108000,161315,174028,137225,135810,131841,121385,111155,124025,130515,95552,90420,99770,75625,114510,157165,157311,90205,89705,64100,107910];
+  const aB=[46400,87000,87000,45000,45000,45000,45000,45000,87000,87000,45000,45000,45000,45000,45000,87000,87000,45000,45000,45000,45000];
+  mk('c-achieve','line',{labels:Array.from({length:Math.max(aS.length,sales31.length)},(_,i)=>(i+1)+'日'),datasets:[
+    {label:'4月達成率',data:aS.map((s,i)=>Math.round(s/aB[i]*100)),borderColor:BLUE,backgroundColor:'transparent',pointRadius:2,tension:.3,borderWidth:1.5},
+    {label:'5月達成率',data:sales31.map((s,i)=>Math.round(s/bud31[i]*100)),borderColor:C,backgroundColor:'transparent',pointRadius:2,tension:.3,borderWidth:1.5,borderDash:[4,3]}
+  ]},{plugins:{legend:{display:true,labels:{font:{size:11},boxWidth:10}}},scales:{x:{ticks:{maxRotation:0,font:{size:10},callback:(_,i)=>i%4===0?(i+1)+'日':''},grid:{display:false}},y:{ticks:{callback:v=>v+'%',font:{size:10}},grid:GY}}});
+})();
+
+/* NAV highlight */
+(function(){
+  const secs=document.querySelectorAll('section[id]');
+  const navs=document.querySelectorAll('.nav-item');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        navs.forEach(n=>n.classList.remove('active'));
+        const a=document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+        if(a)a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(s=>obs.observe(s));
+})();
+    })();
+  };
+})();
+</script>
+</body>
+</html>
